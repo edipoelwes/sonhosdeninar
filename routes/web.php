@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
+Route::get('/', 'App\Http\Controllers\AuthController@loginForm')->name('login');
+Route::post('login', 'App\Http\Controllers\AuthController@login')->name('login.do');
 
-Route::view('/', 'dashboard');
-Route::view('/login', 'login')->name('login.do');
+Route::middleware('auth')->group(function () {
+  Route::get('home', 'App\Http\Controllers\HomeController@home')->name('home');
+  Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
+});

@@ -7,8 +7,10 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}" />
-  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -49,9 +51,11 @@
       </form>
     </div>
   </div>
+  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
   <script type="text/javascript" src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('assets/js/login.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/login/login.js') }}"></script>
   <script type="text/javascript" src="{{ asset('assets/js/login/main.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/core/sweetalert2.min.js') }}"></script>
 </body>
 
 </html>
