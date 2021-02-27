@@ -14,6 +14,9 @@
 </head>
 
 <body>
+  
+  @include('sweetalert::alert')
+
   <div class="wrapper ">
 
     @include('layout.components.sidebar')
