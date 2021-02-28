@@ -23,16 +23,6 @@ class UserController extends Controller
    }
 
    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-   public function create()
-   {
-      //
-   }
-
-   /**
     * Store a newly created resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
@@ -45,8 +35,7 @@ class UserController extends Controller
       $user['company_id'] = !$user['company_id'] ? $user['company_id'] = Auth::user()->company_id : $user['company_id'];
       $data = User::create($user);
 
-      return back()->withToastSuccess('Usuario cadastrado com sucesso!');
-
+      return back()->withToastSuccess('Usuário cadastrado com sucesso!');
    }
 
    /**
@@ -66,9 +55,10 @@ class UserController extends Controller
     * @param  \App\Models\User  $user
     * @return \Illuminate\Http\Response
     */
-   public function edit(User $user)
-   {
-      //
+   public function edit(Request $request) {
+
+      $user = User::select('company_id', 'name', 'email', 'document', 'phone')-> where('id', $request->id)->first();
+      return response()->json($user);
    }
 
    /**
@@ -80,7 +70,11 @@ class UserController extends Controller
     */
    public function update(Request $request, User $user)
    {
-      //
+      $data = $request->all();
+
+      $user->update($data);
+
+      return back()->withToastSuccess('Usuário atualizado com sucesso!');
    }
 
    /**
@@ -91,8 +85,12 @@ class UserController extends Controller
     */
    public function destroy(User $user)
    {
+      if ($user == auth()->user()) {
+         return back()->withToastError('Oops, Não é permitido remover o próprio usuário!');
+      }
+
       $user->delete();
+
       return back()->withToastSuccess('Usuário removido com sucesso.');
    }
-
 }

@@ -5,18 +5,18 @@
          @csrf
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="">Cadastro de usuário</h5>
+               <h5 class="modal-title">Cadastro de usuário</h5>
             </div>
             <div class="modal-body">
                {{-- Limitar o visao da empresa para desenvolvedor --}}
-               <div class="row">
+               {{-- <div class="row">
                   <div class="form-group col-md-12">
                      <label for="company">Empresa</label>
                      <select id="company" class="form-control" name="company_id">
                         <option selected value="">selecione uma empresa</option>
                      </select>
                   </div>
-               </div>
+               </div> --}}
                {{-- ------------------------------------------------ --}}
 
                <div class="row">

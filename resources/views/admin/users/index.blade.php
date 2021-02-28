@@ -43,7 +43,8 @@
                               <a href="javascript:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                                  <i class="fa fa-user"></i>
                               </a>
-                              <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm ">
+                              <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm" data-toggle="modal"
+                              data-target=".user-modal-lg" onclick="userModal({{ $user->id }})" title="Editar Usuário">
                                  <i class="fa fa-edit"></i>
                               </a>
                               <a href="javascript:;" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm "
@@ -73,14 +74,27 @@
 
 @push('js')
    <script type="text/javascript">
-      function userModal() {
+      function userModal(id) {
          $.get("{{ route('companies') }}", function(response) {
             let options = [];
             response.forEach(company => {
                options.push(`<option value="${company.id}">${company.social_name}</option>`)
-            });
+            })
             $('select#company').append(options)
          })
+
+         if(id) {
+            $('div.modal-header h5').text('Atualização de usuário')
+
+            $.get("{{ route('users.edit') }}", {id}, function(response){
+               if(response) {
+                  $('input[name="name"]').val(response.name)
+                  $('input[name="email"]').val(response.email)
+                  $('input[name="phone"]').val(response.phone)
+                  $('input[name="document"]').val(response.document)
+               }
+            })
+         }
          $('#user-modal').modal('show')
       }
    </script>

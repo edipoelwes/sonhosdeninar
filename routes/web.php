@@ -20,8 +20,8 @@ Route::post('login', 'App\Http\Controllers\AuthController@login')->name('login.d
 Route::middleware('auth')->group(function () {
    Route::get('home', 'App\Http\Controllers\HomeController@home')->name('home');
    Route::get('companies', 'App\Http\Controllers\CompanyController@companies')->name('companies');
-   Route::resources([
-      'users' => UserController::class,
-   ]);
+
+   Route::get('users/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit');
+   Route::resource('users', UserController::class)->except(['create', 'show', 'edit']);
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 });
