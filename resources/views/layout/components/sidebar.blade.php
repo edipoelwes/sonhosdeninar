@@ -49,12 +49,33 @@
       </div>
     </div>
     <ul class="nav">
-      <li class="active">
-        <a href="../examples/dashboard.html">
+      <li class="{{ Route::is('home') ? 'active' : '' }}">
+        <a href="{{ route('home') }}">
           <i class="nc-icon nc-bank"></i>
           <p>Dashboard</p>
         </a>
       </li>
+
+      <li class="{{ Route::is('users.index') ? 'active' : '' }}">
+        <a data-toggle="collapse" href="#pagesUsers">
+          <i class="nc-icon nc-single-02"></i>
+          <p>
+            Usuários <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse " id="pagesUsers">
+          <ul class="nav">
+            <li>
+              <a href="{{ route('users.index') }}">
+                <span class="sidebar-mini-icon">U</span>
+                <span class="sidebar-normal"> Usuários </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+
       <li>
         <a data-toggle="collapse" href="#pagesExamples">
           <i class="nc-icon nc-book-bookmark"></i>

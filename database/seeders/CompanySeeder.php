@@ -30,6 +30,21 @@ class CompanySeeder extends Seeder
         'created_at' => now(),
         'updated_at' => now(),
       ],
+      [
+         'social_name' => 'Fototica Macedo LTDA',
+         'alias_name' => 'Fototica Macedo',
+         'document_company' => '63565720000115',
+         'document_company_secondary' => '5026485-2',
+         /** address */
+         'zipcode' => '64017705',
+         'street' => 'Rua Cristo Redentor',
+         'number' => '609',
+         'neighborhood' => 'Três Andares',
+         'state' => 'PI',
+         'city' => 'Teresina',
+         'created_at' => now(),
+         'updated_at' => now(),
+       ],
     ]);
   }
 }
