@@ -33,11 +33,11 @@
                <div class="row">
                   <div class="form-group col-md-4">
                      <label for="phone">Telefone</label>
-                     <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
+                     <input type="text" class="form-control phone_with_ddd" id="phone" name="phone" placeholder="Telefone">
                   </div>
                   <div class="form-group col-md-4">
                      <label for="document">CPF *</label>
-                     <input type="text" class="form-control" id="document" name="document" placeholder="CPF">
+                     <input type="text" class="form-control cpf" id="document" name="document" placeholder="CPF">
                   </div>
                   <div class="form-group col-md-4">
                      <label for="password">Password *</label>

@@ -52,3 +52,5 @@
 
 </script>
 <script src="{{ asset('assets/js/core/functions.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/jquery.mask.js') }}"></script>
