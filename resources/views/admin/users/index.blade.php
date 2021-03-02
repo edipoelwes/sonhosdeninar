@@ -43,8 +43,9 @@
                               <a href="javascript:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                                  <i class="fa fa-user"></i>
                               </a>
-                              <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm" data-toggle="modal"
-                              data-target=".user-modal-lg" onclick="userModal({{ $user->id }})" title="Editar Usuário">
+                              <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"
+                                 data-toggle="modal" data-target=".user-modal-lg" onclick="userModal({{ $user->id }})"
+                                 title="Editar Usuário">
                                  <i class="fa fa-edit"></i>
                               </a>
                               <a href="javascript:;" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm "
@@ -83,19 +84,32 @@
             $('select#company').append(options)
          })
 
-         if(id) {
-            $('div.modal-header h5').text('Atualização de usuário')
+         if (id) {
+            $('div.modal-header h5').text('Atualizar de usuário')
+            $('input[name="user_id"]').val(id)
 
-            $.get("{{ route('users.edit') }}", {id}, function(response){
-               if(response) {
+            $.get("{{ route('users.edit') }}", {
+               id
+            }, function(response) {
+               if (response) {
                   $('input[name="name"]').val(response.name)
                   $('input[name="email"]').val(response.email)
                   $('input[name="phone"]').val(response.phone)
                   $('input[name="document"]').val(response.document)
                }
             })
+         } else {
+            $('div.modal-header h5').text('Cadastrar usuário')
+            $('input[name="user_id"]').val('')
+
+            $('input[name="name"]').val('')
+            $('input[name="email"]').val('')
+            $('input[name="phone"]').val('')
+            $('input[name="document"]').val('')
+
          }
          $('#user-modal').modal('show')
       }
+
    </script>
 @endpush

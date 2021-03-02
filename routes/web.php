@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
    Route::get('companies', 'App\Http\Controllers\CompanyController@companies')->name('companies');
 
    Route::get('users/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit');
-   Route::resource('users', UserController::class)->except(['create', 'show', 'edit']);
+   Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'update']);
+
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 });

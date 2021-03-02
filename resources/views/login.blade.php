@@ -55,7 +55,7 @@
    <script type="text/javascript" src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
    <script type="text/javascript" src="{{ asset('assets/js/login/login.js') }}"></script>
    <script type="text/javascript" src="{{ asset('assets/js/login/main.js') }}"></script>
-   <script type="text/javascript" src="{{ asset('assets/js/core/sweetalert2.min.js') }}"></script>
+   <script type="text/javascript" src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 </body>
 
 </html>

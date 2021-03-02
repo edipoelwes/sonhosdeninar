@@ -31,10 +31,19 @@ class UserController extends Controller
    public function store(Request $request)
    {
       $user = $request->except('_token');
+      $user['company_id'] = Auth::user()->company_id;
 
-      $user['company_id'] = !$user['company_id'] ? $user['company_id'] = Auth::user()->company_id : $user['company_id'];
-      $data = User::create($user);
+      if ($user['user_id']) {
+         $user = $this->update($user, intval($user['user_id']));
+         if ($user) {
+            return back()->withToastSuccess('Usuário atualizado com sucesso!');
+         }
+         return back()->withToastError('Error ao atualizar usuário!');
+      }
 
+      if (!User::create($user)) {
+         return back()->withToastError('Error ao cadastrar usuário!');
+      }
       return back()->withToastSuccess('Usuário cadastrado com sucesso!');
    }
 
@@ -62,22 +71,6 @@ class UserController extends Controller
    }
 
    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\User  $user
-    * @return \Illuminate\Http\Response
-    */
-   public function update(Request $request, User $user)
-   {
-      $data = $request->all();
-
-      $user->update($data);
-
-      return back()->withToastSuccess('Usuário atualizado com sucesso!');
-   }
-
-   /**
     * Remove the specified resource from storage.
     *
     * @param  \App\Models\User  $user
@@ -92,5 +85,15 @@ class UserController extends Controller
       $user->delete();
 
       return back()->withToastSuccess('Usuário removido com sucesso.');
+   }
+
+   private function update(array $userData, int $id): bool {
+      $user = User::where('id', $id)->first();
+
+      if (!$user->update($userData)) {
+         return false;
+      }
+
+      return true;
    }
 }

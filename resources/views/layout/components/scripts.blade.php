@@ -7,7 +7,7 @@
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
 <script src="{{ asset('assets/js/plugins/bootstrap-switch.js') }}"></script>
 <!--  Plugin for Sweet Alert -->
-<script src="{{ asset('assets/js/plugins/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 <!-- Forms Validations Plugin -->
 <script src="{{ asset('assets/js/plugins/jquery.validate.min.js') }}"></script>
 <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
