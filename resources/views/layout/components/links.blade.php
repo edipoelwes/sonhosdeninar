@@ -9,7 +9,4 @@
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css?v=2.1.1') }}" />
-
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link rel="stylesheet" href="{{ asset('assets/demo/demo.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css') }}" />
