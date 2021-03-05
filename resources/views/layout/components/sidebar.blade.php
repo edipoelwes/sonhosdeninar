@@ -56,6 +56,25 @@
             </a>
          </li>
 
+         <li class="{{ Route::is('roles.index') ? 'active' : '' }}">
+            <a data-toggle="collapse" href="#pagesRoles">
+               <i class="nc-icon nc-settings-gear-65"></i>
+               <p>
+                  Configurações <b class="caret"></b>
+               </p>
+            </a>
+            <div class="collapse " id="pagesRoles">
+               <ul class="nav">
+                  <li>
+                     <a href="{{ route('roles.index') }}">
+                        <span class="sidebar-mini-icon">P</span>
+                        <span class="sidebar-normal">Permissões</span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
+
          <li class="{{ Route::is('users.index') ? 'active' : '' }}">
             <a data-toggle="collapse" href="#pagesUsers">
                <i class="nc-icon nc-single-02"></i>

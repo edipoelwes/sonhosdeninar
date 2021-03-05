@@ -6,10 +6,10 @@
          <div class="card">
             <div class="card-header">
                <div class="row">
-                  <div class="col">
+                  <div class="col-md-6">
                      <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> Usuários</h4>
                   </div>
-                  <div class="col">
+                  <div class="col-md-6">
                      <button type="button" class="btn btn-success pull-right" data-toggle="modal"
                         data-target=".user-modal-lg" onclick="userModal()">
                         <i class="bi bi-person-plus-fill" style="font-size: 1rem; margin-right: 0.2rem;"></i> usuário
@@ -75,14 +75,14 @@
 
 @push('js')
    <script type="text/javascript">
-      function userModal(id) {
-         $.get("{{ route('companies') }}", function(response) {
+      const userModal = id => {
+         /*$.get("{{ route('companies') }}", function(response) {
             let options = [];
             response.forEach(company => {
                options.push(`<option value="${company.id}">${company.social_name}</option>`)
             })
             $('select#company').append(options)
-         })
+         })*/
 
          if (id) {
             $('div.modal-header h5').text('Atualizar de usuário')
