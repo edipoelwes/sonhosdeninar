@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{Client};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class ClientController extends Controller
 {
@@ -29,6 +30,10 @@ class ClientController extends Controller
     */
    public function store(Request $request)
    {
+      if(!Auth::user()->hasPermissionTo('Cadastrar Cliente')){
+         throw new UnauthorizedException('403', 'You do not have the required authorization.');
+      }
+
       $client = $request->except('_token');
       $client['company_id'] = Auth::user()->company_id;
 
@@ -67,6 +72,10 @@ class ClientController extends Controller
     */
    public function destroy(Client $client)
    {
+      if(!Auth::user()->hasPermissionTo('Deletar Cliente')){
+         throw new UnauthorizedException('403', 'You do not have the required authorization.');
+      }
+
       $client->delete();
 
       return back()->withToastSuccess('Cliente removido com sucesso.');
@@ -75,6 +84,10 @@ class ClientController extends Controller
 
    private function update(array $clientData, int $id): bool
    {
+      if(!Auth::user()->hasPermissionTo('Atualizar Cliente')){
+         throw new UnauthorizedException('403', 'You do not have the required authorization.');
+      }
+
       $client = Client::where('id', $id)->first();
 
       if (!$client->update($clientData)) {

@@ -112,67 +112,73 @@
          </li>
 
 
-         <li>
-            <a data-toggle="collapse" href="#pagesExamples">
-               <i class="nc-icon nc-book-bookmark"></i>
-               <p>
-                  Pages <b class="caret"></b>
-               </p>
-            </a>
-            <div class="collapse " id="pagesExamples">
-               <ul class="nav">
-                  <li>
-                     <a href="{{ route('profile') }}">
-                        <span class="sidebar-mini-icon">UP</span>
-                        <span class="sidebar-normal"> User Profile </span>
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </li>
-         <li>
-            <a data-toggle="collapse" href="#componentsExamples">
-               <i class="nc-icon nc-layout-11"></i>
-               <p>
-                  Components <b class="caret"></b>
-               </p>
-            </a>
-            <div class="collapse " id="componentsExamples">
-               <ul class="nav">
-                  <li>
-                     <a href="{{ route('icons') }}">
-                        <span class="sidebar-mini-icon">I</span>
-                        <span class="sidebar-normal"> Icons </span>
-                     </a>
-                  </li>
+         @can('pages')
+            <li>
+               <a data-toggle="collapse" href="#pagesExamples">
+                  <i class="nc-icon nc-book-bookmark"></i>
+                  <p>
+                     Pages <b class="caret"></b>
+                  </p>
+               </a>
+               <div class="collapse " id="pagesExamples">
+                  <ul class="nav">
+                     <li>
+                        <a href="{{ route('profile') }}">
+                           <span class="sidebar-mini-icon">UP</span>
+                           <span class="sidebar-normal"> User Profile </span>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+         @endcan
+         @can('components')
+            <li>
+               <a data-toggle="collapse" href="#componentsExamples">
+                  <i class="nc-icon nc-layout-11"></i>
+                  <p>
+                     Components <b class="caret"></b>
+                  </p>
+               </a>
+               <div class="collapse " id="componentsExamples">
+                  <ul class="nav">
+                     <li>
+                        <a href="{{ route('icons') }}">
+                           <span class="sidebar-mini-icon">I</span>
+                           <span class="sidebar-normal"> Icons </span>
+                        </a>
+                     </li>
 
-               </ul>
-            </div>
-         </li>
-         <li>
-            <a data-toggle="collapse" href="#tablesExamples">
-               <i class="nc-icon nc-single-copy-04"></i>
-               <p>
-                  Tables <b class="caret"></b>
-               </p>
-            </a>
-            <div class="collapse " id="tablesExamples">
-               <ul class="nav">
-                  <li>
-                     <a href="{{ route('regular') }}">
-                        <span class="sidebar-mini-icon">RT</span>
-                        <span class="sidebar-normal"> Regular Tables </span>
-                     </a>
-                  </li>
-                  <li>
-                     <a href="{{ route('extended') }}">
-                        <span class="sidebar-mini-icon">ET</span>
-                        <span class="sidebar-normal"> Extended Tables </span>
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </li>
+                  </ul>
+               </div>
+            </li>
+         @endcan
+         @can('tables')
+            <li>
+               <a data-toggle="collapse" href="#tablesExamples">
+                  <i class="nc-icon nc-single-copy-04"></i>
+                  <p>
+                     Tables <b class="caret"></b>
+                  </p>
+               </a>
+               <div class="collapse " id="tablesExamples">
+                  <ul class="nav">
+                     <li>
+                        <a href="{{ route('regular') }}">
+                           <span class="sidebar-mini-icon">RT</span>
+                           <span class="sidebar-normal"> Regular Tables </span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="{{ route('extended') }}">
+                           <span class="sidebar-mini-icon">ET</span>
+                           <span class="sidebar-normal"> Extended Tables </span>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+         @endcan
       </ul>
    </div>
 </div>

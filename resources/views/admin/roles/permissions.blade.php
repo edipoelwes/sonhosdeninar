@@ -6,7 +6,7 @@
          <div class="card">
             <div class="card-header">
                <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                      <h4 class="card-title">
                         <i class="bi bi-person-fill" style="font-size: 2rem;"></i> Permissões para {{ $role->name }}
                      </h4>

@@ -42,10 +42,11 @@ Route::middleware('auth')->group(function () {
 
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
-   Route::middleware(['role_or_permission:Categorias'])->group(function () {
+   Route::middleware(['permission:tables'])->group(function () {
       Route::view('regular', 'paper-dashboard.tables.regular')->name('regular');
       Route::view('extended', 'paper-dashboard.tables.extended')->name('extended');
-      Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile');
-      Route::view('icons', 'paper-dashboard.components.icons')->name('icons');
    });
+   
+   Route::view('icons', 'paper-dashboard.components.icons')->name('icons')->middleware(['permission:components']);
+   Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile')->middleware(['permission:pages']);
 });
