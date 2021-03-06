@@ -12,7 +12,7 @@
                      </h4>
                   </div>
                   <div class="col-md-6">
-                     <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+                     <button type="button" class="btn btn-success btn-round pull-right" data-toggle="modal"
                         data-target=".user-modal-lg" onclick="roleModal()">
                         <i class="bi bi-person-fill" style="font-size: 1rem; margin-right: 0.2rem;"></i> Cadastrar
                         perfil
@@ -23,14 +23,14 @@
             <div class="card-body">
                <table class="table table-striped table-hover">
                   <thead class="text-primary thead-dark">
-                     <th>Perfil</th>
-                     <th>Ação</th>
+                     <th class="text-center">Perfil</th>
+                     <th class="text-center">Ação</th>
                   </thead>
                   <tbody>
                      @forelse ($roles as $role)
                         <tr>
-                           <td>{{ $role->name }}</td>
-                           <td>
+                           <td class="text-center">{{ $role->name }}</td>
+                           <td class="text-center">
                               <a href="javascript:;" class="text-primary mr-2" title="Editar Perfil" onclick="roleModal({{ $role->id }})">
                                  <i class="bi bi-pencil-square" style="font-size: 0.9rem;"></i>
                               </a>

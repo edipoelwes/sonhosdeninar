@@ -104,6 +104,13 @@
             </div>
          </li>
 
+         <li class="{{ Route::is('clients.index') ? 'active' : '' }}">
+            <a href="{{ route('clients.index') }}">
+               <i class="nc-icon nc-single-02"></i>
+               <p>Clientes</p>
+            </a>
+         </li>
+
 
          <li>
             <a data-toggle="collapse" href="#pagesExamples">

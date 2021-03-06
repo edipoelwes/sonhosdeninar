@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{UserController, RoleController, PermissionController};
+use App\Http\Controllers\{UserController, ClientController, RoleController, PermissionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
    Route::get('users/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit');
    Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'update']);
 
+   Route::get('clients/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
+   Route::resource('clients', ClientController::class)->except(['create', 'show', 'edit', 'update']);
+
    /**Rota de permissoes de acesso */
    Route::get('roles/{role}/permissions', 'App\Http\Controllers\RoleController@permissions')->name('roles.permission');
    Route::put('roles/{role}/permissions/sync', 'App\Http\Controllers\RoleController@permissionsSync')->name('roles.permissionSync');
@@ -39,8 +42,10 @@ Route::middleware('auth')->group(function () {
 
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
-   Route::view('regular', 'paper-dashboard.tables.regular')->name('regular');
-   Route::view('extended', 'paper-dashboard.tables.extended')->name('extended');
-   Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile');
-   Route::view('icons', 'paper-dashboard.components.icons')->name('icons');
+   Route::middleware(['role_or_permission:Categorias'])->group(function () {
+      Route::view('regular', 'paper-dashboard.tables.regular')->name('regular');
+      Route::view('extended', 'paper-dashboard.tables.extended')->name('extended');
+      Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile');
+      Route::view('icons', 'paper-dashboard.components.icons')->name('icons');
+   });
 });

@@ -12,7 +12,7 @@
                      </h4>
                   </div>
                   <div class="col-md-6">
-                     <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+                     <button type="button" class="btn btn-success btn-round pull-right" data-toggle="modal"
                         data-target=".user-modal-lg" onclick="permissionModal()">
                         <i class="nc-icon nc-key-25" style="font-size: 1rem; margin-right: 0.2rem;"></i> Cadastrar
                         permissão
