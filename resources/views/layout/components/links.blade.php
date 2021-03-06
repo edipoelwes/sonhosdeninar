@@ -5,9 +5,8 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- CSS Files -->
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css?v=2.1.1') }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link rel="stylesheet" href="{{ asset('assets/demo/demo.css') }}" />
+<!-- CSS Files -->
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css') }}" />
