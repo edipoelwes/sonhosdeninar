@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{RoleController, UserController};
+use App\Http\Controllers\{UserController, RoleController, PermissionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +24,18 @@ Route::middleware('auth')->group(function () {
    Route::get('users/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit');
    Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'update']);
 
+   /**Rota de permissoes de acesso */
+   Route::get('roles/{role}/permissions', 'App\Http\Controllers\RoleController@permissions')->name('roles.permission');
+   Route::put('roles/{role}/permissions/sync', 'App\Http\Controllers\RoleController@permissionsSync')->name('roles.permissionSync');
+
+   Route::get('users/{user}/roles', 'App\Http\Controllers\UserController@roles')->name('users.roles');
+   Route::put('users/{user}/roles/sync', 'App\Http\Controllers\UserController@rolesSync')->name('users.rolesSync');
+
    Route::get('roles/edit', 'App\Http\Controllers\RoleController@edit')->name('roles.edit');
    Route::resource('roles', RoleController::class)->except(['create', 'show', 'edit', 'update']);
+
+   Route::get('permissions/edit', 'App\Http\Controllers\PermissionController@edit')->name('permissions.edit');
+   Route::resource('permissions', PermissionController::class)->except(['create', 'show', 'edit', 'update']);
 
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 

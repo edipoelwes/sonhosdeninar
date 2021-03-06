@@ -40,7 +40,7 @@
                            <td class="text-center">{{ $user->phone }}</td>
                            <td class="text-center">{{ $user->last_login_at ? $user->last_login_at : '------------' }}</td>
                            <td class="text-right">
-                              <a href="javascript:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
+                              <a href="{{ route('users.roles', ['user' => $user->id]) }}" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                                  <i class="fa fa-user"></i>
                               </a>
                               <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"

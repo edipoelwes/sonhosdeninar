@@ -3,7 +3,7 @@
    <div class="logo">
       <a href="javascript:;" class="simple-text logo-mini">
          <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
+            <img src="{{ asset('assets/img/logo-small.png') }}">
          </div>
 
       </a>
@@ -14,7 +14,7 @@
    <div class="sidebar-wrapper">
       <div class="user">
          <div class="photo">
-            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" />
+            <img src="{{ asset('assets/img/logo-small.png') }}" />
          </div>
          <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -65,9 +65,19 @@
             </a>
             <div class="collapse " id="pagesRoles">
                <ul class="nav">
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('roles.index') }}">
-                        <span class="sidebar-mini-icon">P</span>
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-person-fill"></i>
+                        </span>
+                        <span class="sidebar-normal">Perfis</span>
+                     </a>
+                  </li>
+                  <li class="ml-3">
+                     <a href="{{ route('permissions.index') }}">
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-unlock-fill"></i>
+                        </span>
                         <span class="sidebar-normal">Permissões</span>
                      </a>
                   </li>

@@ -344,7 +344,6 @@
 
    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
    <script src="{{ asset('assets/js/plugins/jquery-jvectormap.js') }}"></script>
-   <script src="{{ asset('assets/js/paper-dashboard.min.js') }}" type="text/javascript"></script>
    <script src="{{ asset('assets/demo/demo.js') }}"></script>
 
    <script>
