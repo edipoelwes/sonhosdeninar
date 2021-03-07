@@ -112,7 +112,7 @@
          </li>
 
 
-         @can('pages')
+         @can('Super Usuario')
             <li>
                <a data-toggle="collapse" href="#pagesExamples">
                   <i class="nc-icon nc-book-bookmark"></i>
@@ -132,7 +132,7 @@
                </div>
             </li>
          @endcan
-         @can('components')
+         @can('Super Usuario')
             <li>
                <a data-toggle="collapse" href="#componentsExamples">
                   <i class="nc-icon nc-layout-11"></i>
@@ -153,7 +153,7 @@
                </div>
             </li>
          @endcan
-         @can('tables')
+         @can('Super Usuario')
             <li>
                <a data-toggle="collapse" href="#tablesExamples">
                   <i class="nc-icon nc-single-copy-04"></i>

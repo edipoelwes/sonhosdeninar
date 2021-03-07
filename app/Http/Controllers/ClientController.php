@@ -84,7 +84,7 @@ class ClientController extends Controller
 
    private function update(array $clientData, int $id): bool
    {
-      if(!Auth::user()->hasPermissionTo('Atualizar Cliente')){
+      if(!Auth::user()->hasPermissionTo('Editar Cliente')){
          throw new UnauthorizedException('403', 'You do not have the required authorization.');
       }
 

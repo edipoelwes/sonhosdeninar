@@ -42,11 +42,11 @@ Route::middleware('auth')->group(function () {
 
    Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
-   Route::middleware(['permission:tables'])->group(function () {
+   Route::middleware(['permission:Super Usuario'])->group(function () {
       Route::view('regular', 'paper-dashboard.tables.regular')->name('regular');
       Route::view('extended', 'paper-dashboard.tables.extended')->name('extended');
    });
-   
-   Route::view('icons', 'paper-dashboard.components.icons')->name('icons')->middleware(['permission:components']);
-   Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile')->middleware(['permission:pages']);
+
+   Route::view('icons', 'paper-dashboard.components.icons')->name('icons')->middleware(['permission:Super Usuario']);
+   Route::view('users-profile', 'paper-dashboard.pages.user')->name('profile')->middleware(['permission:Super Usuario']);
 });

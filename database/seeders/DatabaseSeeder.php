@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
          UserSeeder::class,
 
       ]);
-      \App\Models\Client::factory(10)->create();
+      \App\Models\Client::factory(30)->create();
+      $this->call([
+         RoleSeeder::class,
+         PermissionSeeder::class,
+         RolePermissionsSeeder::class,
+      ]);
    }
 }
