@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                <div class="table-responsive">
-                  <table class="table table-striped">
+                  <table class="table table-striped dataTables">
                      <thead class="text-primary">
                         <tr>
                            <th class="text-center">#</th>
@@ -38,13 +38,12 @@
                               <td class="text-center">{{ $client->phone }}</td>
                               </td>
                               <td class="text-center">
-                                 <a href="javascrip:;" type="button" rel="tooltip"
-                                    class="btn btn-info btn-icon btn-sm ">
+                                 <a href="javascrip:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
                                     <i class="fa fa-user"></i>
                                  </a>
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"
-                                    data-toggle="modal" data-target=".user-modal-lg" onclick="clientModal({{ $client->id }})"
-                                    title="Editar Cliente">
+                                    data-toggle="modal" data-target=".user-modal-lg"
+                                    onclick="clientModal({{ $client->id }})" title="Editar Cliente">
                                     <i class="fa fa-edit"></i>
                                  </a>
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm "

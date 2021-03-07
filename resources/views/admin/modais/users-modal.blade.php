@@ -8,6 +8,7 @@
                <h5 class="modal-title"></h5>
             </div>
             <div class="modal-body">
+               <p class="text-danger">Itens com * são obrigatórios</p>
                {{-- Limitar o visao da empresa para desenvolvedor --}}
                {{-- <div class="row">
                   <div class="form-group col-md-12">
@@ -40,7 +41,7 @@
                      <input type="text" class="form-control cpf" id="document" name="document" placeholder="CPF">
                   </div>
                   <div class="form-group col-md-4">
-                     <label for="password">Password *</label>
+                     <label for="password">Senha *</label>
                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                </div>

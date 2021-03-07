@@ -8,7 +8,7 @@
                <h5 class="modal-title"></h5>
             </div>
             <div class="modal-body">
-               <p class="text-warning">Itens com * são obrigatórios</p>
+               <p class="text-danger">Itens com * são obrigatórios</p>
                <input type="hidden" name="client_id" value="">
                <div class="row">
                   <div class="form-group col-md-12">
