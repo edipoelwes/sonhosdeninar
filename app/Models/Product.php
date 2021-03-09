@@ -4,19 +4,18 @@ namespace App\Models;
 
 use App\Models\Traits\{GetAttributes, SetAttributes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
-class Client extends Model
+class Product extends Model
 {
    use HasFactory, SoftDeletes, GetAttributes, SetAttributes;
 
    protected $fillable = [
       'company_id',
+      'category',
       'name',
-      'cpf',
-      'phone',
-      'stars',
-      'internal_obs'
+      'price',
+      'amount',
+      'min_amount',
    ];
 }

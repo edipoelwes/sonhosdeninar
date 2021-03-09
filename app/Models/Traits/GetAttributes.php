@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 trait GetAttributes
 {
 
-   public function getDocumentAttribute($value)
+   public function getCpfAttribute($value)
    {
       return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
    }
@@ -21,5 +21,10 @@ trait GetAttributes
       }
 
       return '(' . substr($value, 0, 2) . ') ' . substr($value, 2, 5) . ' - ' . substr($value, 7, 9);
+   }
+
+   public function getPriceAttribute($value)
+   {
+      return $value ? number_format($value, 2, ',', '.') : '0,00';
    }
 }

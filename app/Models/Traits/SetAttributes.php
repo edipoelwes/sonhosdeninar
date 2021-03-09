@@ -16,10 +16,15 @@ trait SetAttributes
       $this->attributes['document_company'] = $this->clearField($value);
    }
 
-
-   public function setDocumentAttribute($value)
+   public function setDocumentCompanySecondaryAttribute($value)
    {
-      $this->attributes['document'] = $this->clearField($value);
+      $this->attributes['document_company_secondary'] = $this->clearField($value);
+   }
+
+
+   public function setCpfAttribute($value)
+   {
+      $this->attributes['cpf'] = $this->clearField($value);
    }
 
    public function setPhoneAttribute($value)
@@ -40,6 +45,15 @@ trait SetAttributes
       }
 
       $this->attributes['password'] = Hash::make($value);
+   }
+
+   public function setPriceAttribute($value)
+   {
+      if (empty($value)) {
+         $this->attributes['price'] = null;
+      } else {
+         $this->attributes['price'] = floatval($this->convertStringToDouble($value));
+      }
    }
 
 

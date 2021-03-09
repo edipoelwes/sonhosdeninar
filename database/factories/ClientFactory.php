@@ -24,9 +24,8 @@ class ClientFactory extends Factory
       return [
          'company_id' => $this->faker->numberBetween(1, 2),
          'name' => $this->faker->name,
-         'document' => $this->faker->unique()->numberBetween(10000000000, 99999999999),
+         'cpf' => $this->faker->unique()->numberBetween(10000000000, 99999999999),
          'phone' => $this->faker->numberBetween(86994000000, 86994999999)
-
       ];
    }
 }

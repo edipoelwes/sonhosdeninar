@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
       ]);
       \App\Models\Client::factory(30)->create();
+      \App\Models\Product::factory(100)->create();
       $this->call([
          RoleSeeder::class,
          PermissionSeeder::class,
