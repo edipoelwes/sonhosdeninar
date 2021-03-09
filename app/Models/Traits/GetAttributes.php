@@ -9,7 +9,7 @@ trait GetAttributes
       return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
    }
 
-   public function getDocumentCompanyAttribute($value)
+   public function getCnpjAttribute($value)
    {
       return substr($value, 0, 2) . '.' . substr($value, 2, 3) . '.' . substr($value, 5, 3) . '/' . substr($value, 8, 4) . '-' . substr($value, 12, 2);
    }

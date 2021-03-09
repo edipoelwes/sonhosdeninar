@@ -13,8 +13,8 @@ class Company extends Model
    protected $fillable = [
       'social_name',
       'alias_name',
-      'document_company',
-      'document_company_secondary',
+      'cnpj',
+      'inscricao_estadual',
       'zipcodeer',
       'zipcode',
       'street',

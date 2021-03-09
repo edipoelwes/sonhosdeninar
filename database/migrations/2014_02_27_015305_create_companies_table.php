@@ -17,8 +17,8 @@ class CreateCompaniesTable extends Migration
       $table->id();
       $table->string('social_name');
       $table->string('alias_name');
-      $table->string('document_company');
-      $table->string('document_company_secondary');
+      $table->string('cnpj');
+      $table->string('inscricao_estadual');
       /** address */
       $table->string('zipcode')->nullable();
       $table->string('street')->nullable();

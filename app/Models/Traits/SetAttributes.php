@@ -11,14 +11,14 @@ trait SetAttributes
       $this->attributes['company_id'] = intval($value);
    }
 
-   public function setDocumentCompanyAttribute($value)
+   public function setCnpjAttribute($value)
    {
-      $this->attributes['document_company'] = $this->clearField($value);
+      $this->attributes['cnpj'] = $this->clearField($value);
    }
 
-   public function setDocumentCompanySecondaryAttribute($value)
+   public function setInscricaoEstadualAttribute($value)
    {
-      $this->attributes['document_company_secondary'] = $this->clearField($value);
+      $this->attributes['inscricao_estadual'] = $this->clearField($value);
    }
 
 
