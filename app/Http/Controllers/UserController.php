@@ -69,7 +69,7 @@ class UserController extends Controller
    public function edit(Request $request)
    {
 
-      $user = User::select('company_id', 'name', 'email', 'document', 'phone')->where('id', $request->id)->first();
+      $user = User::where('id', $request->id)->first();
       return response()->json($user);
    }
 

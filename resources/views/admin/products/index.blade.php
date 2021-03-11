@@ -7,12 +7,12 @@
             <div class="card-header">
                <div class="row">
                   <div class="col-md-6">
-                     <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> Clientes</h4>
+                     <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> {{ $products[0]->category }}</h4>
                   </div>
                   <div class="col-md-6">
                      <button type="button" class="btn btn-success btn-round pull-right" data-toggle="modal"
-                        data-target=".user-modal-lg" onclick="clientModal()">
-                        <i class="bi bi-person-plus-fill" style="font-size: 1rem; margin-right: 0.2rem;"></i> cliente
+                        data-target=".product-modal-lg" onclick="productModal()">
+                        <i class="bi bi-person-plus-fill" style="font-size: 1rem; margin-right: 0.2rem;"></i> Produto
                      </button>
                   </div>
                </div>
@@ -24,18 +24,20 @@
                         <tr>
                            <th class="text-center">#</th>
                            <th>Nome</th>
-                           <th>CPF</th>
-                           <th class="text-center">Telefone</th>
+                           <th>Preço</th>
+                           <th class="text-center">Qtd.</th>
+                           <th class="text-center">Qtd Min.</th>
                            <th class="text-center">Ações</th>
                         </tr>
                      </thead>
                      <tbody>
-                        @forelse ($clients as $client)
+                        @forelse ($products as $product)
                            <tr>
-                              <td class="text-center">{{ $client->id }}</td>
-                              <td>{{ $client->name }}</td>
-                              <td>{{ $client->cpf }}</td>
-                              <td class="text-center">{{ $client->phone }}</td>
+                              <td class="text-center">{{ $product->id }}</td>
+                              <td>{{ $product->name }}</td>
+                              <td class="text-right">{{ $product->price }}</td>
+                              <td class="text-center">{{ $product->amount }}</td>
+                              <td class="text-center">{{ $product->min_amount }}</td>
                               </td>
                               <td class="text-center">
                                  <a href="javascrip:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
@@ -43,15 +45,15 @@
                                  </a>
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"
                                     data-toggle="modal" data-target=".user-modal-lg"
-                                    onclick="clientModal({{ $client->id }})" title="Editar Cliente">
+                                    onclick="productModal({{ $product->id }})" title="Editar produto">
                                     <i class="fa fa-edit"></i>
                                  </a>
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm "
-                                    onclick="confirmDelete({{ $client->id }})" title="Excluir cliente">
+                                    onclick="confirmDelete({{ $product->id }})" title="Excluir produto">
                                     <i class="fa fa-times"></i>
                                  </a>
-                                 <form id="btn-delete-{{ $client->id }}"
-                                    action="{{ route('clients.destroy', ['client' => $client->id]) }}" method="POST"
+                                 <form id="btn-delete-{{ $product->id }}"
+                                    action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST"
                                     class="hidden">
                                     @method('DELETE')
                                     @csrf
@@ -60,7 +62,7 @@
                            </tr>
                         @empty
                            <tr>
-                              <td colspan="5" class="h3 text-danger">Nenhum cliente encontrado</td>
+                              <td colspan="5" class="h3 text-danger">Nenhum Produto encontrado nesta categoria</td>
                            </tr>
                         @endforelse
                      </tbody>
@@ -70,35 +72,40 @@
          </div>
       </div>
    </div>
-   @include('admin.modais.clients-modal')
+   @include('admin.modais.products-modal')
 @endsection
 
 @push('js')
    <script type="text/javascript">
-      const clientModal = id => {
+      const productModal = id => {
          if (id) {
-            $('div.modal-header h5').text('Atualizar cliente')
-            $('input[name="client_id"]').val(id)
+            $('div.modal-header h5').text('Atualizar produto')
+            $('input[name="product_id"]').val(id)
 
-            $.get("{{ route('clients.edit') }}", {
+            $.get("{{ route('products.edit') }}", {
                id
             }, function(response) {
                if (response) {
                   $('input[name="name"]').val(response.name)
-                  $('input[name="phone"]').val(response.phone)
-                  $('input[name="cpf"]').val(response.cpf)
+                  $(`select[name=category] option[value="${response.category}"]`).attr('selected', true)
+                  $(`select[name=size] option[value="${response.size}"]`).attr('selected', true)
+                  $(`select[name=brand] option[value="${response.brand}"]`).attr('selected', true)
+                  $('input[name="price"]').val(response.price)
+                  $('input[name="min_amount"]').val(response.min_amount)
                }
             })
          } else {
-            $('div.modal-header h5').text('Cadastrar cliente')
-            $('input[name="client_id"]').val('')
+            $('div.modal-header h5').text('Cadastrar produto')
+            $('input[name="product_id"]').val('')
 
             $('input[name="name"]').val('')
-            $('input[name="phone"]').val('')
-            $('input[name="cpf"]').val('')
-
+            $('select[name=category] option[value=""]').attr('selected', true)
+            $('select[name=brand] option[value=""]').attr('selected', true)
+            $('select[name=size] option[value=""]').attr('selected', true)
+            $('input[name="price"]').val('')
+            $('input[name="min_amount"]').val('1')
          }
-         $('#client-modal').modal('show')
+         $('#product-modal').modal('show')
       }
 
    </script>

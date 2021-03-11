@@ -17,7 +17,9 @@ class CreateProductsTable extends Migration
          $table->id();
          $table->unsignedBigInteger('company_id');
          $table->string('category');
-         $table->string('name');
+         $table->string('brand')->nullable();
+         $table->string('name')->nullable();
+         $table->string('size')->nullable();
          $table->decimal('price', 10, 2)->default(0);
          $table->integer('amount')->default(0);
          $table->integer('min_amount')->default(0);

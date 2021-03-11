@@ -60,7 +60,7 @@ class ClientController extends Controller
     */
    public function edit(Request $request)
    {
-      $client = Client::select('name', 'document', 'phone')->where('id', $request->id)->first();
+      $client = Client::select('name', 'cpf', 'phone')->where('id', $request->id)->first();
       return response()->json($client);
    }
 

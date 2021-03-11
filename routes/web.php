@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{UserController, ClientController, RoleController, PermissionController};
+use App\Http\Controllers\{
+   UserController,ClientController, ProductController,
+   RoleController, PermissionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,10 @@ Route::middleware('auth')->group(function () {
 
    Route::get('clients/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
    Route::resource('clients', ClientController::class)->except(['create', 'show', 'edit', 'update']);
+
+   Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
+   Route::get('products/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
+   Route::resource('products', ProductController::class)->except(['index', 'create', 'show', 'edit', 'update']);
 
    /**Rota de permissoes de acesso */
    Route::get('roles/{role}/permissions', 'App\Http\Controllers\RoleController@permissions')->name('roles.permission');

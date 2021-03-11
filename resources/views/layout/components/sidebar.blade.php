@@ -104,6 +104,37 @@
             </div>
          </li>
 
+         <li class="{{ Route::is('products.index') ? 'active' : '' }}">
+            <a data-toggle="collapse" href="#pagesProducts">
+               <i class="nc-icon nc-single-02"></i>
+               <p>
+                  Produtos <b class="caret"></b>
+               </p>
+            </a>
+            <div class="collapse " id="pagesProducts">
+               <ul class="nav">
+                  <li>
+                     <a href="{{ route('products.index', ['category' => 'fraldas']) }}">
+                        <span class="sidebar-mini-icon">F</span>
+                        <span class="sidebar-normal"> Fraldas </span>
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{{ route('products.index', ['category' => 'lencos']) }}">
+                        <span class="sidebar-mini-icon">L</span>
+                        <span class="sidebar-normal"> Lenços </span>
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{{ route('products.index', ['category' => 'roupas']) }}">
+                        <span class="sidebar-mini-icon">R</span>
+                        <span class="sidebar-normal"> Roupas </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
+
          <li class="{{ Route::is('clients.index') ? 'active' : '' }}">
             <a href="{{ route('clients.index') }}">
                <i class="nc-icon nc-single-02"></i>

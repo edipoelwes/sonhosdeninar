@@ -24,7 +24,9 @@ class ProductFactory extends Factory
       return [
          'company_id' => $this->faker->numberBetween(1, 2),
          // 'category' => "fraldas",
-         'category' => $this->faker->randomElement(['Fraldas', 'Lenços', 'Roupas', 'Calçados', 'Higiene', 'Enxoval']),
+         'category' => $this->faker->randomElement(['fraldas', 'lencos', 'roupas', 'calçados', 'higiene', 'enxoval']),
+         'brand' => $this->faker->randomElement(['mamypoko', 'pampers', 'huggies', 'pompom', 'babysec', 'scoobydoo']),
+         'size' => $this->faker->randomElement(['rn', 'p', 'm', 'g', 'xg', 'xxg', 'grandinhos']),
          'name' => $this->faker->sentence(4),
          'price' => $this->faker->randomFloat(1, 2, 10),
          'amount' => $this->faker->numberBetween(1, 30),

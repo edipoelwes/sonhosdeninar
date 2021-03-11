@@ -22,8 +22,8 @@
                      <input type="text" class="form-control phone_with_ddd" id="phone" name="phone" placeholder="Telefone">
                   </div>
                   <div class="form-group col-md-6">
-                     <label for="document">CPF *</label>
-                     <input type="text" class="form-control cpf" id="document" name="document" placeholder="CPF">
+                     <label for="cpf">CPF *</label>
+                     <input type="text" class="form-control cpf" id="cpf" name="cpf" placeholder="CPF">
                   </div>
                </div>
             </div>

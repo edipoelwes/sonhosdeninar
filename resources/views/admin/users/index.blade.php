@@ -36,10 +36,10 @@
                            <tr>
                               <td class="text-center">{{ $user->id }}</td>
                               <td>{{ $user->name }}</td>
-                              <td>{{ $user->document }}</td>
+                              <td>{{ $user->cpf }}</td>
                               <td class="text-center">{{ $user->email }}</td>
                               <td class="text-center">{{ $user->phone }}</td>
-                              <td class="text-center">{{ $user->last_login_at ? $user->last_login_at : '------------' }}
+                              <td class="text-center">{{ $user->last_login_at ? date('d/m/y  H:i:s', strtotime($user->last_login_at)) : '------------' }}
                               </td>
                               <td class="text-center">
                                  <a href="{{ route('users.roles', ['user' => $user->id]) }}" type="button" rel="tooltip"
@@ -100,7 +100,7 @@
                   $('input[name="name"]').val(response.name)
                   $('input[name="email"]').val(response.email)
                   $('input[name="phone"]').val(response.phone)
-                  $('input[name="document"]').val(response.document)
+                  $('input[name="cpf"]').val(response.cpf)
                }
             })
          } else {
@@ -110,7 +110,7 @@
             $('input[name="name"]').val('')
             $('input[name="email"]').val('')
             $('input[name="phone"]').val('')
-            $('input[name="document"]').val('')
+            $('input[name="cpf"]').val('')
 
          }
          $('#user-modal').modal('show')
