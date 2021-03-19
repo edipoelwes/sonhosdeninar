@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
+<link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/css/select2.min.css') }}">
+
 <!-- CSS Files -->
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css') }}" />

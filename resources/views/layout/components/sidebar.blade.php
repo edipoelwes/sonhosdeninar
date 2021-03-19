@@ -142,6 +142,25 @@
             </a>
          </li>
 
+         <li class="{{ Route::is('purchases.index') ? 'active' : '' }}">
+            <a data-toggle="collapse" href="#pagesTransactions">
+               <i class="nc-icon nc-single-02"></i>
+               <p>
+                  Transações <b class="caret"></b>
+               </p>
+            </a>
+            <div class="collapse " id="pagesTransactions">
+               <ul class="nav">
+                  <li>
+                     <a href="{{ route('purchases.index') }}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Compras </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
+
 
          @can('Super Usuario')
             <li>

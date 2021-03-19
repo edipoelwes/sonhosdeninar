@@ -92,4 +92,13 @@ class ProductController extends Controller
 
       return true;
    }
+
+   public function product(Request $request)
+   {
+      $product = Product::where([
+         ['id', $request->id],
+         ['company_id', Auth::user()->company_id]
+      ])->first();
+      return response()->json($product);
+   }
 }
