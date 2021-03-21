@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
    UserController,ClientController, ProductController,
-   RoleController, PermissionController, PurchaseController};
+   RoleController, PermissionController, ProviderController,
+   PurchaseController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
 
    Route::get('clients/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
    Route::resource('clients', ClientController::class)->except(['create', 'show', 'edit', 'update']);
+
+   Route::get('providers/edit', 'App\Http\Controllers\ProviderController@edit')->name('providers.edit');
+   Route::resource('providers', ProviderController::class)->except(['create', 'show', 'edit', 'update']);
 
    Route::get('product', 'App\Http\Controllers\ProductController@product')->name('products.product');
    Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
