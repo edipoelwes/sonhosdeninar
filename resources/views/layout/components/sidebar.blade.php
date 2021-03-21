@@ -94,10 +94,29 @@
             </a>
             <div class="collapse " id="pagesUsers">
                <ul class="nav">
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('users.index') }}">
-                        <span class="sidebar-mini-icon">U</span>
+                        <span class="sidebar-mini-icon">
+                           <i class="nc-icon nc-single-02"></i>
+                        </span>
                         <span class="sidebar-normal"> Usuários </span>
+                     </a>
+                  </li>
+                  <li class="ml-3">
+                     <a href="{{ route('clients.index') }}">
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-people"></i>
+                        </span>
+                        <span class="sidebar-normal">Clientes</span>
+                     </a>
+                  </li>
+
+                  <li class="ml-3">
+                     <a href="{{ route('providers.index') }}">
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-truck"></i>
+                        </span>
+                        <span class="sidebar-normal">Fornecedores</span>
                      </a>
                   </li>
                </ul>
@@ -106,7 +125,7 @@
 
          <li class="{{ Route::is('products.index') ? 'active' : '' }}">
             <a data-toggle="collapse" href="#pagesProducts">
-               <i class="nc-icon nc-single-02"></i>
+               <i class="bi bi-box-seam"></i>
                <p>
                   Produtos <b class="caret"></b>
                </p>
@@ -135,16 +154,9 @@
             </div>
          </li>
 
-         <li class="{{ Route::is('clients.index') ? 'active' : '' }}">
-            <a href="{{ route('clients.index') }}">
-               <i class="nc-icon nc-single-02"></i>
-               <p>Clientes</p>
-            </a>
-         </li>
-
          <li class="{{ Route::is('purchases.index') ? 'active' : '' }}">
             <a data-toggle="collapse" href="#pagesTransactions">
-               <i class="nc-icon nc-single-02"></i>
+               <i class="bi bi-arrow-left-right"></i>
                <p>
                   Transações <b class="caret"></b>
                </p>
@@ -161,27 +173,6 @@
             </div>
          </li>
 
-
-         @can('Super Usuario')
-            <li>
-               <a data-toggle="collapse" href="#pagesExamples">
-                  <i class="nc-icon nc-book-bookmark"></i>
-                  <p>
-                     Pages <b class="caret"></b>
-                  </p>
-               </a>
-               <div class="collapse " id="pagesExamples">
-                  <ul class="nav">
-                     <li>
-                        <a href="{{ route('profile') }}">
-                           <span class="sidebar-mini-icon">UP</span>
-                           <span class="sidebar-normal"> User Profile </span>
-                        </a>
-                     </li>
-                  </ul>
-               </div>
-            </li>
-         @endcan
          @can('Super Usuario')
             <li>
                <a data-toggle="collapse" href="#componentsExamples">
@@ -196,33 +187,6 @@
                         <a href="{{ route('icons') }}">
                            <span class="sidebar-mini-icon">I</span>
                            <span class="sidebar-normal"> Icons </span>
-                        </a>
-                     </li>
-
-                  </ul>
-               </div>
-            </li>
-         @endcan
-         @can('Super Usuario')
-            <li>
-               <a data-toggle="collapse" href="#tablesExamples">
-                  <i class="nc-icon nc-single-copy-04"></i>
-                  <p>
-                     Tables <b class="caret"></b>
-                  </p>
-               </a>
-               <div class="collapse " id="tablesExamples">
-                  <ul class="nav">
-                     <li>
-                        <a href="{{ route('regular') }}">
-                           <span class="sidebar-mini-icon">RT</span>
-                           <span class="sidebar-normal"> Regular Tables </span>
-                        </a>
-                     </li>
-                     <li>
-                        <a href="{{ route('extended') }}">
-                           <span class="sidebar-mini-icon">ET</span>
-                           <span class="sidebar-normal"> Extended Tables </span>
                         </a>
                      </li>
                   </ul>
