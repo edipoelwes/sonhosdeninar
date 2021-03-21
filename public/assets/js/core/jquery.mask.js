@@ -8,5 +8,6 @@ $(document).ready(function () {
    $('.phone_us').mask('(000) 000-0000');
    $('.mixed').mask('AAA 000-S0S');
    $('.cpf').mask('000.000.000-00');
+   $('.cnpj').mask('00.000.000/0000-00');
    $('.money_br').mask('000.000.000.000.000,00', { reverse: true });
 });
