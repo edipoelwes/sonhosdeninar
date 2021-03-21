@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{PaymentMethod, Product, Purchase};
+use App\Models\{PaymentMethod, Product, Provider, Purchase};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +16,6 @@ class PurchaseController extends Controller
    public function index()
    {
       $purchases = Purchase::where('company_id', Auth::user()->company_id)->get();
-
-
       return view('admin.purchases.index', [
          'purchases' => $purchases,
       ]);
@@ -33,6 +31,7 @@ class PurchaseController extends Controller
       // $paymentMethods = PaymentMethod::all(['id', 'name']);
       return view('admin.purchases.form', [
          'products' => Product::where('company_id', Auth::user()->company_id)->get(),
+         'providers' => Provider::where('company_id', Auth::user()->company_id)->get(),
       ]);
    }
 

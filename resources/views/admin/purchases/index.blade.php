@@ -22,7 +22,7 @@
                   <table class="table table-striped dataTables">
                      <thead class="text-primary">
                         <tr>
-                           <th class="text-center">#</th>
+                           <th>N° Lote</th>
                            <th>Nome</th>
                            <th>CPF</th>
                            <th class="text-center">Telefone</th>
@@ -32,7 +32,7 @@
                      <tbody>
                         @forelse ($purchases as $purchase)
                            <tr>
-                              <td class="text-center">{{ $purchase->id }}</td>
+                              <td class="text-center">{{ $purchase->id }}/{{date('Ymd', strtotime($purchase->created_at))}}</td>
                               <td>{{ $purchase->name ??'' }}</td>
                               <td>{{ $purchase->cpf ?? '' }}</td>
                               <td class="text-center">{{ $purchase->phone ?? '' }}</td>

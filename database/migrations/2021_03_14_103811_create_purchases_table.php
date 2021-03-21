@@ -17,11 +17,11 @@ class CreatePurchasesTable extends Migration
          $table->id();
          $table->unsignedBigInteger('company_id');
          $table->unsignedBigInteger('user_id');
+         $table->unsignedBigInteger('provider_id');
 
          $table->integer('status')->nullable();
          $table->integer('payment_method')->nullable();
          $table->text('obs')->nullable();
-         $table->string('provider')->nullable();         //provider = fornecedor
          $table->date('due_date')->nullable();         //provider = fornecedor
          $table->decimal('total', 10, 2)->default(0);
 
@@ -31,6 +31,7 @@ class CreatePurchasesTable extends Migration
 
          $table->foreign('company_id')->references('id')->on('companies');
          $table->foreign('user_id')->references('id')->on('users');
+         $table->foreign('provider_id')->references('id')->on('providers');
       });
    }
 

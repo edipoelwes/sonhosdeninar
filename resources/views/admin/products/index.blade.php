@@ -22,7 +22,6 @@
                   <table class="table table-striped dataTables">
                      <thead class="text-primary">
                         <tr>
-                           <th class="text-center">#</th>
                            <th>Nome</th>
                            <th>Preço</th>
                            <th class="text-center">Qtd.</th>
@@ -33,7 +32,6 @@
                      <tbody>
                         @forelse ($products as $product)
                            <tr>
-                              <td class="text-center">{{ $product->id }}</td>
                               <td>{{ $product->name }}</td>
                               <td class="text-right">{{ $product->price }}</td>
                               <td class="text-center">{{ $product->amount }}</td>

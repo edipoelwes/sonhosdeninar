@@ -75,17 +75,18 @@
                      </div>
                   </div>
                   <div class="row">
-                     <div class="col-md-4">
+                     <div class="col-md-6">
                         <div class="form-group">
                            <label for="providers">Fornecedores</label>
-                           <select class="form-control" id="providers" name="providers">
-                              <option>Selecione o status da venda</option>
-                              <option value="1">Amazon</option>
-                              <option value="2">Magazine Luiza</option>
+                           <select class="form-control select2" id="providers" name="providers">
+                              <option>Selecione um fornecedor</option>
+                              @foreach ($providers as $provider)
+                                 <option value="{{ $provider->id }}">{{ $provider->name }} - {{ $provider->cnpj }}</option>
+                              @endforeach
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-8">
+                     <div class="col-md-6">
                         <div class="form-group">
                            <label for="note">Observações</label>
                            <input type="text" class="form-control" id="note" name="note">

@@ -22,7 +22,6 @@
                   <table class="table table-striped dataTables">
                      <thead class="text-primary">
                         <tr>
-                           <th class="text-center">#</th>
                            <th>Nome</th>
                            <th>CPF</th>
                            <th class="text-center">Telefone</th>
@@ -32,7 +31,6 @@
                      <tbody>
                         @forelse ($clients as $client)
                            <tr>
-                              <td class="text-center">{{ $client->id }}</td>
                               <td>{{ $client->name }}</td>
                               <td>{{ $client->cpf }}</td>
                               <td class="text-center">{{ $client->phone }}</td>

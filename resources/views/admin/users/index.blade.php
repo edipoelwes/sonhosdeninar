@@ -22,7 +22,6 @@
                   <table class="table table-striped">
                      <thead class="text-primary">
                         <tr>
-                           <th class="text-center">#</th>
                            <th>Name</th>
                            <th>CPF</th>
                            <th class="text-center">E-mail</th>
@@ -34,7 +33,6 @@
                      <tbody>
                         @forelse ($users as $user)
                            <tr>
-                              <td class="text-center">{{ $user->id }}</td>
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->cpf }}</td>
                               <td class="text-center">{{ $user->email }}</td>
