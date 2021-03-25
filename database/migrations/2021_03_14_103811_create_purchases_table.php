@@ -17,13 +17,14 @@ class CreatePurchasesTable extends Migration
          $table->id();
          $table->unsignedBigInteger('company_id');
          $table->unsignedBigInteger('user_id');
-         $table->unsignedBigInteger('provider_id');
+         $table->unsignedBigInteger('provider_id'); //provider = fornecedor
 
          $table->integer('status')->nullable();
          $table->integer('payment_method')->nullable();
-         $table->text('obs')->nullable();
-         $table->date('due_date')->nullable();         //provider = fornecedor
-         $table->decimal('total', 10, 2)->default(0);
+         $table->text('note')->nullable();
+         $table->date('purchase_date')->nullable();
+         $table->integer('quota')->default(1)->nullable();
+         // $table->decimal('total', 10, 2)->default(0);
 
          // $table->string('month_year')->default(strval(date('m/yy', strtotime(now()))));
          $table->timestamps();

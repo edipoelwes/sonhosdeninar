@@ -45,10 +45,10 @@
                <form action="{{ route('purchases.store') }}" method="POST">
                   @csrf
                   <div class="row">
-                     <div class="col-md-3">
+                     <div class="col-md-4">
                         <div class="form-group">
-                           <label for="paymentForm">Forma de Pagamento</label>
-                           <select class="form-control" id="paymentForm" name="paymentForm" onchange="quotas(this.value)">
+                           <label for="payment_method">Forma de Pagamento</label>
+                           <select class="form-control" id="payment_method" name="payment_method" onchange="quotas(this.value)">
                               <option value="">Selecione um metodo de pagamento</option>
                               <option value="1">Boleto Bancario</option>
                               <option value="2">Cartão de credito</option>
@@ -58,7 +58,7 @@
                         </div>
                      </div>
 
-                     <div class="col-md-3 quotas" hidden>
+                     <div class="col-md-2" id="div-quotas" hidden>
                         <div class="form-group">
                            <label for="quota">Parcelas</label>
                            <select class="form-control" id="quota" name="quota">
@@ -80,20 +80,22 @@
                      </div>
                      <div class="col-md-3" id="div-due" hidden>
                         <div class="form-group">
-                           <label for="due-date">Data do vencimento</label>
-                           <input type="date" class="form-control" id="due-date" name="due-date">
+                           <label for="due_date">Data do vencimento</label>
+                           <input type="date" class="form-control" id="due_date" name="due_date">
                         </div>
                      </div>
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
-                           <label for="purchase-date">Data da Compra</label>
-                           <input type="date" class="form-control" id="purchase-date" name="purchase-date">
+                           <label for="purchase_date">Data da Compra</label>
+                           <input type="date" class="form-control" id="purchase_date" name="purchase_date">
                         </div>
                      </div>
-                     <div class="col-md-3">
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6">
                         <div class="form-group">
                            <label for="providers">Fornecedores</label>
-                           <select class="form-control select2" id="providers" name="providers">
+                           <select class="form-control select2" id="providers" name="provider_id">
                               <option>Selecione um fornecedor</option>
                               @foreach ($providers as $provider)
                                  <option value="{{ $provider->id }}">{{ $provider->name }} - {{ $provider->cnpj }}</option>
@@ -101,7 +103,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-3" id="div-status">
+                     <div class="col-md-6" id="div-status">
                         <div class="form-group">
                            <label for="status">Status</label>
                            <select class="form-control" id="status" name="status">
@@ -111,7 +113,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-6">
+                     <div class="col-md-12">
                         <div class="form-group">
                            <label for="note">Observações</label>
                            <input type="text" class="form-control" id="note" name="note">
@@ -191,9 +193,11 @@
    <script>
       function quotas(value) {
          if (value == 1 || value == 2) {
-            $('.quotas').removeAttr('hidden')
+            $('#div-quotas').removeAttr('hidden')
+            $('#div-due').removeAttr('hidden')
          } else {
-            $('.quotas').attr('hidden', '')
+            $('#div-quotas').attr('hidden', '')
+            $('#div-due').attr('hidden', '')
          }
 
       }
