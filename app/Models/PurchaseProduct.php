@@ -9,6 +9,8 @@ class PurchaseProduct extends Model
 {
    use HasFactory, SoftDeletes;
 
+   public $timestamps = false;
+
    protected $fillable = [
       'company_id',
       'purchase_id',
@@ -17,9 +19,14 @@ class PurchaseProduct extends Model
       'subtotal',
    ];
 
-   public function getSubTotalAttribute($value)
+   public function purchase()
    {
-      return $value ? number_format($value, 2, ',', '.') : '0,00';
+      return $this->belongsTo(Purchase::class);
+   }
+
+   public function product()
+   {
+      return $this->belongsTo(Product::class);
    }
 
    public function setSubTotalAttribute($value)

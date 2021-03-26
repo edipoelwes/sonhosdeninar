@@ -19,43 +19,32 @@
             </div>
             <div class="card-body">
                <div class="table-responsive">
-                  <table class="table table-striped dataTables">
+                  <table class="table table-striped dataTables" style="width: 100%">
                      <thead class="text-primary">
                         <tr>
                            <th>N° Lote</th>
-                           <th>Nome</th>
-                           <th>CPF</th>
-                           <th class="text-center">Telefone</th>
-                           <th class="text-center">Ações</th>
+                           <th>Fornecedor</th>
+                           <th>Forma de pag.</th>
+                           <th class="text-center">Data da compra</th>
+                           <th class="text-center">Total R$</>
+                           <th hidden></th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($purchases as $purchase)
                            <tr>
-                              <td class="text-center">{{ $purchase->id }}/{{date('Ymd', strtotime($purchase->created_at))}}</td>
-                              <td>{{ $purchase->name ??'' }}</td>
-                              <td>{{ $purchase->cpf ?? '' }}</td>
-                              <td class="text-center">{{ $purchase->phone ?? '' }}</td>
+                              <td class="text-center">
+                                 {{ lot_number($purchase->id, $purchase->created_at) }}</td>
+                              <td>{{ $purchase->provider->name }}</td>
+                              <td>{{ $purchase->payment_method }}</td>
+                              <td class="text-center">{{ $purchase->purchase_date }}</td>
+                              <td class="text-right">{{ money_br($purchase->purchaseProducts->sum('sub_total')) }}</td>
                               </td>
                               <td class="text-center">
-                                 <a href="javascrip:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">
-                                    <i class="fa fa-user"></i>
+                                 <a href="{{ route('purchases.show', ['purchase' => $purchase->id]) }}" type="button"
+                                    rel="tooltip" class="btn btn-default btn-icon btn-sm" title="Detalhes da compra">
+                                    <i class="bi bi-list-check"></i>
                                  </a>
-                                 <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"
-                                    data-toggle="modal" data-target=".user-modal-lg"
-                                    onclick="clientModal({{ $purchase->id }})" title="Editar Cliente">
-                                    <i class="fa fa-edit"></i>
-                                 </a>
-                                 <a href="javascript:;" type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm "
-                                    onclick="confirmDelete({{ $purchase->id }})" title="Excluir cliente">
-                                    <i class="fa fa-times"></i>
-                                 </a>
-                                 <form id="btn-delete-{{ $purchase->id }}"
-                                    action="{{ route('purchases.destroy', ['purchase' => $purchase->id]) }}" method="POST"
-                                    class="hidden">
-                                    @method('DELETE')
-                                    @csrf
-                                 </form>
                               </td>
                            </tr>
                         @empty
@@ -71,4 +60,3 @@
       </div>
    </div>
 @endsection
-

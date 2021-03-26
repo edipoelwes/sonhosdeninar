@@ -37,10 +37,11 @@ Route::middleware('auth')->group(function () {
    Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
    Route::get('products/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
    Route::resource('products', ProductController::class)->except(['index', 'create', 'show', 'edit', 'update']);
+   Route::resource('purchases', PurchaseController::class)->except(['edit', 'update', 'destroy']);
 
-   Route::resources([
-      'purchases' => PurchaseController::class
-   ]);
+   // Route::resources([
+   //    'purchases' => PurchaseController::class
+   // ]);
 
    /**Rota de permissoes de acesso */
    Route::get('roles/{role}/permissions', 'App\Http\Controllers\RoleController@permissions')->name('roles.permission');

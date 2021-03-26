@@ -58,7 +58,7 @@
                         </div>
                      </div>
 
-                     <div class="col-md-2" id="div-quotas" hidden>
+                     <div class="col-md-2" id="div-quotas">
                         <div class="form-group">
                            <label for="quota">Parcelas</label>
                            <select class="form-control" id="quota" name="quota">
@@ -78,7 +78,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-3" id="div-due" hidden>
+                     <div class="col-md-3" id="div-due">
                         <div class="form-group">
                            <label for="due_date">Data do vencimento</label>
                            <input type="date" class="form-control" id="due_date" name="due_date">
@@ -191,16 +191,15 @@
 
 @push('js')
    <script>
-      function quotas(value) {
-         if (value == 1 || value == 2) {
-            $('#div-quotas').removeAttr('hidden')
-            $('#div-due').removeAttr('hidden')
-         } else {
-            $('#div-quotas').attr('hidden', '')
-            $('#div-due').attr('hidden', '')
-         }
-
-      }
+      // function quotas(value) {
+      //    if (value == 1 || value == 2) {
+      //       $('#div-quotas').removeAttr('hidden')
+      //       $('#div-due').removeAttr('hidden')
+      //    } else {
+      //       $('#div-quotas').attr('hidden', '')
+      //       $('#div-due').attr('hidden', '')
+      //    }
+      // }
 
       function purchases(id) {
          $.get("{{ route('products.product') }}", {

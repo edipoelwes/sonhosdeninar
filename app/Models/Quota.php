@@ -10,6 +10,8 @@ class Quota extends Model
 {
    use HasFactory, SoftDeletes, GetAttributes, SetAttributes;
 
+   public $timestamps = false;
+
    protected $fillable = [
       'company_id',
       'purchase_id',
@@ -17,4 +19,9 @@ class Quota extends Model
       'price',
       'due_date'
    ];
+
+   public function purchase()
+   {
+      return $this->belongsTo(Purchase::class);
+   }
 }

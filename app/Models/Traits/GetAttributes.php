@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Traits;
 
 trait GetAttributes
@@ -25,6 +26,45 @@ trait GetAttributes
 
    public function getPriceAttribute($value)
    {
-      return $value ? number_format($value, 2, ',', '.') : '0,00';
+      return $value;
+   }
+
+   public function getPurchaseDateAttribute($value)
+   {
+      return date('d/m/Y', strtotime($value));
+   }
+
+   public function getPaymentMethodAttribute(int $value): string
+   {
+      switch ($value) {
+         case 1:
+            return 'Boleto Bancário';
+            break;
+         case 2:
+            return 'Cartão de credito';
+            break;
+         case 3:
+            return 'Transferência Bancaria';
+            break;
+         case 4:
+            return 'Dinheiro';
+            break;
+         default:
+            return '';
+      }
+   }
+
+   public function getStatusAttribute(int $value): string
+   {
+      switch ($value) {
+         case 1:
+            return 'Confirmado';
+            break;
+         case 2:
+            return 'Pendente';
+            break;
+         default:
+            return 'Cancelado';
+      }
    }
 }

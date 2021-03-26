@@ -28,7 +28,6 @@ class PurchaseController extends Controller
     */
    public function create()
    {
-      // $paymentMethods = PaymentMethod::all(['id', 'name']);
       return view('admin.purchases.form', [
          'products' => Product::where('company_id', Auth::user()->company_id)->get(),
          'providers' => Provider::where('company_id', Auth::user()->company_id)->get(),
@@ -43,7 +42,6 @@ class PurchaseController extends Controller
     */
    public function store(Request $request)
    {
-      // dd($request->all());
       DB::beginTransaction();
 
       $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota']);
@@ -70,7 +68,7 @@ class PurchaseController extends Controller
       $purchase_product = PurchaseProduct::insert($itens);
 
       $total = array_sum($products['price']);
-      $valor_parcela = $total / intval($request->quota);
+      $valor_parcela = $total / intval($request->quota) ?? 1;
 
       $quotas = [];
       for ($i = 0; $i < $request->quota; $i++) {
@@ -101,40 +99,8 @@ class PurchaseController extends Controller
     */
    public function show(Purchase $purchase)
    {
-      //
-   }
-
-   /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Purchase  $purchase
-    * @return \Illuminate\Http\Response
-    */
-   public function edit(Purchase $purchase)
-   {
-      //
-   }
-
-   /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\Purchase  $purchase
-    * @return \Illuminate\Http\Response
-    */
-   public function update(Request $request, Purchase $purchase)
-   {
-      //
-   }
-
-   /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Purchase  $purchase
-    * @return \Illuminate\Http\Response
-    */
-   public function destroy(Purchase $purchase)
-   {
-      //
+      return view('admin.purchases.show', [
+         'purchase' => $purchase
+      ]);
    }
 }

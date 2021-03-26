@@ -20,7 +20,7 @@ class CreateQuotasTable extends Migration
          $table->integer('quota')->default(1);
          $table->decimal('price', 10, 2)->default(0);
          $table->date('due_date')->nullable();
-         $table->timestamps();
+         // $table->timestamps();
          $table->softDeletes();
 
          $table->foreign('purchase_id')->references('id')->on('purchases');

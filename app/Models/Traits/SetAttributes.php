@@ -56,8 +56,6 @@ trait SetAttributes
       }
    }
 
-
-
    private function convertStringToDouble(?string $param)
    {
       if (empty($param)) {

@@ -22,7 +22,7 @@ class CreatePurchaseProductsTable extends Migration
          $table->integer('amount');
          $table->decimal('sub_total', 10, 2)->default(0);
 
-         $table->timestamps();
+         // $table->timestamps();
          $table->softDeletes();
 
          $table->foreign('company_id')->references('id')->on('companies');

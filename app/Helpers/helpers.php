@@ -80,9 +80,22 @@ if (!function_exists('icon_status')) {
    }
 }
 
+/**
+ *
+ */
 if (!function_exists('date_br')) {
    function date_br($date)
    {
       return date('d/m/Y', strtotime($date));
+   }
+}
+
+/**
+ *
+ */
+if (!function_exists('lot_number')) {
+   function lot_number($id, $date)
+   {
+      return str_pad($id, 4, '0', STR_PAD_LEFT).date('ymd-H', strtotime($date));
    }
 }

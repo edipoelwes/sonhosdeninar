@@ -25,4 +25,19 @@ class Purchase extends Model
    {
       return $this->belongsTo(User::class);
    }
+
+   public function provider()
+   {
+      return $this->belongsTo(Provider::class);
+   }
+
+   public function quotas()
+   {
+      return $this->hasMany(Quota::class);
+   }
+
+   public function purchaseProducts()
+   {
+      return $this->hasMany(PurchaseProduct::class);
+   }
 }
