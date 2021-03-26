@@ -132,19 +132,19 @@
             </a>
             <div class="collapse " id="pagesProducts">
                <ul class="nav">
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('products.index', ['category' => 'fraldas']) }}">
                         <span class="sidebar-mini-icon">F</span>
                         <span class="sidebar-normal"> Fraldas </span>
                      </a>
                   </li>
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('products.index', ['category' => 'lencos']) }}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Lenços </span>
                      </a>
                   </li>
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('products.index', ['category' => 'roupas']) }}">
                         <span class="sidebar-mini-icon">R</span>
                         <span class="sidebar-normal"> Roupas </span>
@@ -163,9 +163,11 @@
             </a>
             <div class="collapse " id="pagesTransactions">
                <ul class="nav">
-                  <li>
+                  <li class="ml-3">
                      <a href="{{ route('purchases.index') }}">
-                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-bag"></i>
+                        </span>
                         <span class="sidebar-normal"> Compras </span>
                      </a>
                   </li>
