@@ -13,12 +13,13 @@
                <div class="row">
                   <div class="form-group col-md-6">
                      <label for="category">Categoria *</label>
-                     <select id="category" class="form-control" name="category">
+                     <input type="text" class="form-control" name="category" id="category" value="" readonly>
+                     {{-- <select id="category" class="form-control" name="category">
                         <option value="">Selecione uma categoria</option>
                         <option value="fraldas">Fraldas</option>
                         <option value="lencos">Lenços</option>
                         <option value="roupas">Roupas</option>
-                     </select>
+                     </select> --}}
                   </div>
                   <div class="form-group col-md-6">
                      <label for="brand">Marca *</label>

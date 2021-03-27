@@ -19,8 +19,8 @@ class CreatePurchasesTable extends Migration
          $table->unsignedBigInteger('user_id');
          $table->unsignedBigInteger('provider_id'); //provider = fornecedor
 
-         $table->integer('status')->nullable();
-         $table->integer('payment_method')->nullable();
+         $table->integer('status')->nullable()->comment('1 => Confirmado, 2 => Pendente, 3 => Cancelado');
+         $table->integer('payment_method')->nullable()->comment('1 => Boleto bancário, 2 => Cartão de credito, 3 => Transferência bancaria, 4 => Dinheiro');
          $table->text('note')->nullable();
          $table->date('purchase_date')->nullable();
          $table->integer('quota')->default(1)->nullable();

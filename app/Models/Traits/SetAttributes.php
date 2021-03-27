@@ -56,6 +56,15 @@ trait SetAttributes
       }
    }
 
+   public function setCategoryAttribute($value)
+   {
+      if (empty($value)) {
+         $this->attributes['category'] = null;
+      } else {
+         $this->attributes['category'] = mb_strtolower($value);
+      }
+   }
+
    private function convertStringToDouble(?string $param)
    {
       if (empty($param)) {

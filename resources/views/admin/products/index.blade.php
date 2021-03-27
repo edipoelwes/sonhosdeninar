@@ -7,7 +7,7 @@
             <div class="card-header">
                <div class="row">
                   <div class="col-md-6">
-                     <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> {{ $products[0]->category }}</h4>
+                     <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> {{ $category }}</h4>
                   </div>
                   <div class="col-md-6">
                      <button type="button" class="btn btn-success btn-round pull-right" data-toggle="modal"
@@ -85,7 +85,7 @@
             }, function(response) {
                if (response) {
                   $('input[name="name"]').val(response.name)
-                  $(`select[name=category] option[value="${response.category}"]`).attr('selected', true)
+                  $('input[name=category]').val('{{ $category }}')
                   $(`select[name=size] option[value="${response.size}"]`).attr('selected', true)
                   $(`select[name=brand] option[value="${response.brand}"]`).attr('selected', true)
                   $('input[name="price"]').val(response.price)
@@ -97,7 +97,7 @@
             $('input[name="product_id"]').val('')
 
             $('input[name="name"]').val('')
-            $('select[name=category] option[value=""]').attr('selected', true)
+            $('input[name=category]').val('{{ $category }}')
             $('select[name=brand] option[value=""]').attr('selected', true)
             $('select[name=size] option[value=""]').attr('selected', true)
             $('input[name="price"]').val('')
@@ -108,3 +108,4 @@
 
    </script>
 @endpush
+D

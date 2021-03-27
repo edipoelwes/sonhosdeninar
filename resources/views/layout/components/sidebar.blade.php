@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="primary" data-active-color="success">
+<div class="sidebar" data-color="primary" data-active-color="warning">
    <!-- Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |" -->
    <div class="logo">
       <a href="javascript:;" class="simple-text logo-mini">
@@ -56,7 +56,7 @@
             </a>
          </li>
 
-         <li class="{{ Route::is('roles.index') ? 'active' : '' }}">
+         <li class="{{ Route::is('roles.index') || Route::is('permissions.index')  ? 'active' : '' }}">
             <a data-toggle="collapse" href="#pagesRoles">
                <i class="nc-icon nc-settings-gear-65"></i>
                <p>
@@ -65,7 +65,7 @@
             </a>
             <div class="collapse " id="pagesRoles">
                <ul class="nav">
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('roles.index') ? 'active' : ''  }}">
                      <a href="{{ route('roles.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="bi bi-person-fill"></i>
@@ -73,7 +73,7 @@
                         <span class="sidebar-normal">Perfis</span>
                      </a>
                   </li>
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('permissions.index') ? 'active' : ''  }}">
                      <a href="{{ route('permissions.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="bi bi-unlock-fill"></i>
@@ -85,7 +85,7 @@
             </div>
          </li>
 
-         <li class="{{ Route::is('users.index') ? 'active' : '' }}">
+         <li class="{{ Route::is('users.index') || Route::is('clients.index') || Route::is('providers.index')  ? 'active' : '' }}">
             <a data-toggle="collapse" href="#pagesUsers">
                <i class="nc-icon nc-single-02"></i>
                <p>
@@ -94,7 +94,7 @@
             </a>
             <div class="collapse " id="pagesUsers">
                <ul class="nav">
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('users.index') ? 'active' : '' }}">
                      <a href="{{ route('users.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="nc-icon nc-single-02"></i>
@@ -102,7 +102,7 @@
                         <span class="sidebar-normal"> Usuários </span>
                      </a>
                   </li>
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('clients.index') ? 'active' : '' }}">
                      <a href="{{ route('clients.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="bi bi-people"></i>
@@ -111,7 +111,7 @@
                      </a>
                   </li>
 
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('providers.index') ? 'active' : '' }}">
                      <a href="{{ route('providers.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="bi bi-truck"></i>
@@ -139,7 +139,7 @@
                      </a>
                   </li>
                   <li class="ml-3">
-                     <a href="{{ route('products.index', ['category' => 'lencos']) }}">
+                     <a href="{{ route('products.index', ['category' => 'lenços']) }}">
                         <span class="sidebar-mini-icon">L</span>
                         <span class="sidebar-normal"> Lenços </span>
                      </a>
@@ -163,7 +163,7 @@
             </a>
             <div class="collapse " id="pagesTransactions">
                <ul class="nav">
-                  <li class="ml-3">
+                  <li class="ml-3 {{ Route::is('purchases.index') ? 'active' : '' }}">
                      <a href="{{ route('purchases.index') }}">
                         <span class="sidebar-mini-icon">
                            <i class="bi bi-bag"></i>

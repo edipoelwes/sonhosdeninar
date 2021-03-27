@@ -20,7 +20,10 @@ class ProductController extends Controller
          ['company_id', Auth::user()->company_id]
       ])->get();
 
-      return view('admin.products.index', ['products' => $products]);
+      return view('admin.products.index', [
+         'products' => $products,
+         'category' => ucfirst($request->category)
+      ]);
    }
 
 
