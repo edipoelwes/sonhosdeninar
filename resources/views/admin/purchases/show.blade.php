@@ -86,7 +86,7 @@
                      <tbody>
                         @foreach ($purchase->purchaseProducts as $item)
                            <tr>
-                              <td>{{ strtoupper($item->product->category) }}</td>
+                              <td>{{ mb_strtoupper($item->product->category) }}</td>
                               <td>{{ ucwords($item->product->brand).' '.$item->product->name }}</td>
                               <td class="text-center">{{  strtoupper($item->product->size) ?? '' }}</td>
                               <td class="text-center" nowrap>R$ {{ money_br($item->sub_total / $item->amount)}}</td>

@@ -28,9 +28,15 @@ class PurchaseController extends Controller
     */
    public function create()
    {
+      $status = [
+         ['id' => 1, 'name' => 'Confirmado'],
+         ['id' => 2, 'name' => 'Pendente'],
+      ];
+
       return view('admin.purchases.form', [
          'products' => Product::where('company_id', Auth::user()->company_id)->get(),
          'providers' => Provider::where('company_id', Auth::user()->company_id)->get(),
+         'status' => $status
       ]);
    }
 

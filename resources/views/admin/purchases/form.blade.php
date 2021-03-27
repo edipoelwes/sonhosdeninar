@@ -46,18 +46,8 @@
                   @csrf
                   <div class="row">
                      <div class="col-md-4">
-                        <div class="form-group">
-                           <label for="payment_method">Forma de Pagamento</label>
-                           <select class="form-control" id="payment_method" name="payment_method" onchange="quotas(this.value)">
-                              <option value="">Selecione um metodo de pagamento</option>
-                              <option value="1">Boleto Bancario</option>
-                              <option value="2">Cartão de credito</option>
-                              <option value="3">Transferência Bancaria</option>
-                              <option value="4">Dinheiro</option>
-                           </select>
-                        </div>
+                        @include('admin.includes.payment_method')
                      </div>
-
                      <div class="col-md-2" id="div-quotas">
                         <div class="form-group">
                            <label for="quota">Parcelas</label>
@@ -104,14 +94,7 @@
                         </div>
                      </div>
                      <div class="col-md-6" id="div-status">
-                        <div class="form-group">
-                           <label for="status">Status</label>
-                           <select class="form-control" id="status" name="status">
-                              <option>Selecione o status da venda</option>
-                              <option value="1">Confirmado</option>
-                              <option value="2">Pendente</option>
-                           </select>
-                        </div>
+                        @include('admin.includes.status', ['status' => $status])
                      </div>
                      <div class="col-md-12">
                         <div class="form-group">
