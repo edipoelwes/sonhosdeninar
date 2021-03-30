@@ -67,9 +67,12 @@ class PurchaseController extends Controller
 
          $data['sub_total'] = $products['price'][$key];
          $data['amount'] = $products['amount'][$key];
+         $data['profit'] = $products['profit'][$key];
 
          array_push($itens, $data);
       }
+
+      $this->amount_price($itens);
 
       $purchase_product = PurchaseProduct::insert($itens);
 
@@ -108,5 +111,22 @@ class PurchaseController extends Controller
       return view('admin.purchases.show', [
          'purchase' => $purchase
       ]);
+   }
+
+   private function amount_price(array $products) {
+      foreach ($products as $item) {
+         $product = Product::where('id', $item['product_id'])->first();
+         $product->amount += $item['amount'];
+         $price = $item['sub_total']/$item['amount'];
+         $lucre = $price * ($item['profit'] / 100);
+         if($product->price > 0) {
+            $unit_price = $price + $lucre;
+            $total = ($product->price + $unit_price) / 2;
+            $product->price = number_format($total, 2, ',', '.');
+         } else {
+            $product->price = number_format($price + $lucre, 2, ',', '.');
+         }
+         $product->save();
+      }
    }
 }

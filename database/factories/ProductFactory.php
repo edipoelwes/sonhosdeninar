@@ -29,7 +29,7 @@ class ProductFactory extends Factory
          'size' => $this->faker->randomElement(['rn', 'p', 'm', 'g', 'xg', 'xxg', 'grandinhos']),
          'name' => $this->faker->sentence(4),
          // 'price' => $this->faker->randomFloat(1, 2, 10),
-         'amount' => $this->faker->numberBetween(1, 30),
+         // 'amount' => $this->faker->numberBetween(1, 30),
          'min_amount' => $this->faker->numberBetween(4, 10),
       ];
    }

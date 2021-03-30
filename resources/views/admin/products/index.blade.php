@@ -31,11 +31,20 @@
                      </thead>
                      <tbody>
                         @forelse ($products as $product)
+                           @php
+                              if($product->amount > $product->min_amount+3) {
+                                 $color = 'text-success';
+                              } elseif ($product->amount < $product->min_amount) {
+                                 $color = 'text-danger';
+                              } else {
+                                 $color = 'text-warning';
+                              }
+                           @endphp
                            <tr>
                               <td>{{ $product->name }}</td>
-                              <td class="text-right">{{ $product->price }}</td>
-                              <td class="text-center">{{ $product->amount }}</td>
-                              <td class="text-center">{{ $product->min_amount }}</td>
+                              <td class="text-right">{{ money_br($product->price) }}</td>
+                              <td class="text-center {{ $color }}">{{ $product->amount }}</td>
+                              <td class="text-center text-info">{{ $product->min_amount }}</td>
                               </td>
                               <td class="text-center">
                                  <a href="javascrip:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">

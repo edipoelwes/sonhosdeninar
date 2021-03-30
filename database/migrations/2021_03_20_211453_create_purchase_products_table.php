@@ -21,6 +21,7 @@ class CreatePurchaseProductsTable extends Migration
 
          $table->integer('amount');
          $table->decimal('sub_total', 10, 2)->default(0);
+         $table->integer('profit')->default(10);
 
          // $table->timestamps();
          $table->softDeletes();

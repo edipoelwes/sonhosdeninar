@@ -150,6 +150,12 @@
                         <span class="sidebar-normal"> Roupas </span>
                      </a>
                   </li>
+                  <li class="ml-3">
+                     <a href="{{ route('products.index', ['category' => 'calçados']) }}">
+                        <span class="sidebar-mini-icon">C</span>
+                        <span class="sidebar-normal"> Calçados </span>
+                     </a>
+                  </li>
                </ul>
             </div>
          </li>
