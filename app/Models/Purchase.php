@@ -36,6 +36,11 @@ class Purchase extends Model
       return $this->hasMany(Quota::class);
    }
 
+   public function lot()
+   {
+      return $this->hasOne(Lot::class);
+   }
+
    public function purchaseProducts()
    {
       return $this->hasMany(PurchaseProduct::class);

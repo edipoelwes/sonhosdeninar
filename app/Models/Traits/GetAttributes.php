@@ -29,10 +29,10 @@ trait GetAttributes
       return $value;
    }
 
-   public function getCategoryAttribute($value)
-   {
-      return ucwords($value);
-   }
+   // public function getCategoryAttribute($value)
+   // {
+   //    return ucwords($value);
+   // }
 
    public function getPurchaseDateAttribute($value)
    {

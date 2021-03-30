@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, DB};
-use App\Models\{PaymentMethod, Product, Provider, Purchase, PurchaseProduct, Quota};
+use App\Models\{Lot, LotItem, PaymentMethod, Product, Provider, Purchase, PurchaseProduct, Quota};
 
 class PurchaseController extends Controller
 {
@@ -48,6 +48,7 @@ class PurchaseController extends Controller
     */
    public function store(Request $request)
    {
+
       DB::beginTransaction();
 
       $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota']);
@@ -72,10 +73,28 @@ class PurchaseController extends Controller
          array_push($itens, $data);
       }
 
-      $this->amount_price($itens);
-
       $purchase_product = PurchaseProduct::insert($itens);
 
+      $lot['company_id'] = Auth::user()->company_id;
+      $lot['purchase_id'] = $purchase_id->id;
+      $lot['lot_number'] = lot_number($purchase_id->id, $purchase_id->created_at);
+      $lot['purchase_date'] = $request->purchase_date;
+
+      $lot_id = Lot::create($lot);
+
+      $lot_itens = [];
+      foreach($itens as $item) {
+         $item_data['lot_id'] = $lot_id->id;
+         $item_data['product_id'] = $item['product_id'];
+         $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');
+         $item_data['amount'] = $item['amount'];
+
+         array_push($lot_itens, $item_data);
+      }
+
+      $lot_itens_id = LotItem::insert($lot_itens);
+
+      /*
       $total = array_sum($products['price']);
       $valor_parcela = $total / intval($request->quota) ?? 1;
 
@@ -89,9 +108,9 @@ class PurchaseController extends Controller
          array_push($quotas, $quota);
       }
 
-      $quota_id = Quota::insert($quotas);
+      $quota_id = Quota::insert($quotas);*/
 
-      if ($purchase_id && $purchase_product) {
+      if ($purchase_id && $purchase_product && $lot_id && $lot_itens_id) {
          DB::commit();
          return redirect()->route('purchases.index')->withToastSuccess('Compra Cadastrada com sucesso!');
       } else {
@@ -113,20 +132,12 @@ class PurchaseController extends Controller
       ]);
    }
 
-   private function amount_price(array $products) {
-      foreach ($products as $item) {
-         $product = Product::where('id', $item['product_id'])->first();
-         $product->amount += $item['amount'];
-         $price = $item['sub_total']/$item['amount'];
-         $lucre = $price * ($item['profit'] / 100);
-         if($product->price > 0) {
-            $unit_price = $price + $lucre;
-            $total = ($product->price + $unit_price) / 2;
-            $product->price = number_format($total, 2, ',', '.');
-         } else {
-            $product->price = number_format($price + $lucre, 2, ',', '.');
-         }
-         $product->save();
-      }
+   private function price(float $sub_total, int $amount, int $profit): float
+   {
+      $unit_price = $sub_total / $amount;
+      $lucre = $unit_price * ($profit / 100);
+      $price = $unit_price + $lucre;
+
+      return $price;
    }
 }

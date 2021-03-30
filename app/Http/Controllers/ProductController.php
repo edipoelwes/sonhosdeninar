@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\{Product, LotItem};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+   public function inventory()
+   {
+      $inventories = Product::where('company_id', Auth::user()->company_id)->get();
+
+      return view('admin.inventory.index', [
+         'inventories' => $inventories
+      ]);
+   }
    /**
     * Display a listing of the resource.
     *
@@ -15,10 +23,23 @@ class ProductController extends Controller
     */
    public function index(Request $request)
    {
-      $products = Product::where([
-         ['category', $request->category],
-         ['company_id', Auth::user()->company_id]
-      ])->get();
+      $products = LotItem::select(
+         'lots.company_id',
+         'lots.lot_number',
+         'products.category',
+         'products.brand',
+         'products.name',
+         'products.size',
+         'lot_items.price',
+         'lot_items.amount',
+      )
+         ->join('lots', 'lots.id', '=', 'lot_items.lot_id')
+         ->join('products', 'products.id', '=', 'lot_items.product_id')
+         ->where([
+            ['lots.company_id', Auth::user()->company_id],
+            ['products.category', $request->category],
+            ['lot_items.amount', '>', 0]
+         ])->get();
 
       return view('admin.products.index', [
          'products' => $products,

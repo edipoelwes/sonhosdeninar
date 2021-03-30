@@ -13,13 +13,15 @@
                <div class="row">
                   <div class="form-group col-md-6">
                      <label for="category">Categoria *</label>
-                     <input type="text" class="form-control" name="category" id="category" value="" readonly>
-                     {{-- <select id="category" class="form-control" name="category">
+                     <select id="category" class="form-control" name="category">
                         <option value="">Selecione uma categoria</option>
                         <option value="fraldas">Fraldas</option>
-                        <option value="lencos">Lenços</option>
+                        <option value="lenços">Lenços</option>
                         <option value="roupas">Roupas</option>
-                     </select> --}}
+                        <option value="calçados">Calçados</option>
+                        <option value="higiene">Higiene</option>
+                        <option value="enxaval">Enxaval</option>
+                     </select>
                   </div>
                   <div class="form-group col-md-6">
                      <label for="brand">Marca *</label>
@@ -52,17 +54,6 @@
                         <option value="xxg">XXG</option>
                         <option value="grandinhos">GRANDINHOS</option>
                      </select>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="form-group col-md-6">
-                     <label for="price">Preço *</label>
-                     <input type="text" class="form-control money_br" id="price" name="price"
-                        placeholder="Preço">
-                  </div>
-                  <div class="form-group col-md-6">
-                     <label for="min_amount">Qtd *</label>
-                     <input type="number" min="1" class="form-control" id="min_amount" name="min_amount" value="1">
                   </div>
                </div>
             </div>

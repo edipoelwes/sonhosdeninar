@@ -91,7 +91,7 @@
                               <td class="text-center">{{  strtoupper($item->product->size) ?? '' }}</td>
                               <td class="text-center" nowrap>R$ {{ money_br($item->sub_total / $item->amount)}}</td>
                               <td class="text-center">{{ $item->amount }}</td>
-                              <td class="text-right">R$ {{$item->sub_total }}</td>
+                              <td class="text-right">R$ {{money_br($item->sub_total) }}</td>
                            </tr>
                         @endforeach
                      </tbody>

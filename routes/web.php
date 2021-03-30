@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
    Route::get('providers/edit', 'App\Http\Controllers\ProviderController@edit')->name('providers.edit');
    Route::resource('providers', ProviderController::class)->except(['create', 'show', 'edit', 'update']);
 
+   Route::get('inventories', 'App\Http\Controllers\ProductController@inventory')->name('products.inventory');
    Route::get('product', 'App\Http\Controllers\ProductController@product')->name('products.product');
    Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
    Route::get('products/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');

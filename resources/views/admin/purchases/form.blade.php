@@ -42,7 +42,7 @@
             </div>
             <hr>
             <div class="card-body">
-               <form action="{{ route('purchases.store') }}" method="POST">
+               <form action="{{ route('purchases.store') }}" method="POST" autocomplete="off">
                   @csrf
                   <div class="row">
                      <div class="col-md-4">

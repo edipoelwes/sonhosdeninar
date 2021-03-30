@@ -65,6 +65,14 @@
             </a>
             <div class="collapse " id="pagesRoles">
                <ul class="nav">
+                  <li class="ml-3 {{ Route::is('products.inventory') ? 'active' : ''  }}">
+                     <a href="{{ route('products.inventory') }}">
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-box-seam"></i>
+                        </span>
+                        <span class="sidebar-normal">Inventário</span>
+                     </a>
+                  </li>
                   <li class="ml-3 {{ Route::is('roles.index') ? 'active' : ''  }}">
                      <a href="{{ route('roles.index') }}">
                         <span class="sidebar-mini-icon">
