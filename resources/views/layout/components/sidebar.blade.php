@@ -1,16 +1,6 @@
 <div class="sidebar" data-color="primary" data-active-color="warning">
    <!-- Tip 1: You can change the color of the sidebar using: data-color=" default | primary | info | success | warning | danger |" -->
-   <div class="logo">
-      <a href="javascript:;" class="simple-text logo-mini">
-         <div class="logo-image-small">
-            <img src="{{ asset('assets/img/logo-small.png') }}">
-         </div>
 
-      </a>
-      <a href="javascript:;" class="simple-text logo-normal">
-         Sonhos de Ninar
-      </a>
-   </div>
    <div class="sidebar-wrapper">
       <div class="user">
          <div class="photo">
@@ -20,10 +10,10 @@
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                <span>
                   Edipo Elwes
-                  <b class="caret"></b>
+                  {{-- <b class="caret"></b> --}}
                </span>
             </a>
-            <div class="clearfix"></div>
+            {{-- <div class="clearfix"></div>
             <div class="collapse" id="collapseExample">
                <ul class="nav">
                   <li>
@@ -45,7 +35,7 @@
                      </a>
                   </li>
                </ul>
-            </div>
+            </div> --}}
          </div>
       </div>
       <ul class="nav">
