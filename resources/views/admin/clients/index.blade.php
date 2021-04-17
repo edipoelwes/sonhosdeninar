@@ -22,18 +22,23 @@
                   <table class="table table-striped dataTables" style="width: 100%">
                      <thead class="text-primary">
                         <tr>
-                           <th>Nome</th>
-                           <th>CPF</th>
-                           <th class="text-center">Telefone</th>
+                           <th>Cliente</th>
                            <th class="text-center">Ações</th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($clients as $client)
                            <tr>
-                              <td>{{ $client->name }}</td>
-                              <td>{{ $client->cpf }}</td>
-                              <td class="text-center">{{ $client->phone }}</td>
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">{{ $client->name }}</h6>
+                                       <p class="text-secondary mb-0">CPF: {{ $client->cpf }}</p>
+                                       <p class="text-secondary mb-0">Telefone: {{ $client->phone }}</p>
+                                    </div>
+                                 </div>
+
+                              </td>
                               </td>
                               <td class="text-center">
                                  <a href="javascrip:;" type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm ">

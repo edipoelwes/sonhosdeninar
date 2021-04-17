@@ -22,20 +22,22 @@
                   <table class="table table-striped dataTables">
                      <thead class="text-primary">
                         <tr>
-                           <th>Categoria</th>
-                           <th>Marca</th>
-                           <th>Nome</th>
-                           <th>Tamanho</th>
+                           <th>Item</th>
                            <th class="text-center">Ações</th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($inventories as $inventory)
                            <tr>
-                              <td>{{ ucwords($inventory->category) }}</td>
-                              <td class="">{{ ucwords($inventory->brand) }}</td>
-                              <td class="">{{ $inventory->name }}</td>
-                              <td class="text-center">{{ mb_strtoupper($inventory->size) }}</td>
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">{{ ucwords($inventory->category).' '.ucwords($inventory->brand).' Tam. '.mb_strtoupper($inventory->size) }}</h6>
+                                       <p class="text-secondary mb-0">{{  $inventory->name }}</p>
+                                    </div>
+                                 </div>
+                              </td>
+
                               </td>
                               <td class="text-center">
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"

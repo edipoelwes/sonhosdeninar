@@ -24,7 +24,6 @@
                         <tr>
                            <th>Name</th>
                            <th>CPF</th>
-                           <th class="text-center">E-mail</th>
                            <th class="text-center">Telefone</th>
                            <th class="text-center">Logado em</th>
                            <th class="text-center">Ações</th>
@@ -33,11 +32,18 @@
                      <tbody>
                         @forelse ($users as $user)
                            <tr>
-                              <td>{{ $user->name }}</td>
-                              <td>{{ $user->cpf }}</td>
-                              <td class="text-center">{{ $user->email }}</td>
-                              <td class="text-center">{{ $user->phone }}</td>
-                              <td class="text-center">{{ $user->last_login_at ? date('d/m/y  H:i:s', strtotime($user->last_login_at)) : '------------' }}
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">{{ $user->name }}</h6>
+                                       <p class="text-secondary mb-0">{{ $user->email }}</p>
+                                    </div>
+                                 </div>
+                              </td>
+                              <td class="text-secondary">{{ $user->cpf }}</td>
+                              <td class="text-center text-secondary">{{ $user->phone }}</td>
+                              <td class="text-center text-secondary">
+                                 {{ $user->last_login_at ? date('d/m/y  H:i:s', strtotime($user->last_login_at)) : '------------' }}
                               </td>
                               <td class="text-center">
                                  <a href="{{ route('users.roles', ['user' => $user->id]) }}" type="button" rel="tooltip"

@@ -23,17 +23,21 @@
                      <thead class="text-primary">
                         <tr>
                            <th>Nome</th>
-                           <th>CNPJ</th>
-                           <th class="text-center">Telefone</th>
                            <th class="text-center">Ações</th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($providers as $provider)
                            <tr>
-                              <td>{{ $provider->name }}</td>
-                              <td>{{ $provider->cnpj }}</td>
-                              <td class="text-center">{{ $provider->phone }}</td>
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">{{ $provider->name }}</h6>
+                                       <p class="text-secondary mb-1">{{ $provider->cnpj }}</p>
+                                       <p class="text-secondary mb-0">{{ $provider->phone }}</p>
+                                    </div>
+                                 </div>
+                              </td>
                               </td>
                               <td class="text-center">
                                  <a href="javascript:;" type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm"

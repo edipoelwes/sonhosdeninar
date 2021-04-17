@@ -18,18 +18,23 @@
                         <tr>
                            <th>N° Lote</th>
                            <th>Nome</th>
-                           <th>Tamanho</th>
-                           <th>Preço</th>
+                           <th class="text-left">Preço</th>
                            <th class="text-center">Qtd.</th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($products as $product)
                            <tr>
-                              <td>{{ $product->lot_number }}</td>
-                              <td>{{ ucwords($product->brand).' '.$product->name }}</td>
-                              <td>{{ mb_strtoupper($product->size) }}</td>
-                              <td class="text-right">{{ money_br($product->price) }}</td>
+                              <td class="text-secondary">{{ $product->lot_number }}</td>
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">{{ ucwords($product->brand).' Tam '.mb_strtoupper($product->size) }}</h6>
+                                       <p class="text-secondary mb-0">{{ $product->name }}</p>
+                                    </div>
+                                 </div>
+                              </td>
+                              <td class="text-secondary text-left">R$ {{ money_br($product->price) }}</td>
                               <td class="text-center">
                                  <span class="badge {{ $product->amount < 5 ? 'badge-danger' : 'badge-success' }}">
                                     {{ $product->amount }}
