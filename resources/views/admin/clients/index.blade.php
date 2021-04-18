@@ -37,7 +37,6 @@
                                        <p class="text-secondary mb-0">Telefone: {{ $client->phone }}</p>
                                     </div>
                                  </div>
-
                               </td>
                               </td>
                               <td class="text-center">

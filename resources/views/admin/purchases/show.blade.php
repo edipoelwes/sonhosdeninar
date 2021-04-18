@@ -34,11 +34,13 @@
                         <label>Forma de pagamento</label>
                         <input type="text" class="form-control" placeholder="{{ $purchase->payment_method }}">
                      </div>
+
                      <div class="col-md-3">
                         <label>Parcelas</label>
                         <input type="text" class="form-control"
-                           placeholder="{{ $purchase->quota }} x de R$ {{ money_br($purchase->purchaseProducts->sum('sub_total') / $purchase->quota) }}">
+                           placeholder="{{ $purchase->quota .' x de R$ '.money_br($purchase->purchaseProducts->sum('sub_total') / $purchase->quota) }}">
                      </div>
+
                      <div class="col-md-2">
                         <label>Status da compra</label>
                         <input type="text" class="form-control" placeholder="{{ $purchase->status }}">
@@ -75,9 +77,9 @@
                   <table class="table table-striped">
                      <thead class="thead-dark">
                         <tr>
-                           <th>categoria</th>
+                           {{-- <th>categoria</th> --}}
                            <th>Produto</th>
-                           <th class="text-center">Tamanho</th>
+                           {{-- <th class="text-center">Tamanho</th> --}}
                            <th class="text-center">Unid.</th>
                            <th class="text-center">Qtd.</th>
                            <th class="text-center" nowrap>Sub-total</>
@@ -86,20 +88,30 @@
                      <tbody>
                         @foreach ($purchase->purchaseProducts as $item)
                            <tr>
-                              <td>{{ mb_strtoupper($item->product->category) }}</td>
+                              <td>
+                                 <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column">
+                                       <h6 class="mb-1 text-sm">
+                                          {{ substr(ucwords($item->product->category), 0, -1).' '.ucwords($item->product->brand).' '.strtoupper($item->product->size) ?? '' }}
+                                       </h6>
+                                       <p class="text-secondary mb-0">{{ $item->product->name }}</p>
+                                    </div>
+                                 </div>
+                              </td>
+                              {{-- <td>{{ mb_strtoupper($item->product->category) }}</td>
                               <td>{{ ucwords($item->product->brand).' '.$item->product->name }}</td>
-                              <td class="text-center">{{  strtoupper($item->product->size) ?? '' }}</td>
-                              <td class="text-center" nowrap>R$ {{ money_br($item->sub_total / $item->amount)}}</td>
-                              <td class="text-center">{{ $item->amount }}</td>
-                              <td class="text-right">R$ {{money_br($item->sub_total) }}</td>
+                              <td class="text-center">{{  strtoupper($item->product->size) ?? '' }}</td> --}}
+                              <td class="text-secondary text-center" nowrap>R$ {{ money_br($item->sub_total / $item->amount)}}</td>
+                              <td class="text-secondary text-center">{{ $item->amount }}</td>
+                              <td class="text-secondary text-right">R$ {{money_br($item->sub_total) }}</td>
                            </tr>
                         @endforeach
                      </tbody>
                      <tfoot>
                         <tr style="background: #ccc">
-                           <td colspan="4"></td>
+                           <td colspan="2"></td>
                            <td class="text-bold text-center"><strong>TOTAL</strong></td>
-                           <td class="text-right">R$ {{ money_br($purchase->purchaseProducts->sum('sub_total')) }}</td>
+                           <td class="text-secondary text-right">R$ {{ money_br($purchase->purchaseProducts->sum('sub_total')) }}</td>
                         </tr>
                      </tfoot>
                   </table>

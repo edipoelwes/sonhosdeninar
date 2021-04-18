@@ -18,7 +18,7 @@ class CreateQuotasTable extends Migration
          $table->unsignedBigInteger('company_id');
          $table->unsignedBigInteger('purchase_id');
          $table->integer('quota')->default(1);
-         $table->decimal('price', 10, 2)->default(0);
+         $table->integer('payment_status')->nullable()->comment('1 => Confirmado, 2 => Pendente, 3 => Cancelado');
          $table->date('due_date')->nullable();
          // $table->timestamps();
          $table->softDeletes();

@@ -33,8 +33,8 @@
                                  <div class="d-flex px-2 py-1">
                                     <div class="d-flex flex-column">
                                        <h6 class="mb-1 text-sm">{{ $provider->name }}</h6>
-                                       <p class="text-secondary mb-1">{{ $provider->cnpj }}</p>
-                                       <p class="text-secondary mb-0">{{ $provider->phone }}</p>
+                                       <p class="text-secondary mb-1">CNPJ: {{ $provider->cnpj }}</p>
+                                       <p class="text-secondary mb-0">Telefone: {{ $provider->phone }}</p>
                                     </div>
                                  </div>
                               </td>

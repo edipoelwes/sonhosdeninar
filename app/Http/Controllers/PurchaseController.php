@@ -48,14 +48,16 @@ class PurchaseController extends Controller
     */
    public function store(Request $request)
    {
+      // dd($request->all());
 
       DB::beginTransaction();
 
-      $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota']);
+      $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota', 'payout_interval']);
       $purchase['company_id'] = Auth::user()->company_id;
       $purchase['user_id'] = Auth::user()->id;
       $purchase['provider_id'] = intval($request->provider_id);
 
+      // return $purchase;
       $purchase_id = Purchase::create($purchase);
 
       $products = $request->only(['price', 'amount', 'profit']);
@@ -83,7 +85,7 @@ class PurchaseController extends Controller
       $lot_id = Lot::create($lot);
 
       $lot_itens = [];
-      foreach($itens as $item) {
+      foreach ($itens as $item) {
          $item_data['lot_id'] = $lot_id->id;
          $item_data['product_id'] = $item['product_id'];
          $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');
@@ -94,21 +96,34 @@ class PurchaseController extends Controller
 
       $lot_itens_id = LotItem::insert($lot_itens);
 
-      /*
+
       $total = array_sum($products['price']);
-      $valor_parcela = $total / intval($request->quota) ?? 1;
 
-      $quotas = [];
-      for ($i = 0; $i < $request->quota; $i++) {
-         $quota['company_id'] = Auth::user()->company_id;
-         $quota['purchase_id'] = $purchase_id->id;
-         $quota['quota'] = $i + 1;
-         $quota['price'] = $valor_parcela;
-         $quota['due_date'] = date('Y-m-d', strtotime("+$i month", strtotime($request->due_date)));
-         array_push($quotas, $quota);
+      if ($request->payment_method == 1 || $request->payment_method == 2) {
+         $quotas = [];
+         $payout_interval = 0;
+         for ($i = 0; $i < $request->quota; $i++) {
+            $quota['company_id'] = Auth::user()->company_id;
+            $quota['purchase_id'] = $purchase_id->id;
+            $quota['quota'] = $i+1;
+            $quota['payment_status'] = $request->status;
+
+            if ($request->payment_method == 1 && $i == 0) {
+               $quota['due_date'] = date('Y-m-d', strtotime($request->due_date));
+            } else {
+               $payout_interval += $request->payout_interval;
+               $quota['due_date'] = date('Y-m-d', strtotime("+$payout_interval days", strtotime($request->due_date)));
+            }
+
+            if ($request->payment_method == 2) {
+               $quota['due_date'] = date('Y-m-d', strtotime("+$i month", strtotime($request->due_date)));
+            }
+
+            array_push($quotas, $quota);
+         }
+
+         $quota_id = Quota::insert($quotas);
       }
-
-      $quota_id = Quota::insert($quotas);*/
 
       if ($purchase_id && $purchase_product && $lot_id && $lot_itens_id) {
          DB::commit();

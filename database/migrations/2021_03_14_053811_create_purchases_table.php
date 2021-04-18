@@ -24,6 +24,7 @@ class CreatePurchasesTable extends Migration
          $table->text('note')->nullable();
          $table->date('purchase_date')->nullable();
          $table->integer('quota')->default(1)->nullable();
+         $table->integer('payout_interval')->nullable();
          // $table->decimal('total', 10, 2)->default(0);
 
          // $table->string('month_year')->default(strval(date('m/yy', strtotime(now()))));

@@ -74,15 +74,25 @@
                            <input type="date" class="form-control" id="due_date" name="due_date">
                         </div>
                      </div>
+                     <div class="col-md-3" hidden id="div_payout_interval">
+                        <div class="form-group">
+                           <label for="payout_interval">Prazo de pagamento</label>
+                           <select class="form-control" id="payout_interval" name="payout_interval">
+                              <option value="">Intervalo</option>
+                              <option value="10">cada 10 dias</option>
+                              <option value="15">cada 15 dias</option>
+                              <option value="20">cada 20 dias</option>
+                              <option value="30">cada 30 dias</option>
+                           </select>
+                        </div>
+                     </div>
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="purchase_date">Data da Compra</label>
                            <input type="date" class="form-control" id="purchase_date" name="purchase_date">
                         </div>
                      </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-6">
+                     <div class="col-md-6" id="div-provider_id">
                         <div class="form-group">
                            <label for="providers">Fornecedores</label>
                            <select class="form-control select2" id="providers" name="provider_id">
@@ -174,6 +184,13 @@
 
 @push('js')
    <script>
+      function bank_slip(value) {
+         if(value == 1) {
+            $('#div_payout_interval').removeAttr('hidden')
+         } else {
+            $('#div_payout_interval').attr('hidden', true)
+         }
+      }
       // function quotas(value) {
       //    if (value == 1 || value == 2) {
       //       $('#div-quotas').removeAttr('hidden')

@@ -19,6 +19,7 @@ class Purchase extends Model
       'purchase_date',
       'note',
       'quota',
+      'payout_interval'
    ];
 
    public function user()
