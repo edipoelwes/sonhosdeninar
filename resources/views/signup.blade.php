@@ -10,10 +10,6 @@
 
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
-
-   <meta name="csrf-token" content="{{ csrf_token() }}">
-
    <title>Login</title>
 </head>
 
@@ -25,9 +21,10 @@
          <img src="{{ asset('assets/img/login/login.png') }}">
       </div>
       <div class="login-content">
-         <form name="login" action="{{ route('login.do') }}" method="post" autocomplete="off">
+         <form name="login" action="{{ route('signup.do') }}" method="post" autocomplete="off">
+            @csrf
             <img src="{{ asset('assets/img/login/avatar.jpg') }}">
-            <h2 class="title">Login</h2>
+            <h3 class="title">Cadastrar um usuario</h3>
             <div class="input-div one">
                <div class="i">
                   <i class="fas fa-user"></i>
@@ -46,16 +43,14 @@
                   <input type="password" name="password_check" class="input">
                </div>
             </div>
-            <a href="{{ route('signup') }}">Criar uma conta</a>
+            <a href="#">Esqueceu sua Senha?</a>
             <input type="submit" class="btn" value="Login">
          </form>
       </div>
    </div>
    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
    <script type="text/javascript" src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
-   <script type="text/javascript" src="{{ asset('assets/js/login/login.js') }}"></script>
-   <script type="text/javascript" src="{{ asset('assets/js/login/main.js') }}"></script>
-   <script type="text/javascript" src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+   {{-- <script type="text/javascript" src="{{ asset('assets/js/login/login.js') }}"></script> --}}
+   {{-- <script type="text/javascript" src="{{ asset('assets/js/login/main.js') }}"></script> --}}
 </body>
-
 </html>

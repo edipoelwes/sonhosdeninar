@@ -17,6 +17,16 @@ class AuthController extends Controller
       return view('login');
    }
 
+   public function signupForm()
+   {
+      return view('signup');
+   }
+
+   public function signup(Request $request)
+   {
+      return $request->all();
+   }
+
    public function login(Request $request)
    {
 

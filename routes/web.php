@@ -19,6 +19,8 @@ use App\Http\Controllers\{
 
 Route::get('/', 'App\Http\Controllers\AuthController@loginForm')->name('login');
 Route::post('login', 'App\Http\Controllers\AuthController@login')->name('login.do');
+Route::get('signup', 'App\Http\Controllers\AuthController@signupForm')->name('signup');
+Route::post('signup', 'App\Http\Controllers\AuthController@signup')->name('signup.do');
 
 Route::middleware('auth')->group(function () {
    Route::get('home', 'App\Http\Controllers\HomeController@home')->name('home');
