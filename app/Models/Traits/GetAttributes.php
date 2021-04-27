@@ -63,7 +63,7 @@ trait GetAttributes
    {
       switch ($value) {
          case 1:
-            return 'Confirmado';
+            return 'Faturado';
             break;
          case 2:
             return 'Pendente';

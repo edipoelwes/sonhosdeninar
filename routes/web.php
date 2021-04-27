@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
    Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
    Route::get('products/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
    Route::resource('products', ProductController::class)->except(['index', 'create', 'show', 'edit', 'update']);
+
+   Route::post('purchases/quota', 'App\Http\Controllers\PurchaseController@updateQuota')->name('purchases.quota');
    Route::resource('purchases', PurchaseController::class)->except(['edit', 'update', 'destroy']);
 
    // Route::resources([

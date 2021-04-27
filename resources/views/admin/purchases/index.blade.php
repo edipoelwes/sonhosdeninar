@@ -24,8 +24,8 @@
                         <tr>
                            <th>N° Lote</th>
                            <th>Fornecedor</th>
-                           <th>Forma de pag.</th>
                            <th class="text-center">Data da compra</th>
+                           <th>Status</th>
                            <th class="text-center">Total R$</>
                            <th hidden></th>
                         </tr>
@@ -36,8 +36,12 @@
                               <td class="text-center">
                                  {{ lot_number($purchase->id, $purchase->created_at) }}</td>
                               <td>{{ $purchase->provider->name }}</td>
-                              <td>{{ $purchase->payment_method }}</td>
                               <td class="text-center">{{ $purchase->purchase_date }}</td>
+                              <td class="text-center">
+                                 <span class="badge {{ $purchase->status == 'Faturado' ? 'bg-success' : 'bg-secondary' }}">
+                                    {{ $purchase->status }}
+                                 </span>
+                              </td>
                               <td class="text-right">{{ money_br($purchase->purchaseProducts->sum('sub_total')) }}</td>
                               </td>
                               <td class="text-center">

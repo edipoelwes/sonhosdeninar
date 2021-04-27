@@ -16,6 +16,22 @@ class PurchaseController extends Controller
    public function index()
    {
       $purchases = Purchase::where('company_id', Auth::user()->company_id)->get();
+
+      foreach ($purchases as $purchase) {
+         if (count($purchase->quotas) > 0) {
+            $status = [];
+            foreach ($purchase->quotas as $quota) {
+               array_push($status, $quota->payment_status);
+            }
+
+            if(!in_array(2, $status)) {
+               $bill = Purchase::find($purchase->id);
+               $bill->status = 1;
+               $bill->save();
+            }
+         }
+      }
+
       return view('admin.purchases.index', [
          'purchases' => $purchases,
       ]);
@@ -105,7 +121,7 @@ class PurchaseController extends Controller
          for ($i = 0; $i < $request->quota; $i++) {
             $quota['company_id'] = Auth::user()->company_id;
             $quota['purchase_id'] = $purchase_id->id;
-            $quota['quota'] = $i+1;
+            $quota['quota'] = $i + 1;
             $quota['payment_status'] = $request->status;
 
             if ($request->payment_method == 1 && $i == 0) {
@@ -142,10 +158,28 @@ class PurchaseController extends Controller
     */
    public function show(Purchase $purchase)
    {
+      $quotas = Quota::where('purchase_id', $purchase->id)->orderBy('id')->get();
+
       return view('admin.purchases.show', [
-         'purchase' => $purchase
+         'purchase' => $purchase,
+         'quotas' => $quotas
       ]);
    }
+
+   public function updateQuota(Request $request)
+   {
+      $quota = Quota::where('id', $request->id)->first();
+
+      $quota->payment_status = $request->payment_status;
+
+      if (!$quota->save()) {
+         return back()->withToastError('Error ao faturar parcela!');
+      }
+
+      return back()->withToastSuccess('Parcela faturada com sucesso!');
+   }
+
+
 
    private function price(float $sub_total, int $amount, int $profit): float
    {

@@ -4,7 +4,7 @@
    <div class="row">
       <div class="col-md-12">
          <div class="row">
-            <div class="col-md-{{ (count($purchase->quotas) > 0) ? '6' : '12' }}">
+            <div class="col-md-{{ count($purchase->quotas) > 0 ? '6' : '12' }}">
                <div class="card">
                   <div class="card-header">
                      <div class="row">
@@ -84,32 +84,43 @@
                         </div>
                      </div>
                      <div class="card-body">
-                        <legend>Parcelas</legend>
+                        <legend>Parcela / Vencimento</legend>
                         <div class="row">
-                           <div class="col-md-2">
-                              <label>Parcela</label>
+                           <div class="col-md-4">
+                              <label>Parcela / Vencimento</label>
                            </div>
                            <div class="col-md-4">
-                              <label>Vencimento</label>
-                           </div>
-                           <div class="col-md-3">
                               <label>Valor</label>
                            </div>
                         </div>
-                        @foreach ($purchase->quotas as $quota)
-                           <form action="">
+                        @foreach ($quotas as $quota)
+                           <form action="{{ route('purchases.quota') }}" method="POST"
+                              id="form_faturar_{{ $quota->id }}">
+                              @csrf
+                              <input type="hidden" name="id" value="{{ $quota->id }}">
+                              <input type="hidden" name="payment_status" value="1">
                               <div class="row">
-                                 <div class="col-md-2 mb-2">
-                                    <input type="text" class="form-control" placeholder="{{ $quota->quota }}" disabled>
+                                 <div class="col-md-4 mb-2">
+                                    <input type="text" class="form-control"
+                                       placeholder="{{ $quota->quota . '   ' . date_br($quota->due_date) }}" disabled>
                                  </div>
-                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="{{ date_br($quota->due_date) }}"
-                                       disabled>
-                                 </div>
+
                                  <div class="col-md-4">
                                     <input type="text" class="form-control"
                                        placeholder="R$ {{ money_br($purchase->purchaseProducts->sum('sub_total') / $purchase->quota) }}"
                                        disabled>
+                                 </div>
+                                 <div class="col-md-4">
+                                    <select class="form-control" name="faturamento_{{ $quota->id }}"
+                                       id="faturamento_{{ $quota->id }}" onchange="faturar(this.value)"
+                                       {{ $quota->payment_status == 1 ? 'disabled' : '' }}>
+                                       <option
+                                          value="{{ json_encode(['value' => 1, 'quota' => $quota->quota, 'id' => $quota->id, 'data_vencimento' => date_br($quota->due_date)]) }}"
+                                          {{ $quota->payment_status == 1 ? 'selected' : '' }}>Faturado</option>
+                                       <option
+                                          value="2"
+                                          {{ $quota->payment_status == 2 ? 'selected' : '' }}>Pendente</option>
+                                    </select>
                                  </div>
                               </div>
                            </form>
@@ -174,3 +185,47 @@
       </div>
    </div>
 @endsection
+
+
+@push('js')
+   <script>
+      const faturar = datas => {
+         const {
+            value,
+            quota,
+            id,
+            data_vencimento
+         } = JSON.parse(datas)
+
+         if(value == 1) {
+            confirmQuota(id, quota, data_vencimento)
+         }
+
+         return null
+
+      }
+
+      function confirmQuota(id, quota, data_vencimento) {
+         Swal.fire({
+            title: 'Atenção',
+            text: `Faturar parcela n° ${quota} com vencimento para o dia ${data_vencimento}`,
+            type: 'warning',
+            //input: 'text',
+            //inputPlaceholder: 'Informe o motivo',
+            //position: 'top-end',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#aaa',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Sim, faturar!',
+            reverseButtons: true,
+            preConfirm: () => {
+               $(`#form_faturar_${id}`).submit()
+            },
+         }).then(() => {
+            $(`#faturamento_${id} option[value="2"]`).prop('selected', true)
+         })
+      }
+
+   </script>
+@endpush
