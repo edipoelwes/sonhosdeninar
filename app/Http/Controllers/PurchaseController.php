@@ -17,21 +17,6 @@ class PurchaseController extends Controller
    {
       $purchases = Purchase::where('company_id', Auth::user()->company_id)->get();
 
-      foreach ($purchases as $purchase) {
-         if (count($purchase->quotas) > 0) {
-            $status = [];
-            foreach ($purchase->quotas as $quota) {
-               array_push($status, $quota->payment_status);
-            }
-
-            if(!in_array(2, $status)) {
-               $bill = Purchase::find($purchase->id);
-               $bill->status = 1;
-               $bill->save();
-            }
-         }
-      }
-
       return view('admin.purchases.index', [
          'purchases' => $purchases,
       ]);
@@ -172,14 +157,22 @@ class PurchaseController extends Controller
 
       $quota->payment_status = $request->payment_status;
 
-      if (!$quota->save()) {
-         return back()->withToastError('Error ao faturar parcela!');
+      if ($quota->save()) {
+         $quotas = Quota::where([
+            ['purchase_id', $quota->purchase_id],
+            ['company_id', Auth::user()->company_id]
+         ])->whereIn('payment_status', [2, 3])->get();
+
+         if (count($quotas) == 0) {
+            $purchase = Purchase::where('id', $quota->purchase_id)->first();
+            $purchase->status = 1;
+            $purchase->save();
+         }
+         return back()->withToastSuccess('Parcela faturada com sucesso!');
       }
 
-      return back()->withToastSuccess('Parcela faturada com sucesso!');
+      return back()->withToastError('Error ao faturar parcela!');
    }
-
-
 
    private function price(float $sub_total, int $amount, int $profit): float
    {
