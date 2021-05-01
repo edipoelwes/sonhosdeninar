@@ -175,6 +175,15 @@
                         <span class="sidebar-normal"> Compras </span>
                      </a>
                   </li>
+
+                  <li class="ml-3 {{ Route::is('sales.index') ? 'active' : '' }}">
+                     <a href="{{ route('sales.index') }}">
+                        <span class="sidebar-mini-icon">
+                           <i class="bi bi-cart"></i>
+                        </span>
+                        <span class="sidebar-normal"> Vendas </span>
+                     </a>
+                  </li>
                </ul>
             </div>
          </li>
