@@ -15,6 +15,7 @@ class CreateLotItemsTable extends Migration
    {
       Schema::create('lot_items', function (Blueprint $table) {
          $table->id();
+         $table->unsignedBigInteger('company_id');
          $table->unsignedBigInteger('lot_id');
          $table->unsignedBigInteger('product_id');
          $table->decimal('price', 10, 2)->default(0);
@@ -23,6 +24,7 @@ class CreateLotItemsTable extends Migration
 
          $table->foreign('lot_id')->references('id')->on('lots');
          $table->foreign('product_id')->references('id')->on('products');
+         $table->foreign('company_id')->references('id')->on('companies');
       });
    }
 

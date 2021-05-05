@@ -29,15 +29,19 @@ class PurchaseController extends Controller
     */
    public function create()
    {
-      $status = [
-         ['id' => 1, 'name' => 'Confirmado'],
-         ['id' => 2, 'name' => 'Pendente'],
-      ];
-
       return view('admin.purchases.form', [
          'products' => Product::where('company_id', Auth::user()->company_id)->get(),
          'providers' => Provider::where('company_id', Auth::user()->company_id)->get(),
-         'status' => $status
+         'payment_methods' => [
+            ['id' => 1, 'name' => 'Boleto Bancario'],
+            ['id' => 2, 'name' => 'Cartão de credito'],
+            ['id' => 3, 'name' => 'Transferência Bancaria'],
+            ['id' => 4, 'name' => 'Dinheiro']
+         ],
+         'status' => [
+            ['id' => 1, 'name' => 'Confirmado'],
+            ['id' => 2, 'name' => 'Pendente'],
+         ]
       ]);
    }
 
@@ -49,8 +53,6 @@ class PurchaseController extends Controller
     */
    public function store(Request $request)
    {
-      // dd($request->all());
-
       DB::beginTransaction();
 
       $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota', 'payout_interval']);
@@ -58,7 +60,6 @@ class PurchaseController extends Controller
       $purchase['user_id'] = Auth::user()->id;
       $purchase['provider_id'] = intval($request->provider_id);
 
-      // return $purchase;
       $purchase_id = Purchase::create($purchase);
 
       $products = $request->only(['price', 'amount', 'profit']);
@@ -87,6 +88,7 @@ class PurchaseController extends Controller
 
       $lot_itens = [];
       foreach ($itens as $item) {
+         $item_data['company_id'] = Auth::user()->company_id;
          $item_data['lot_id'] = $lot_id->id;
          $item_data['product_id'] = $item['product_id'];
          $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');

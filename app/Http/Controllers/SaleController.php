@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Sale};
+use App\Models\{Client, LotItem, Product, Sale};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth};
 
@@ -27,7 +27,24 @@ class SaleController extends Controller
     */
    public function create()
    {
-      //
+      $products = LotItem::where([
+         ['company_id', Auth::user()->company_id],
+         ['amount', '>', 0]
+      ])->get();
+
+      return view('admin.sales.form', [
+         'clients' => Client::where('company_id', Auth::user()->company_id)->get(),
+         'products' => $products,
+         'payment_methods' => [
+            ['id' => 2, 'name' => 'Cartão de credito'],
+            ['id' => 3, 'name' => 'Transferência Bancaria'],
+            ['id' => 4, 'name' => 'Dinheiro']
+         ],
+         'status' =>  [
+            ['id' => 1, 'name' => 'Confirmado'],
+            ['id' => 2, 'name' => 'Pendente'],
+         ]
+      ]);
    }
 
    /**
@@ -38,7 +55,7 @@ class SaleController extends Controller
     */
    public function store(Request $request)
    {
-      //
+      dd($request->all());
    }
 
    /**

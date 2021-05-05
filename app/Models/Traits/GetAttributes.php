@@ -26,7 +26,7 @@ trait GetAttributes
 
    public function getPriceAttribute($value)
    {
-      return $value;
+      return floatval($value);
    }
 
    // public function getCategoryAttribute($value)

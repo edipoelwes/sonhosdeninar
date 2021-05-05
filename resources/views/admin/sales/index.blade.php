@@ -7,12 +7,12 @@
             <div class="card-header">
                <div class="row">
                   <div class="col-md-6">
-                     <h4 class="card-title"><i class="bi bi-cart-fill" style="font-size: 2rem;"></i> Venda</h4>
+                     <h4 class="card-title"><i class="bi bi-cart-fill" style="font-size: 2rem;"></i> Vendas</h4>
                   </div>
                   <div class="col-md-6">
                      <a href="{{ route('sales.create') }}" class="btn btn-success btn-round pull-right">
                         <i class="bi bi bi-cart-fill" style="font-size: 1rem; margin-right: 0.2rem;"></i>
-                        Registrar Compras
+                        Registrar Vendas
                      </a>
                   </div>
                </div>

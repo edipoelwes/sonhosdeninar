@@ -46,7 +46,7 @@
                   @csrf
                   <div class="row">
                      <div class="col-md-4">
-                        @include('admin.includes.payment_method')
+                        @include('admin.includes.payment_method', ['payment_methods' => $payment_methods])
                      </div>
                      <div class="col-md-2" id="div-quotas">
                         <div class="form-group">
