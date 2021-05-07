@@ -125,4 +125,17 @@ class ProductController extends Controller
       ])->first();
       return response()->json($product);
    }
+
+   public function productSale(Request $request)
+   {
+      $product = LotItem::select('lot_items.id', 'lot_items.price', 'lot_items.amount', 'p.category', 'p.brand', 'p.name', 'p.size')
+         ->join('products AS p', 'p.id', '=', 'lot_items.product_id')
+         ->where([
+            ['lot_items.company_id', Auth::user()->company_id],
+            ['lot_items.id', $request->id],
+         ])
+         ->first();
+
+      return response()->json($product);
+   }
 }

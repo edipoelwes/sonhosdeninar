@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
    Route::get('inventories', 'App\Http\Controllers\ProductController@inventory')->name('products.inventory');
    Route::get('product', 'App\Http\Controllers\ProductController@product')->name('products.product');
+   Route::get('product/sale', 'App\Http\Controllers\ProductController@productSale')->name('products.sales');
    Route::get('product/{category}', 'App\Http\Controllers\ProductController@index')->name('products.index');
    Route::get('products/edit', 'App\Http\Controllers\ProductController@edit')->name('products.edit');
    Route::resource('products', ProductController::class)->except(['index', 'create', 'show', 'edit', 'update']);

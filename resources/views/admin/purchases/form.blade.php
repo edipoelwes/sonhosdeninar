@@ -17,9 +17,11 @@
          width: 55%;
       }
 
-      #amount, #profit {
+      #amount,
+      #profit {
          width: 45%;
       }
+
    </style>
 @endpush
 @section('content')
@@ -98,7 +100,8 @@
                            <select class="form-control select2" id="providers" name="provider_id">
                               <option>Selecione um fornecedor</option>
                               @foreach ($providers as $provider)
-                                 <option value="{{ $provider->id }}">{{ $provider->name }} - {{ $provider->cnpj }}</option>
+                                 <option value="{{ $provider->id }}">{{ $provider->name }} - {{ $provider->cnpj }}
+                                 </option>
                               @endforeach
                            </select>
                         </div>
@@ -120,7 +123,8 @@
                            <select class="form-control select2" onchange="purchases(this.value)">
                               <option value="">Selecione um Item</option>
                               @foreach ($products as $product)
-                                 <option value="{{ $product->id }}">{{ $product->category }} {{ $product->brand }} {{ $product->name }} {{ $product->size }}</option>
+                                 <option value="{{ $product->id }}">{{ $product->category }} {{ $product->brand }}
+                                    {{ $product->name }} {{ $product->size }}</option>
                               @endforeach
                            </select>
                         </div>
@@ -164,8 +168,8 @@
                                        R$ 0,00
                                     </td>
                                     <td colspan="1" class="text-right">
-                                       <button type="submit" rel="tooltip" class="btn btn-round "
-                                          data-original-title="" title="Concluir Compra">
+                                       <button type="submit" rel="tooltip" class="btn btn-round " data-original-title=""
+                                          title="Concluir Compra">
                                           Salvar
                                        </button>
                                     </td>
@@ -185,7 +189,7 @@
 @push('js')
    <script>
       function bank_slip(value) {
-         if(value == 1) {
+         if (value == 1) {
             $('#div_payout_interval').removeAttr('hidden')
          } else {
             $('#div_payout_interval').attr('hidden', true)
@@ -202,67 +206,83 @@
       // }
 
       function purchases(id) {
-         $.get("{{ route('products.product') }}", {
-            id
-         }, function(product) {
-            let item = `
-               <tr>
-                  <td colspan="3">
-                     ${product.category} ${product.brand} ${product.name} ${product.size}
-                  </td>
-                  <td class="text-right">
-                     R$ <input type="number" class="input price" id="price" name="price[${product.id}]" min="1" step="0.01" placeholder="0,00" onchange="updateForPrice(this)" required>
-                  </td>
-                  <td class="text-center">
-                     <input type="number" min="1" class="input amount" id="amount" name="amount[${product.id}]" value="1" onchange="updateForAmount(this)" required>
-                  </td>
-                  <td class="text-left">
-                     <input type="number" min="1" class="input" id="profit" name="profit[${product.id}]" placeholder="30" required>
-                  </td>
-                  <td class="text-left unit_price">
-                     R$ 0,00
-                  </td>
-                  <td class="">
-                     <a href="javascript:;" class="btn btn-danger" onclick="deleteProduct(this)">
-                        <i class="nc-icon nc-simple-remove"></i>
-                     </a>
-                  </td>
-               </tr>`
+         if (id) {
+            $.get("{{ route('products.product') }}", {
+               id
+            }, function(product) {
+               let item = `
+                  <tr>
+                     <td colspan="3">
+                        <div class="d-flex px-2 py-1">
+                           <div class="d-flex flex-column">
+                              <h6 class="mb-1 text-sm">${product.category}</h6>
+                              <p class="text-secondary mb-0">${product.brand} ${product.name} ${product.size}</p>
+                           </div>
+                        </div>
+                     </td>
+                     <td class="text-right">
+                        R$ <input type="number" class="input price" id="price" name="price[${product.id}]" min="1" step="0.01" placeholder="0,00" onchange="updateForPrice(this)" required>
+                     </td>
+                     <td class="text-center">
+                        <input type="number" min="1" class="input amount" id="amount" name="amount[${product.id}]" value="1" onchange="updateForAmount(this)" required>
+                     </td>
+                     <td class="text-left">
+                        <input type="number" min="1" class="input" id="profit" name="profit[${product.id}]" placeholder="30" required>
+                     </td>
+                     <td class="text-left unit_price">
+                        R$ 0,00
+                     </td>
+                     <td class="">
+                        <a href="javascript:;" class="btn btn-danger" onclick="deleteProduct(this)">
+                           <i class="nc-icon nc-simple-remove"></i>
+                        </a>
+                     </td>
+                  </tr>`
 
-            if ($(`input[name="amount[${product.id}]"]`).length == 0) {
-               $('table #itens').append(item)
-            }
-         })
+               if ($(`input[name="amount[${product.id}]"]`).length == 0) {
+                  $('table #itens').append(item)
+               }
+            })
+         }
       }
 
       function updateTotal() {
          let total = 0
-         for(let i = 0; i < $('.amount').length; i++ ) {
+         for (let i = 0; i < $('.amount').length; i++) {
             let price = $('.price').eq(i)
             total += parseFloat(price.val())
          }
 
-         $('.total').html(total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}))
+         $('.total').html(total.toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL'
+         }))
       }
 
-      function updateForPrice (obj) {
+      function updateForPrice(obj) {
          let price = $(obj).val()
          let amount = $(obj).closest('tr').find('#amount').val()
-         let unitPrice = (parseFloat(price) / parseInt(amount)).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+         let unitPrice = (parseFloat(price) / parseInt(amount)).toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL'
+         })
 
          $(obj).closest('tr').find('.unit_price').html(unitPrice)
          updateTotal();
       }
 
-      function updateForAmount (obj) {
+      function updateForAmount(obj) {
          let amount = $(obj).val()
          let price = $(obj).closest('tr').find('#price').val()
 
-         if(!price) {
+         if (!price) {
             price = 0
          }
 
-         let unitPrice = (parseFloat(price) / parseInt(amount)).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+         let unitPrice = (parseFloat(price) / parseInt(amount)).toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL'
+         })
 
          $(obj).closest('tr').find('.unit_price').html(unitPrice)
          updateTotal();
