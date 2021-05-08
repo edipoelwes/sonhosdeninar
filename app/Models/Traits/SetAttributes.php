@@ -56,12 +56,39 @@ trait SetAttributes
       }
    }
 
+   public function setDiscountAttribute($value)
+   {
+      if (empty($value)) {
+         $this->attributes['discount'] = 0;
+      } else {
+         $this->attributes['discount'] = floatval($this->convertStringToDouble($value));
+      }
+   }
+
    public function setCategoryAttribute($value)
    {
       if (empty($value)) {
          $this->attributes['category'] = null;
       } else {
          $this->attributes['category'] = mb_strtolower($value);
+      }
+   }
+
+   // public function setStatusAttribute($value)
+   // {
+   //    if (empty($value)) {
+   //       $this->attributes['status'] = null;
+   //    } else {
+   //       $this->attributes['status'] = intval($value);
+   //    }
+   // }
+
+   public function setSaleDateAttribute($value)
+   {
+      if (empty($value)) {
+         $this->attributes['sale_date'] = null;
+      } else {
+         $this->attributes['sale_date'] = $this->convertStringToDate($value);
       }
    }
 

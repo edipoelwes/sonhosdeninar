@@ -38,6 +38,7 @@
                                     {{ $sale->status }}
                                  </span>
                               </td>
+                              <td></td>
                               <td class="text-right">{{ money_br($sale->total_price) }}</td>
                               </td>
                               <td class="text-center">

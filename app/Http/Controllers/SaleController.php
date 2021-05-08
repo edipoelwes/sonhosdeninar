@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Client, LotItem, Product, Sale};
+use App\Models\{Client, LotItem, Product, Sale, SaleProduct};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth};
+use Illuminate\Support\Facades\{Auth, DB};
 
 class SaleController extends Controller
 {
@@ -55,7 +55,45 @@ class SaleController extends Controller
     */
    public function store(Request $request)
    {
-      dd($request->all());
+      DB::beginTransaction();
+      $sale = $request->except(['price_subtotal', 'price', 'amount', '_token']);
+      $sale['company_id'] = Auth::user()->company_id;
+      $sale['user_id'] = Auth::user()->id;
+      $sale['sale_date'] = date('d/m/Y', strtotime($request->sale_date));
+
+      $sale_id = Sale::create($sale);
+
+      $itens = $request->only(['price_subtotal', 'price', 'amount']);
+
+      $sale_itens = [];
+      foreach($itens['amount'] as $key => $item) {
+         $data['company_id'] = Auth::user()->company_id;
+         $data['sale_id'] = $sale_id->id;
+         $data['lot_item_id'] = $key;
+         $data['amount'] = $itens['amount'][$key];
+
+         array_push($sale_itens, $data);
+      }
+
+      $sale_products = SaleProduct::insert($sale_itens);
+
+      if($sale_products) {
+         foreach($sale_itens as $item) {
+            $lot_item = LotItem::where('id', $item['lot_item_id'])->first();
+            $lot_item->amount -= $item['amount'];
+            $lot_item->save();
+         }
+      }
+
+      // return ['sales' => $sale_id, 'sale_itens' => $sale_itens];
+
+      if ($sale_id && $sale_products) {
+         DB::commit();
+         return redirect()->route('sales.index')->withToastSuccess('Venda registrada com sucesso!');
+      } else {
+         DB::rollBack();
+         redirect()->route('sales.index')->withToastSuccess('Erro ao Registrar venda!');
+      }
    }
 
    /**

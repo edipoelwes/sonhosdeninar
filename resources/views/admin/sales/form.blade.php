@@ -44,8 +44,8 @@
                   <div class="row">
                      <div class="col-md-5">
                         <div class="form-group">
-                           <label for="sale_date">Cliente</label>
-                           <select class="form-control">
+                           <label for="client_id">Cliente</label>
+                           <select class="form-control" name="client_id" id="client_id">
                               <option value="">Selecione um Cliente</option>
                               @foreach ($clients as $client)
                                  <option value="{{ $client->id }}">{{ $client->name . '   ' . $client->cpf }}</option>
@@ -208,6 +208,10 @@
          }
 
          total -= discount
+
+         if(total < 0) {
+            total = 0
+         }
 
          $('.total').html(total.toLocaleString('pt-br', {
             style: 'currency',

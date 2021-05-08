@@ -9,4 +9,25 @@ use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 class Sale extends Model
 {
    use HasFactory, SoftDeletes, GetAttributes, SetAttributes;
+
+   protected $fillable = [
+      'company_id',
+      'user_id',
+      'client_id',
+      'discount',
+      'sale_date',
+      'status',
+      'payment_method',
+      'note'
+   ];
+
+   public function user()
+   {
+      return $this->belongsTo(User::class);
+   }
+
+   public function client()
+   {
+      return $this->belongsTo(Client::class);
+   }
 }

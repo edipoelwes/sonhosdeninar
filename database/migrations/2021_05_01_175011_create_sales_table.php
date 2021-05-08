@@ -19,10 +19,11 @@ class CreateSalesTable extends Migration
          $table->unsignedBigInteger('user_id');
          $table->unsignedBigInteger('client_id');
          $table->decimal('discount', 10, 2)->default(0);
-         $table->decimal('total_price', 10, 2)->default(0);
+         $table->string('sale_date')->nullable();
+         // $table->decimal('total_price', 10, 2)->default(0);
          $table->integer('status')->nullable()->comment('1 => Confirmado, 2 => Pendente, 3 => Cancelado');
          $table->integer('payment_method')->nullable()->comment('1 => Boleto bancário, 2 => Cartão de credito, 3 => Transferência bancaria, 4 => Dinheiro');
-         $table->text('description')->nullable();
+         $table->text('note')->nullable()->comment('Observações da venda');
          // $table->string('month_year')->default(strval(date('m/Y', strtotime(now()))));
          $table->timestamps();
          $table->softDeletes();

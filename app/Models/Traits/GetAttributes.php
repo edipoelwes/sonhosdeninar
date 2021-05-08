@@ -29,6 +29,11 @@ trait GetAttributes
       return floatval($value);
    }
 
+   public function getDiscountAttribute($value)
+   {
+      return money_br($value);
+   }
+
    // public function getCategoryAttribute($value)
    // {
    //    return ucwords($value);
