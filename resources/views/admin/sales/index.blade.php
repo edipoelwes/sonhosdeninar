@@ -22,24 +22,22 @@
                   <table class="table table-striped dataTables" style="width: 100%">
                      <thead class="text-primary">
                         <tr>
-                           <th>#</th>
                            <th>Status</th>
-                           <th class="text-center">Data da compra</th>
+                           <th class="text-center">Data da venda</th>
                            <th class="text-center">Total R$</th>
-                           <th>Ações</th>
+                           <th class="text-center">Ações</th>
                         </tr>
                      </thead>
                      <tbody>
                         @forelse ($sales as $sale)
                            <tr>
-                              <td class="text-center">{{ $sale->id }}</td>
                               <td class="text-center">
                                  <span class="badge {{ $sale->status == 'Faturado' ? 'bg-success' : 'bg-danger' }}">
                                     {{ $sale->status }}
                                  </span>
                               </td>
-                              <td></td>
-                              <td class="text-right">{{ money_br($sale->total_price) }}</td>
+                              <td class="text-center text-secondary">{{ $sale->sale_date }}</td>
+                              <td class="text-right">R$ {{ money_br($sale->sale_products->sum('subtotal')) }}</td>
                               </td>
                               <td class="text-center">
                                  <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" type="button"

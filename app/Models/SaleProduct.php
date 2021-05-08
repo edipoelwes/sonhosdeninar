@@ -9,6 +9,8 @@ class SaleProduct extends Model
 {
    use HasFactory, SoftDeletes;
 
+   public $timestamps = false;
+
    protected $fillable = [
       'company_id',
       'sale_id',

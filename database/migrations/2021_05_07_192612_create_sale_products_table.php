@@ -19,8 +19,8 @@ class CreateSaleProductsTable extends Migration
          $table->unsignedBigInteger('sale_id');
          $table->unsignedBigInteger('lot_item_id');
          $table->integer('amount');
-         $table->timestamps();
-
+         $table->decimal('subtotal', 10, 2)->default(0);
+         // $table->timestamps();
          $table->softDeletes();
 
          $table->foreign('company_id')->references('id')->on('companies');

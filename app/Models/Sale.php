@@ -30,4 +30,9 @@ class Sale extends Model
    {
       return $this->belongsTo(Client::class);
    }
+
+   public function sale_products()
+   {
+      return $this->hasMany(SaleProduct::class);
+   }
 }

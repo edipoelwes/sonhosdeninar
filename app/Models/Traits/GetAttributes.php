@@ -77,4 +77,9 @@ trait GetAttributes
             return 'Cancelado';
       }
    }
+
+   public function getSaleDateAttribute($value)
+   {
+      return date_br($value);
+   }
 }

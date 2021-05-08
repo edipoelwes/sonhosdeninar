@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Client, LotItem, Product, Sale, SaleProduct};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, DB};
+use App\Models\{Client, LotItem, Product, Sale, SaleProduct};
 
 class SaleController extends Controller
 {
@@ -15,8 +15,11 @@ class SaleController extends Controller
     */
    public function index()
    {
+      $sales = Sale::where('company_id', Auth::user()->company_id)->get();
+      // return $sales;
+
       return view('admin.sales.index', [
-         'sales' => Sale::where('company_id', Auth::user()->company_id)->get()
+         'sales' => $sales
       ]);
    }
 
@@ -71,6 +74,7 @@ class SaleController extends Controller
          $data['sale_id'] = $sale_id->id;
          $data['lot_item_id'] = $key;
          $data['amount'] = $itens['amount'][$key];
+         $data['subtotal'] = $itens['price_subtotal'][$key];
 
          array_push($sale_itens, $data);
       }
@@ -84,8 +88,6 @@ class SaleController extends Controller
             $lot_item->save();
          }
       }
-
-      // return ['sales' => $sale_id, 'sale_itens' => $sale_itens];
 
       if ($sale_id && $sale_products) {
          DB::commit();
