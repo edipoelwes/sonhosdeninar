@@ -22,7 +22,7 @@
                   <table class="table table-striped dataTables" style="width: 100%">
                      <thead class="text-primary">
                         <tr>
-                           <th>Status</th>
+                           <th class="text-center">Status</th>
                            <th class="text-center">Data da venda</th>
                            <th class="text-center">Total R$</th>
                            <th class="text-center">Ações</th>
@@ -30,14 +30,23 @@
                      </thead>
                      <tbody>
                         @forelse ($sales as $sale)
+                           @php
+                              if($sale->status == 'Faturado') {
+                                 $text_color = "text-success";
+                              } elseif($sale->status == 'Pendente') {
+                                 $text_color = "text-warning";
+                              } else {
+                                 $text_color = "text-danger";
+                              }
+                           @endphp
                            <tr>
                               <td class="text-center">
-                                 <span class="badge {{ $sale->status == 'Faturado' ? 'bg-success' : 'bg-danger' }}">
+                                 <span class="h6 {{ $text_color }}">
                                     {{ $sale->status }}
                                  </span>
                               </td>
                               <td class="text-center text-secondary">{{ $sale->sale_date }}</td>
-                              <td class="text-right">R$ {{ money_br($sale->sale_products->sum('subtotal')) }}</td>
+                              <td class="text-center">R$ {{ money_br($sale->sale_products->sum('subtotal') - money_db($sale->discount)) }}</td>
                               </td>
                               <td class="text-center">
                                  <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" type="button"

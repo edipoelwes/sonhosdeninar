@@ -45,9 +45,11 @@ Route::middleware('auth')->group(function () {
    Route::post('purchases/quota', 'App\Http\Controllers\PurchaseController@updateQuota')->name('purchases.quota');
    Route::resource('purchases', PurchaseController::class)->except(['edit', 'update', 'destroy']);
 
-   Route::resources([
-      'sales' => SaleController::class
-   ]);
+   Route::resource('sales', SaleController::class)->except(['edit', 'destroy']);
+
+   // Route::resources([
+   //    'sales' => SaleController::class
+   // ]);
 
    /**Rota de permissoes de acesso */
    Route::get('roles/{role}/permissions', 'App\Http\Controllers\RoleController@permissions')->name('roles.permission');

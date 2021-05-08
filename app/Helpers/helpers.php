@@ -99,3 +99,10 @@ if (!function_exists('lot_number')) {
       return str_pad($id, 4, '0', STR_PAD_LEFT).date('ymd-H', strtotime($date));
    }
 }
+
+if (!function_exists('sale_number')) {
+   function sale_number($id)
+   {
+      return str_pad($id, 5, '0', STR_PAD_LEFT);
+   }
+}

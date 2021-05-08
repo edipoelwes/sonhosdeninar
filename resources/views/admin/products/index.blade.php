@@ -13,7 +13,7 @@
             </div>
             <div class="card-body">
                <div class="table-responsive">
-                  <table class="table table-striped dataTables">
+                  <table class="table table-striped">
                      <thead class="text-primary">
                         <tr>
                            <th>N° Lote</th>
@@ -36,7 +36,7 @@
                               </td>
                               <td class="text-secondary text-left">R$ {{ money_br($product->price) }}</td>
                               <td class="text-center">
-                                 <span class="badge {{ $product->amount < 5 ? 'badge-danger' : 'badge-success' }}">
+                                 <span class="h6 {{ $product->amount < 5 ? 'text-danger' : 'text-success' }}">
                                     {{ $product->amount }}
                                  </span>
                               </td>

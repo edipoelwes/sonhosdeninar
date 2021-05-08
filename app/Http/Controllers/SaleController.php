@@ -106,19 +106,11 @@ class SaleController extends Controller
     */
    public function show(Sale $sale)
    {
-      //
+      return view('admin.sales.show', [
+         'sale' => $sale
+      ]);
    }
 
-   /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Sale  $sale
-    * @return \Illuminate\Http\Response
-    */
-   public function edit(Sale $sale)
-   {
-      //
-   }
 
    /**
     * Update the specified resource in storage.
@@ -129,17 +121,24 @@ class SaleController extends Controller
     */
    public function update(Request $request, Sale $sale)
    {
-      //
-   }
+      $sale->status = $request->status;
 
-   /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Sale  $sale
-    * @return \Illuminate\Http\Response
-    */
-   public function destroy(Sale $sale)
-   {
-      //
+      if($request->status == '3') {
+         $products = SaleProduct::where([
+            ['company_id', Auth::user()->company_id],
+            ['sale_id', $sale->id]
+         ])->select('lot_item_id as item', 'amount')->get();
+
+        foreach ($products as $product) {
+           $lot_item = LotItem::where('id', $product->item)->first();
+           $lot_item->amount += $product->amount;
+           $lot_item->save();
+        }
+      }
+
+      if($sale->save()) {
+         return back()->withToastSuccess('Status atualizado com sucesso!');
+      }
+      return back()->withToastError('Error ao atualizar status!');
    }
 }
