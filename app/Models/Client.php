@@ -16,7 +16,13 @@ class Client extends Model
       'name',
       'cpf',
       'phone',
+      'phone_secondary',
       'stars',
       'internal_obs'
    ];
+
+   public function adress()
+   {
+      return $this->hasOne(Adress::class);
+   }
 }

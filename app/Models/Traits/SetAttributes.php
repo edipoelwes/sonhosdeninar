@@ -32,6 +32,11 @@ trait SetAttributes
       $this->attributes['phone'] = $this->clearField($value);
    }
 
+   public function setPhoneSecondaryAttribute($value)
+   {
+      $this->attributes['phone_secondary'] = $this->clearField($value);
+   }
+
    public function setZipcodeAttribute($value)
    {
       $this->attributes['zipcode'] = $this->clearField($value);

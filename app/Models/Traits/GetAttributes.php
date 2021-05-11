@@ -24,6 +24,15 @@ trait GetAttributes
       return '(' . substr($value, 0, 2) . ') ' . substr($value, 2, 5) . ' - ' . substr($value, 7, 9);
    }
 
+   public function getPhoneSecondaryAttribute($value)
+   {
+      if (!$value) {
+         return null;
+      }
+
+      return '(' . substr($value, 0, 2) . ') ' . substr($value, 2, 5) . ' - ' . substr($value, 7, 9);
+   }
+
    public function getPriceAttribute($value)
    {
       return floatval($value);

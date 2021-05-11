@@ -65,7 +65,7 @@
                            </tr>
                         @empty
                            <tr>
-                              <td colspan="5" class="h3 text-danger">Nenhum Produto encontrado nesta categoria</td>
+                              <td colspan="5" class="h3 text-danger text-center">Nenhum Produto encontrado nesta categoria</td>
                            </tr>
                         @endforelse
                      </tbody>

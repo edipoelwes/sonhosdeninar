@@ -85,23 +85,83 @@
             $.get("{{ route('clients.edit') }}", {
                id
             }, function(response) {
+               console.log(response);
                if (response) {
                   $('input[name="name"]').val(response.name)
                   $('input[name="phone"]').val(response.phone)
+                  $('input[name="phone_secondary"]').val(response.phone_secondary)
                   $('input[name="cpf"]').val(response.cpf)
+
+                  $("#zipcode").val(response.zipcode)
+                  $("#street").val(response.street)
+                  $("#complement").val(response.complement)
+                  $("#number").val(response.number)
+                  $("#neighborhood").val(response.neighborhood)
+                  $("#city").val(response.city)
+                  $("#state").val(response.state)
                }
             })
          } else {
             $('div.modal-header h5').text('Cadastrar cliente')
             $('input[name="client_id"]').val('')
-
             $('input[name="name"]').val('')
             $('input[name="phone"]').val('')
+            $('input[name="phone_secondary"]').val('')
             $('input[name="cpf"]').val('')
-
+            $("#zipcode").val('')
+            $("#street").val('')
+            $("#complement").val('')
+            $("#number").val('')
+            $("#neighborhood").val('')
+            $("#city").val('')
+            $("#state").val('')
          }
          $('#client-modal').modal('show')
       }
+
+      const limpa_formulário_cep = () => {
+         // Limpa valores do formulário de cep.
+         $("#street").val("")
+         $("#neighborhood").val("")
+         $("#city").val("")
+         $("#state").val("")
+         $("#number").val("")
+      }
+
+      $('#zipcode').blur(function() {
+         let cep = $(this).val().replace(/\D/g, '')
+         if (cep != '') {
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/
+
+            //Valida o formato do CEP.
+            if (validacep.test(cep)) {
+               //Preenche os campos com "..." enquanto consulta webservice.
+               $("#street").val("...")
+               $("#complement").val("...")
+               $("#neighborhood").val("...")
+               $("#city").val("...")
+               $("#state").val("...")
+
+
+               //Consulta o webservice viacep.com.br/
+               $.getJSON(`https://viacep.com.br/ws/${cep}/json/?callback=?`, function(response) {
+                  if (response.bairro == '') {
+                     $("#neighborhood").removeAttr('readonly').focus()
+                  }
+                  $("#street").val(response.logradouro)
+                  $("#complement").val(response.complemento)
+                  $("#neighborhood").val(response.bairro)
+                  $("#city").val(response.localidade)
+                  $("#state").val(response.uf)
+               })
+            } else {
+               limpa_formulário_cep();
+            }
+         } else {
+            limpa_formulário_cep();
+         }
+      })
 
    </script>
 @endpush
