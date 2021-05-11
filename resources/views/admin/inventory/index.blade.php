@@ -32,8 +32,14 @@
                               <td>
                                  <div class="d-flex px-2 py-1">
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-sm">{{ ucwords($inventory->category).' '.ucwords($inventory->brand).' Tam. '.mb_strtoupper($inventory->size) }}</h6>
-                                       <p class="text-secondary mb-0">{{  $inventory->name }}</p>
+                                       @can('Sonhos de Ninar')
+                                          <h6 class="mb-1 text-sm">{{ ucwords($inventory->category).' '.ucwords($inventory->brand).' Tam. '.mb_strtoupper($inventory->size) }}</h6>
+                                          <p class="text-secondary mb-0">{{  $inventory->name }}</p>
+                                       @endcan
+                                       @can('Fototica Macedo')
+                                          <h6 class="mb-1 text-sm">{{ ucwords($inventory->category).' '.ucwords($inventory->brand).' Referência n° '.$inventory->reference }}</h6>
+                                          <p class="text-secondary mb-0">{{  $inventory->name }}</p>
+                                       @endcan
                                     </div>
                                  </div>
                               </td>
@@ -74,6 +80,7 @@
 
 @push('js')
    <script type="text/javascript">
+   $('.refer').mask('0000 00▢00 000');
       const productModal = id => {
          if (id) {
             $('div.modal-header h5').text('Atualizar produto')
@@ -82,9 +89,9 @@
             $.get("{{ route('products.edit') }}", {
                id
             }, function(response) {
-               console.log(response)
                if (response) {
                   $('input[name="name"]').val(response.name)
+                  $('input[name="reference"]').val(response.reference)
                   $(`select[name=category] option[value="${response.category}"]`).attr('selected', true)
                   $(`select[name=size] option[value="${response.size}"]`).attr('selected', true)
                   $(`select[name=brand] option[value="${response.brand}"]`).attr('selected', true)
@@ -94,6 +101,7 @@
             $('div.modal-header h5').text('Cadastrar produto')
             $('input[name="product_id"]').val('')
             $('input[name="name"]').val('')
+            $('input[name="reference"]').val('')
             $('select[name=category] option[value=""]').attr('selected', true)
             $('select[name=brand] option[value=""]').attr('selected', true)
             $('select[name=size] option[value=""]').attr('selected', true)

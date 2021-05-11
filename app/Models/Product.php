@@ -19,5 +19,6 @@ class Product extends Model
       'price',
       'amount',
       'min_amount',
+      'reference'
    ];
 }
