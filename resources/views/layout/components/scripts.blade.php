@@ -50,12 +50,11 @@
 <script>
    $(document).ready(function() {
       $('.select2').select2({
-         language: "pt-BR",
-         theme: "classic",
-         width: 'resolve'
-      },
+            language: "pt-BR",
+            theme: "classic",
+            width: 'resolve'
+         },
 
       );
    });
-
 </script>

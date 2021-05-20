@@ -147,14 +147,16 @@
             $.get("{{ route('products.sales') }}", {
                id
             }, function(product) {
+               let size = product.size != null ? product.size : ''
+               let name = product.name != null ? product.name : ''
                let item = `
                      <tr>
                         <td colspan="3">
                            <input type="hidden" class="price_subtotal" id="price_subtotal" value="${product.price}" name="price_subtotal[${product.id}]">
                            <div class="d-flex px-2 py-1">
                               <div class="d-flex flex-column">
-                                 <h6 class="mb-1 text-sm">${product.category+' '+product.size+' '+product.brand}</h6>
-                                 <p class="text-secondary mb-0">${product.name}</p>
+                                 <h6 class="mb-1 text-sm">${product.category+' '+size+' '+product.brand}</h6>
+                                 <p class="text-secondary mb-0">${name}</p>
                               </div>
                            </div>
                         </td>

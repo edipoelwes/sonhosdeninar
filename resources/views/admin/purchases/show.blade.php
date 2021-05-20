@@ -153,15 +153,12 @@
                                  <div class="d-flex px-2 py-1">
                                     <div class="d-flex flex-column">
                                        <h6 class="mb-1 text-sm">
-                                          {{ substr(ucwords($item->product->category), 0, -1) . ' ' . ucwords($item->product->brand) . ' ' . strtoupper($item->product->size) ?? '' }}
+                                          {{ substr(ucwords($item->product->category), 0, -1) . ' ' . ucwords($item->product->brand) . ' ' . strtoupper($item->product->size ?? $item->product->reference) }}
                                        </h6>
                                        <p class="text-secondary mb-0">{{ $item->product->name }}</p>
                                     </div>
                                  </div>
                               </td>
-                              {{-- <td>{{ mb_strtoupper($item->product->category) }}</td>
-                              <td>{{ ucwords($item->product->brand).' '.$item->product->name }}</td>
-                              <td class="text-center">{{  strtoupper($item->product->size) ?? '' }}</td> --}}
                               <td class="text-secondary text-center" nowrap>R$
                                  {{ money_br($item->sub_total / $item->amount) }}</td>
                               <td class="text-secondary text-center">{{ $item->amount }}</td>

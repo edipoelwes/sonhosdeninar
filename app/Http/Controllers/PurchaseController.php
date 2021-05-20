@@ -51,6 +51,7 @@ class PurchaseController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
+
    public function store(Request $request)
    {
       DB::beginTransaction();
@@ -70,7 +71,7 @@ class PurchaseController extends Controller
          $data['purchase_id'] = $purchase_id->id;
          $data['product_id'] = $key;
 
-         $data['sub_total'] = $products['price'][$key];
+         $data['sub_total'] = $this->convertNumber($products['price'][$key]);
          $data['amount'] = $products['amount'][$key];
          $data['profit'] = $products['profit'][$key];
 
@@ -183,5 +184,10 @@ class PurchaseController extends Controller
       $price = $unit_price + $lucre;
 
       return $price;
+   }
+
+   private function convertNumber(string $value): float
+   {
+      return floatval(str_replace(',', '.', $value));
    }
 }

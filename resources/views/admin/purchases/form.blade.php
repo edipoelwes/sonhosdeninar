@@ -221,7 +221,7 @@
                         </div>
                      </td>
                      <td class="text-right">
-                        R$ <input type="number" class="input price" id="price" name="price[${product.id}]" min="1" step="0.01" placeholder="0,00" onchange="updateForPrice(this)" required>
+                        R$ <input type="text" class="input price" id="price" name="price[${product.id}]" min="1" step="0.01" placeholder="0,00" onchange="updateForPrice(this)" onkeyup="maskPrice(this)" value="" required>
                      </td>
                      <td class="text-center">
                         <input type="number" min="1" class="input amount" id="amount" name="amount[${product.id}]" value="1" onchange="updateForAmount(this)" required>
@@ -250,7 +250,7 @@
          let total = 0
          for (let i = 0; i < $('.amount').length; i++) {
             let price = $('.price').eq(i)
-            total += parseFloat(price.val())
+            total += parseFloat(price.val().replace(',', '.'))
          }
 
          $('.total').html(total.toLocaleString('pt-br', {
@@ -291,6 +291,12 @@
       function deleteProduct(obj) {
          $(obj).closest('tr').remove();
          updateTotal();
+      }
+
+      function maskPrice(obj) {
+         let price = obj.value
+         price = price.replace(/\D/g, '').replace(/(\d{1,2})$/, ',$1').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+         obj.value = price
       }
 
    </script>

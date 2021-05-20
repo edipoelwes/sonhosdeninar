@@ -80,7 +80,7 @@
 
 @push('js')
    <script type="text/javascript">
-   $('.refer').mask('0000 00▢00 000');
+   $('.refer').mask('0000 00-00 000');
       const productModal = id => {
          if (id) {
             $('div.modal-header h5').text('Atualizar produto')

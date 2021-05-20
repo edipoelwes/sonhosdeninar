@@ -25,7 +25,7 @@
                         @endcan
                         @can('Fototica Macedo')
                            <option value="armação receituario">Armação receituario</option>
-                           <option value="oculos solar">Oculos solar</option>
+                           <option value="óculos solar">Óculos solar</option>
                         @endcan
 
                      </select>

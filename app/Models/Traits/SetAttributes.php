@@ -97,6 +97,15 @@ trait SetAttributes
       }
    }
 
+   public function setQuotaAttribute($value)
+   {
+      if (empty($value)) {
+         $this->attributes['quota'] = 1;
+      } else {
+         $this->attributes['quota'] = $value;
+      }
+   }
+
    private function convertStringToDouble(?string $param)
    {
       if (empty($param)) {
