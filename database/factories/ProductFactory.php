@@ -22,7 +22,7 @@ class ProductFactory extends Factory
    public function definition()
    {
       return [
-         'company_id' => $this->faker->numberBetween(1, 2),
+         'company_id' => 1,//$this->faker->numberBetween(1, 2),
          // 'category' => "fraldas",
          'category' => $this->faker->randomElement(['fraldas', 'lenços', 'roupas', 'calçados', 'higiene', 'enxoval']),
          'brand' => $this->faker->randomElement(['mamypoko', 'pampers', 'huggies', 'pompom', 'babysec', 'scoobydoo']),
