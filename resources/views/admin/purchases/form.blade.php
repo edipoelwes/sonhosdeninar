@@ -250,7 +250,7 @@
          let total = 0
          for (let i = 0; i < $('.amount').length; i++) {
             let price = $('.price').eq(i)
-            total += parseFloat(price.val().replace(',', '.'))
+            total += parseFloat(price.val().replace('.', '').replace(',', '.'))
          }
 
          $('.total').html(total.toLocaleString('pt-br', {
@@ -260,7 +260,7 @@
       }
 
       function updateForPrice(obj) {
-         let price = $(obj).val()
+         let price = $(obj).val().replace('.', '').replace(',', '.')
          let amount = $(obj).closest('tr').find('#amount').val()
          let unitPrice = (parseFloat(price) / parseInt(amount)).toLocaleString('pt-br', {
             style: 'currency',
@@ -273,7 +273,7 @@
 
       function updateForAmount(obj) {
          let amount = $(obj).val()
-         let price = $(obj).closest('tr').find('#price').val()
+         let price = $(obj).closest('tr').find('#price').val().replace('.', '').replace(',', '.')
 
          if (!price) {
             price = 0

@@ -188,6 +188,6 @@ class PurchaseController extends Controller
 
    private function convertNumber(string $value): float
    {
-      return floatval(str_replace(',', '.', $value));
+      return floatval(str_replace(',', '.', str_replace('.', '', $value)));
    }
 }
