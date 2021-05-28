@@ -39,7 +39,7 @@
             </div>
             <hr>
             <div class="card-body">
-               <form action="{{ route('sales.store') }}" method="POST" autocomplete="off">
+               <form action="{{ route('sales.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                   @csrf
                   <div class="row">
                      <div class="col-md-5">
@@ -83,21 +83,13 @@
                            <input type="text" class="form-control" id="note" name="note" maxlength="255">
                         </div>
                      </div>
+                     @can('Fototica Macedo')
+                        <div class="col-md-6">
+                           <label for="receitas">Receitas</label><br>
+                           <input type="file" name="receitas[]" multiple/>
+                        </div>
+                     @endcan
                   </div>
-                  @can('Fototica Macedo')
-                     <hr>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <span class="h4">Receitas</span>
-                        </div>
-                        <div class="col-md-6">
-                           <button class="btn btn-secondary float-right" type="button" onclick="receitas()">Adicionar Receita</button>
-                        </div>
-                     </div>
-                     <div class="receitas">
-
-                     </div>
-                  @endcan
                   <hr>
                   <div class="row mt-4">
                      <div class="col-md-12">
@@ -165,42 +157,42 @@
                let size = product.size != null ? product.size : ''
                let name = product.name != null ? product.name : ''
                let item = `
-                           <tr>
-                              <td colspan="3">
-                                 <input type="hidden" class="price_subtotal" id="price_subtotal" value="${product.price}" name="price_subtotal[${product.id}]">
-                                 <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-sm">${product.category+' '+size+' '+product.brand}</h6>
-                                       <p class="text-secondary mb-0">${name}</p>
+                              <tr>
+                                 <td colspan="3">
+                                    <input type="hidden" class="price_subtotal" id="price_subtotal" value="${product.price}" name="price_subtotal[${product.id}]">
+                                    <div class="d-flex px-2 py-1">
+                                       <div class="d-flex flex-column">
+                                          <h6 class="mb-1 text-sm">${product.category+' '+size+' '+product.brand}</h6>
+                                          <p class="text-secondary mb-0">${name}</p>
+                                       </div>
                                     </div>
-                                 </div>
-                              </td>
-                              <td class="text-center text-secondary">
-                                 <input type="hidden" id="price" value="${product.price}" name="price[${product.id}]">
-                                 ${Number(product.price).toLocaleString('pt-br', {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                 })}
-                              </td>
-                              <td class="text-center text-secondary">
-                                 ${product.amount}
-                              </td>
-                              <td class="text-center">
-                                 <input type="number" min="1" max="${product.amount}" class="input amount" id="amount" name="amount[${product.id}]" value="1" onchange="updateForAmount(this)" required>
-                              </td>
+                                 </td>
+                                 <td class="text-center text-secondary">
+                                    <input type="hidden" id="price" value="${product.price}" name="price[${product.id}]">
+                                    ${Number(product.price).toLocaleString('pt-br', {
+                                       style: 'currency',
+                                       currency: 'BRL'
+                                    })}
+                                 </td>
+                                 <td class="text-center text-secondary">
+                                    ${product.amount}
+                                 </td>
+                                 <td class="text-center">
+                                    <input type="number" min="1" max="${product.amount}" class="input amount" id="amount" name="amount[${product.id}]" value="1" onchange="updateForAmount(this)" required>
+                                 </td>
 
-                              <td class="text-left subtotal text-secondary">
-                                 ${Number(product.price).toLocaleString('pt-br', {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                 })}
-                              </td>
-                              <td class="">
-                                 <a href="javascript:;" class="btn btn-danger" onclick="deleteProduct(this)">
-                                    <i class="nc-icon nc-simple-remove"></i>
-                                 </a>
-                              </td>
-                           </tr>`
+                                 <td class="text-left subtotal text-secondary">
+                                    ${Number(product.price).toLocaleString('pt-br', {
+                                       style: 'currency',
+                                       currency: 'BRL'
+                                    })}
+                                 </td>
+                                 <td class="">
+                                    <a href="javascript:;" class="btn btn-danger" onclick="deleteProduct(this)">
+                                       <i class="nc-icon nc-simple-remove"></i>
+                                    </a>
+                                 </td>
+                              </tr>`
 
                if ($(`input[name="amount[${product.id}]"]`).length == 0) {
                   $('table #itens').append(item)
@@ -257,199 +249,199 @@
       const receitas = () => {
          let id = $('.receitas .row').length
          const div = `
-            <div class="row mt-3">
-               <div class="col-md-6">
-                  <div class="form-group">
-                     <label for="name">Nome</label>
-                     <input type="text" class="form-control" name="name[${id}]">
+               <div class="row mt-3">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" name="name[${id}]">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-3">
-                  <div class="form-group">
-                     <label for="age">Idade</label>
-                     <input type="text" class="form-control" name="age[${id}]">
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="age">Idade</label>
+                        <input type="text" class="form-control" name="age[${id}]">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-3">
-                  <div class="form-group">
-                     <label for="addition">Adição</label>
-                     <input type="text" class="form-control" name="addition[${id}]">
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="addition">Adição</label>
+                        <input type="text" class="form-control" name="addition[${id}]">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="od">Longe</label>
-                     <input type="text" class="form-control" name="od[${id}]" value="OD" readonly>
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="od">Longe</label>
+                        <input type="text" class="form-control" name="od[${id}]" value="OD" readonly>
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="esf_od">ESF</label>
-                     <input type="text" class="form-control" name="esf_od[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="esf_od">ESF</label>
+                        <input type="text" class="form-control" name="esf_od[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="cil_od">CIL</label>
-                     <input type="text" class="form-control" name="cil_od[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="cil_od">CIL</label>
+                        <input type="text" class="form-control" name="cil_od[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="eixo_od">EIXO</label>
-                     <input type="text" class="form-control" name="eixo_od[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="eixo_od">EIXO</label>
+                        <input type="text" class="form-control" name="eixo_od[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="alt_od">ALT</label>
-                     <input type="text" class="form-control" name="alt_od[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="alt_od">ALT</label>
+                        <input type="text" class="form-control" name="alt_od[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="dnp_od">DNP</label>
-                     <input type="text" class="form-control" name="dnp_od[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="dnp_od">DNP</label>
+                        <input type="text" class="form-control" name="dnp_od[${id}]" value="">
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="oe">Longe</label>
-                     <input type="text" class="form-control" name="oe[${id}]" value="OE" readonly>
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="oe">Longe</label>
+                        <input type="text" class="form-control" name="oe[${id}]" value="OE" readonly>
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="esf_oe">ESF</label>
-                     <input type="text" class="form-control" name="esf_oe[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="esf_oe">ESF</label>
+                        <input type="text" class="form-control" name="esf_oe[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="cil_oe">CIL</label>
-                     <input type="text" class="form-control" name="cil_oe[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="cil_oe">CIL</label>
+                        <input type="text" class="form-control" name="cil_oe[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="eixo_oe">EIXO</label>
-                     <input type="text" class="form-control" name="eixo_oe[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="eixo_oe">EIXO</label>
+                        <input type="text" class="form-control" name="eixo_oe[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="alt_oe">ALT</label>
-                     <input type="text" class="form-control" name="alt_oe[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="alt_oe">ALT</label>
+                        <input type="text" class="form-control" name="alt_oe[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-2">
-                  <div class="form-group">
-                     <label for="dnp_oe">DNP</label>
-                     <input type="text" class="form-control" name="dnp_oe[${id}]" value="">
+                  <div class="col-md-2">
+                     <div class="form-group">
+                        <label for="dnp_oe">DNP</label>
+                        <input type="text" class="form-control" name="dnp_oe[${id}]" value="">
+                     </div>
                   </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="form-group">
-                     <label for="note_receita">Observações</label>
-                     <input type="text" class="form-control" name="note_receita[${id}]" value="">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="note_receita">Observações</label>
+                        <input type="text" class="form-control" name="note_receita[${id}]" value="">
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-3">
-                  <div class="form-group">
-                     <label for="data_receita">Data da receita</label>
-                     <input type="date" class="form-control" name="data_receita[${id}]">
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="data_receita">Data da receita</label>
+                        <input type="date" class="form-control" name="data_receita[${id}]">
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-3">
-                  <div class="form-group">
-                     <label for="doutor">Medico</label>
-                     <input type="text" class="form-control" name="doutor[${id}]">
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="doutor">Medico</label>
+                        <input type="text" class="form-control" name="doutor[${id}]">
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="monofocais[${id}]" onclick="verifica(this)" value="">
-                        MONOFOCAIS
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="monofocais[${id}]" onclick="verifica(this)" value="">
+                           MONOFOCAIS
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="multifocais[${id}]" onclick="verifica(this)" value="">
-                        MULTIFOCAIS
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="multifocais[${id}]" onclick="verifica(this)" value="">
+                           MULTIFOCAIS
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="bifocais[${id}]" onclick="verifica(this)" value="">
-                        BIFOCAIS
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="bifocais[${id}]" onclick="verifica(this)" value="">
+                           BIFOCAIS
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="reflexo[${id}]" onclick="verifica(this)" value="">
-                        A.REFLEXO
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="reflexo[${id}]" onclick="verifica(this)" value="">
+                           A.REFLEXO
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="fotossensivel[${id}]" onclick="verifica(this)" value="">
-                        FOTOSSENSIVEL
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="fotossensivel[${id}]" onclick="verifica(this)" value="">
+                           FOTOSSENSIVEL
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
-               </div>
 
-               <div class="col-md-2">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="monofocais[${id}]" onclick="verifica(this)" value="">
-                        INCOLOR
-                        <span class="form-check-sign">
-                           <span class="check"></span>
-                        </span>
-                     </label>
+                  <div class="col-md-2">
+                     <div class="form-check">
+                        <label class="form-check-label">
+                           <input class="form-check-input" type="checkbox" name="monofocais[${id}]" onclick="verifica(this)" value="">
+                           INCOLOR
+                           <span class="form-check-sign">
+                              <span class="check"></span>
+                           </span>
+                        </label>
+                     </div>
                   </div>
+                  <hr>
                </div>
-               <hr>
-            </div>
-         `
+            `
          $('.receitas').append(div)
       }
 
       const verifica = obj => {
          console.log(obj);
-         if(obj.checked) {
+         if (obj.checked) {
             obj.value = 'T'
          } else {
             obj.value = 'F'

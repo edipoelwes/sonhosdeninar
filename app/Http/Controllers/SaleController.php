@@ -58,7 +58,7 @@ class SaleController extends Controller
     */
    public function store(Request $request)
    {
-      // return $request->all();
+      return $request->all();
       DB::beginTransaction();
       $sale = $request->except(['price_subtotal', 'price', 'amount', '_token']);
       $sale['company_id'] = Auth::user()->company_id;
