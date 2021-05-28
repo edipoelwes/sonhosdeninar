@@ -130,30 +130,46 @@
             </a>
             <div class="collapse " id="pagesProducts">
                <ul class="nav">
-                  <li class="ml-3">
-                     <a href="{{ route('products.index', ['category' => 'fraldas']) }}">
-                        <span class="sidebar-mini-icon">F</span>
-                        <span class="sidebar-normal"> Fraldas </span>
-                     </a>
-                  </li>
-                  <li class="ml-3">
-                     <a href="{{ route('products.index', ['category' => 'lenços']) }}">
-                        <span class="sidebar-mini-icon">L</span>
-                        <span class="sidebar-normal"> Lenços </span>
-                     </a>
-                  </li>
-                  <li class="ml-3">
-                     <a href="{{ route('products.index', ['category' => 'roupas']) }}">
-                        <span class="sidebar-mini-icon">R</span>
-                        <span class="sidebar-normal"> Roupas </span>
-                     </a>
-                  </li>
-                  <li class="ml-3">
-                     <a href="{{ route('products.index', ['category' => 'calçados']) }}">
-                        <span class="sidebar-mini-icon">C</span>
-                        <span class="sidebar-normal"> Calçados </span>
-                     </a>
-                  </li>
+                  @can('Sonhos de Ninar')
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'fraldas']) }}">
+                           <span class="sidebar-mini-icon">F</span>
+                           <span class="sidebar-normal"> Fraldas </span>
+                        </a>
+                     </li>
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'lenços']) }}">
+                           <span class="sidebar-mini-icon">L</span>
+                           <span class="sidebar-normal"> Lenços </span>
+                        </a>
+                     </li>
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'roupas']) }}">
+                           <span class="sidebar-mini-icon">R</span>
+                           <span class="sidebar-normal"> Roupas </span>
+                        </a>
+                     </li>
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'calçados']) }}">
+                           <span class="sidebar-mini-icon">C</span>
+                           <span class="sidebar-normal"> Calçados </span>
+                        </a>
+                     </li>
+                  @endcan
+                  @can('Fototica Macedo')
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'armação receituario']) }}">
+                           <span class="sidebar-mini-icon">A</span>
+                           <span class="sidebar-normal"> Armação Receituario </span>
+                        </a>
+                     </li>
+                     <li class="ml-3">
+                        <a href="{{ route('products.index', ['category' => 'óculos solar']) }}">
+                           <span class="sidebar-mini-icon">O</span>
+                           <span class="sidebar-normal"> Óculos Solar </span>
+                        </a>
+                     </li>
+                  @endcan
                </ul>
             </div>
          </li>

@@ -92,7 +92,8 @@ class PurchaseController extends Controller
          $item_data['company_id'] = Auth::user()->company_id;
          $item_data['lot_id'] = $lot_id->id;
          $item_data['product_id'] = $item['product_id'];
-         $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');
+         // $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');
+         $item_data['price'] = floatval(str_replace(',', '.', str_replace('.', '', $this->price($item['sub_total'], $item['amount'], $item['profit']))));
          $item_data['amount'] = $item['amount'];
 
          array_push($lot_itens, $item_data);
