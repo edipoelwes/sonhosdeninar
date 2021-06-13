@@ -54,6 +54,10 @@ class PurchaseController extends Controller
 
    public function store(Request $request)
    {
+      // $valor = $request->only('price');
+      // // $num = floatval($valor['price']["21"]);
+      // var_dump($this->convertNumber($valor['price']["21"])); die();
+      // return number_format($num, 2, '.', ',');
       DB::beginTransaction();
 
       $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota', 'payout_interval']);
@@ -72,8 +76,8 @@ class PurchaseController extends Controller
          $data['product_id'] = $key;
 
          $data['sub_total'] = $this->convertNumber($products['price'][$key]);
-         $data['amount'] = $products['amount'][$key];
-         $data['profit'] = $products['profit'][$key];
+         $data['amount'] = intval($products['amount'][$key]);
+         $data['profit'] = intval($products['profit'][$key]);
 
          array_push($itens, $data);
       }
@@ -92,8 +96,7 @@ class PurchaseController extends Controller
          $item_data['company_id'] = Auth::user()->company_id;
          $item_data['lot_id'] = $lot_id->id;
          $item_data['product_id'] = $item['product_id'];
-         // $item_data['price'] = number_format($this->price($item['sub_total'], $item['amount'], $item['profit']), 2, '.', ',');
-         $item_data['price'] = floatval(str_replace(',', '.', str_replace('.', '', $this->price($item['sub_total'], $item['amount'], $item['profit']))));
+         $item_data['price'] = $this->price($item['sub_total'], $item['amount'], $item['profit']);
          $item_data['amount'] = $item['amount'];
 
          array_push($lot_itens, $item_data);
@@ -184,7 +187,7 @@ class PurchaseController extends Controller
       $lucre = $unit_price * ($profit / 100);
       $price = $unit_price + $lucre;
 
-      return $price;
+      return number_format($price, 2);
    }
 
    private function convertNumber(string $value): float

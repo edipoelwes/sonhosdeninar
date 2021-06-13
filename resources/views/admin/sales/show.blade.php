@@ -66,7 +66,7 @@
                         @if ($sale->note)
                            <div class="col-md-12 mt-2">
                               <label>Observações das compras</label>
-                              <textarea class="form-control" cols="30" rows="10" disabled>{{ $sale->note }}</textarea>
+                              <textarea class="form-control" cols="30" rows="10" disabled>   {{ $sale->note }}</textarea>
                            </div>
                         @endif
                      </div>

@@ -30,6 +30,7 @@ class ProductController extends Controller
          'products.brand',
          'products.name',
          'products.size',
+         'products.reference',
          'lot_items.price',
          'lot_items.amount',
       )

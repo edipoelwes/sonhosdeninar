@@ -61,7 +61,7 @@
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="sale_date">Data da venda</label>
-                           <input type="date" class="form-control" id="sale_date" name="sale_date">
+                           <input type="date" class="form-control" id="sale_date" name="sale_date" value="{{ date('Y-m-d') }}">
                         </div>
                      </div>
 
@@ -456,5 +456,20 @@
          }
       }
 
+      const bank_slip = value => {
+         $('#div-status select#status option').removeAttr('selected')
+         switch (value) {
+            case '1':
+            case '2':
+               $('#div-status select#status option[value="2"]').attr('selected','selected')
+               break;
+            case '3':
+            case '4':
+               $('#div-status select#status option[value="1"]').attr('selected','selected')
+               break;
+            default:
+               $('#div-status select#status option[value=""]').attr('selected','selected')
+         }
+      }
    </script>
 @endpush

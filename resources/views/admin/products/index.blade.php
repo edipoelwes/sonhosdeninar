@@ -36,7 +36,13 @@
                               <td>
                                  <div class="d-flex px-2 py-1">
                                     <div class="d-flex flex-column">
-                                       <h6 class="mb-1 text-sm">{{ ucwords($product->brand).'  '.mb_strtoupper($product->size) }}</h6>
+                                       <h6 class="mb-1 text-sm">
+                                          @can('Fototica Macedo')
+                                          {{ ucwords($product->brand).'  / REF N° '.mb_strtoupper($product->reference) }}
+                                          @elsecan('Sonhos de Ninar')
+                                          {{ ucwords($product->brand).'  '.mb_strtoupper($product->size) }}
+                                          @endcan
+                                       </h6>
                                        <p class="text-secondary mb-0">{{ $product->name }}</p>
                                     </div>
                                  </div>

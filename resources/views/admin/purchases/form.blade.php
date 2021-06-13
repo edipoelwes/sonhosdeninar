@@ -73,7 +73,7 @@
                      <div class="col-md-3" id="div-due">
                         <div class="form-group">
                            <label for="due_date">Data do vencimento</label>
-                           <input type="date" class="form-control" id="due_date" name="due_date">
+                           <input type="date" class="form-control" id="due_date" name="due_date" value="{{date('Y-m-d')}}">
                         </div>
                      </div>
                      <div class="col-md-3" hidden id="div_payout_interval">
@@ -91,7 +91,7 @@
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="purchase_date">Data da Compra</label>
-                           <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+                           <input type="date" class="form-control" id="purchase_date" name="purchase_date" value="{{date('Y-m-d')}}">
                         </div>
                      </div>
                      <div class="col-md-6" id="div-provider_id">
@@ -191,19 +191,22 @@
       function bank_slip(value) {
          if (value == 1) {
             $('#div_payout_interval').removeAttr('hidden')
+            $('#div-status select#status option[value="2"]').attr('selected','selected')
          } else {
             $('#div_payout_interval').attr('hidden', true)
          }
+
+         if(value == 2) {
+            $('#div-status select#status option[value="2"]').attr('selected','selected')
+         }
+
+         if(value == 3 || value == 4) {
+            $('#div-quotas').attr('hidden', true)
+            $('#div-status select#status option[value="1"]').attr('selected','selected')
+         } else {
+            $('#div-quotas').removeAttr('hidden')
+         }
       }
-      // function quotas(value) {
-      //    if (value == 1 || value == 2) {
-      //       $('#div-quotas').removeAttr('hidden')
-      //       $('#div-due').removeAttr('hidden')
-      //    } else {
-      //       $('#div-quotas').attr('hidden', '')
-      //       $('#div-due').attr('hidden', '')
-      //    }
-      // }
 
       function purchases(id) {
          if (id) {

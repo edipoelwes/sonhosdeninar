@@ -16,7 +16,6 @@ class SaleController extends Controller
    public function index()
    {
       $sales = Sale::where('company_id', Auth::user()->company_id)->get();
-      // return $sales;
 
       return view('admin.sales.index', [
          'sales' => $sales
@@ -39,6 +38,7 @@ class SaleController extends Controller
          'clients' => Client::where('company_id', Auth::user()->company_id)->get(),
          'products' => $products,
          'payment_methods' => [
+            ['id' => 1, 'name' => 'Boleto Bancario'],
             ['id' => 2, 'name' => 'Cartão de credito'],
             ['id' => 3, 'name' => 'Transferência Bancaria'],
             ['id' => 4, 'name' => 'Dinheiro']
