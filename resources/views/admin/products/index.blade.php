@@ -7,7 +7,14 @@
             <div class="card-header">
                <div class="row">
                   <div class="col-md-6">
-                     <h4 class="card-title"><i class="bi bi-people-fill" style="font-size: 2rem;"></i> {{ $category }}</h4>
+                     <h4 class="card-title">
+                        @can('Fototica Macedo')
+                           <i class="bi bi-emoji-sunglasses" style="font-size: 2rem;"></i>
+                        @elsecan('Sonhos de Ninar')
+                        <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
+                        @endcan
+                        {{ $category }}
+                     </h4>
                   </div>
                </div>
             </div>

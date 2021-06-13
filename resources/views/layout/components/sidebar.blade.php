@@ -159,13 +159,17 @@
                   @can('Fototica Macedo')
                      <li class="ml-3">
                         <a href="{{ route('products.index', ['category' => 'armação receituario']) }}">
-                           <span class="sidebar-mini-icon">A</span>
+                           <span class="sidebar-mini-icon">
+                              <i class="bi bi-eyeglasses"></i>
+                           </span>
                            <span class="sidebar-normal"> Armação Receituario </span>
                         </a>
                      </li>
                      <li class="ml-3">
                         <a href="{{ route('products.index', ['category' => 'óculos solar']) }}">
-                           <span class="sidebar-mini-icon">O</span>
+                           <span class="sidebar-mini-icon">
+                              <i class="bi bi-sunglasses"></i>
+                           </span>
                            <span class="sidebar-normal"> Óculos Solar </span>
                         </a>
                      </li>
