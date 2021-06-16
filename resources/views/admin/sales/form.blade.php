@@ -471,5 +471,12 @@
                $('#div-status select#status option[value=""]').attr('selected','selected')
          }
       }
+
+      const check = (id) => {
+         let monofocais = $('#monofocais_'+id)
+         let multifocais = $('#multifocais_'+id)
+         monofocais.is(':checked') == true ? monofocais.val(`${id} => ${true}`) : monofocais.val(`${id} => ${false}`)
+         multifocais.is(':checked') == true ? multifocais.val(`${id} => ${true}`) : multifocais.val(`${id} => ${false}`)
+      }
    </script>
 @endpush

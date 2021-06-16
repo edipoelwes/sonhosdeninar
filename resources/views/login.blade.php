@@ -22,7 +22,7 @@
    <img class="wave" src="{{ asset('assets/img/login/sonhos.png') }}">
    <div class="container">
       <div class="img">
-         <img src="{{ asset('assets/img/login/login.png') }}">
+         <img src="{{ asset('assets/img/login/login2.png') }}">
       </div>
       <div class="login-content">
          <form name="login" action="{{ route('login.do') }}" method="post" autocomplete="off">
