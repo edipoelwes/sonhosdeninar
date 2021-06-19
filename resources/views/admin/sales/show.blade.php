@@ -133,12 +133,28 @@
                         </table>
                      </div>
                   </div>
-
                </div>
+
             </div>
          </div>
       </div>
    </div>
+
+   @can('Fototica Macedo')
+      <div class="row">
+         @foreach ($sale->recipes as $recipe)
+            <div class="col-lg-6 col-md-6 col-sm-6">
+               <div class="card card-stats">
+                  <div class="card-body ">
+                     <a href="{{ env('APP_URL') }}/storage/{{ $recipe->path }}" download="{{$recipe->path}}">
+                        <img src="{{ env('APP_URL') }}/storage/{{ $recipe->path }}" alt="receita de oculos">
+                     </a>
+                  </div>
+               </div>
+            </div>
+         @endforeach
+      </div>
+   @endcan
 @endsection
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, DB};
-use App\Models\{Client, LotItem, Product, Sale, SaleProduct};
+use App\Models\{Client, LotItem, Product, Recipe, Sale, SaleProduct, User};
 
 class SaleController extends Controller
 {
@@ -58,7 +58,6 @@ class SaleController extends Controller
     */
    public function store(Request $request)
    {
-      return $request->all();
       DB::beginTransaction();
       $sale = $request->except(['price_subtotal', 'price', 'amount', '_token']);
       $sale['company_id'] = Auth::user()->company_id;
@@ -66,6 +65,19 @@ class SaleController extends Controller
       $sale['sale_date'] = date('d/m/Y', strtotime($request->sale_date));
 
       $sale_id = Sale::create($sale);
+
+      $user = User::where('id', Auth::user()->id);
+      if(Auth::user()->can('Fototica Macedo')) {
+         $recipes = [];
+         foreach($request->allFiles()['receitas'] as $file) {
+            $recipe['sale_id'] = $sale_id->id;
+            $recipe['path'] = $file->store('recipes/'.$sale_id->id);
+            array_push($recipes, $recipe);
+         }
+
+         $recipe_id = Recipe::insert($recipes);
+      }
+
 
       $itens = $request->only(['price_subtotal', 'price', 'amount']);
 
@@ -90,12 +102,22 @@ class SaleController extends Controller
          }
       }
 
-      if ($sale_id && $sale_products) {
-         DB::commit();
-         return redirect()->route('sales.index')->withToastSuccess('Venda registrada com sucesso!');
+      if (Auth::user()->can('Fototica Macedo')) {
+         if ($sale_id && $sale_products && $recipe_id) {
+            DB::commit();
+            return redirect()->route('sales.index')->withToastSuccess('Venda registrada com sucesso!');
+         } else {
+            DB::rollBack();
+            redirect()->route('sales.index')->withToastSuccess('Erro ao Registrar venda!');
+         }
       } else {
-         DB::rollBack();
-         redirect()->route('sales.index')->withToastSuccess('Erro ao Registrar venda!');
+         if ($sale_id && $sale_products) {
+            DB::commit();
+            return redirect()->route('sales.index')->withToastSuccess('Venda registrada com sucesso!');
+         } else {
+            DB::rollBack();
+            redirect()->route('sales.index')->withToastSuccess('Erro ao Registrar venda!');
+         }
       }
    }
 
