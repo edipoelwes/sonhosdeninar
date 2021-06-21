@@ -17,6 +17,10 @@
          width: 40%;
       }
 
+      .text-error {
+         color: #ff0000be;
+      }
+
    </style>
 @endpush
 @section('content')
@@ -45,12 +49,19 @@
                      <div class="col-md-5">
                         <div class="form-group">
                            <label for="client_id">Cliente</label>
-                           <select class="form-control" name="client_id" id="client_id">
+                           <select class="form-control @error('client_id') is-invalid @enderror"
+                              name="client_id" id="client_id">
                               <option value="">Selecione um Cliente</option>
                               @foreach ($clients as $client)
-                                 <option value="{{ $client->id }}">{{ $client->name . '   ' . $client->cpf }}</option>
+                                 <option value="{{ $client->id }}" @if ($client->id == old('client_id')) selected @endif >{{ $client->name . '   ' . $client->cpf }}</option>
                               @endforeach
                            </select>
+
+                           @error('client_id')
+                              <div id="" class="invalid-feedback">
+                                 {{ $message }}
+                              </div>
+                           @enderror
                         </div>
                      </div>
 
@@ -61,7 +72,13 @@
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="sale_date">Data da venda</label>
-                           <input type="date" class="form-control" id="sale_date" name="sale_date" value="{{ date('Y-m-d') }}">
+                           <input type="date" class="form-control @error('sale_date') is-invalid @enderror" id="sale_date" name="sale_date" value="{{ old('sale_date', date('Y-m-d')) }}">
+
+                           @error('sale_date')
+                              <div id="" class="invalid-feedback">
+                                 {{ $message }}
+                              </div>
+                           @enderror
                         </div>
                      </div>
 
@@ -72,7 +89,7 @@
                      <div class="col-md-3">
                         <div class="form-group">
                            <label for="discount">Desconto R$</label>
-                           <input type="text" class="form-control money_br_discount" id="discount" name="discount"
+                           <input type="text" class="form-control money_br_discount" id="discount" name="discount" value="{{ old('discount') }}"
                               placeholder="0,00" onkeyup="updateTotal()">
                         </div>
                      </div>
@@ -80,7 +97,7 @@
                      <div class="col-md-6">
                         <div class="form-group">
                            <label for="note">Observações</label>
-                           <input type="text" class="form-control" id="note" name="note" maxlength="255">
+                           <input type="text" class="form-control" id="note" name="note" maxlength="255" value="{{ old('note') }}">
                         </div>
                      </div>
                      @can('Fototica Macedo')
@@ -103,6 +120,10 @@
                                  </option>
                               @endforeach
                            </select>
+
+                           @error('amount')
+                              <div class="text-error">{{ $message }}</div>
+                           @enderror
                         </div>
                      </div>
                   </div>
