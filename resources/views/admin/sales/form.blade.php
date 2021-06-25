@@ -53,7 +53,7 @@
                               name="client_id" id="client_id">
                               <option value="">Selecione um Cliente</option>
                               @foreach ($clients as $client)
-                                 <option value="{{ $client->id }}" @if ($client->id == old('client_id')) selected @endif >{{ $client->name . '   ' . $client->cpf }}</option>
+                                 <option value="{{ $client->id }}" @if ($client->id == old('client_id')) selected @endif>{{ $client->name . '   ' . $client->cpf }}</option>
                               @endforeach
                            </select>
 
@@ -67,6 +67,10 @@
 
                      <div class="col-md-4">
                         @include('admin.includes.payment_method', ['payment_methods' => $payment_methods])
+                     </div>
+
+                     <div class="col-md-2" id="div-quotas" hidden>
+                        @include('admin.includes.quotas')
                      </div>
 
                      <div class="col-md-3" id="div-purchaseDate">
@@ -273,13 +277,16 @@
             case '1':
             case '2':
                $('#div-status select#status option[value="2"]').attr('selected','selected')
+               $('#div-quotas').removeAttr('hidden')
                break;
             case '3':
             case '4':
                $('#div-status select#status option[value="1"]').attr('selected','selected')
+               $('#div-quotas').attr('hidden', true)
                break;
             default:
                $('#div-status select#status option[value=""]').attr('selected','selected')
+               $('#div-quotas').attr('hidden', true)
          }
       }
 

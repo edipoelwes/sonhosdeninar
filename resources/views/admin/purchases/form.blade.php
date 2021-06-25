@@ -22,6 +22,10 @@
          width: 45%;
       }
 
+      .text-error {
+         color: #ff0000be;
+      }
+
    </style>
 @endpush
 @section('content')
@@ -51,29 +55,13 @@
                         @include('admin.includes.payment_method', ['payment_methods' => $payment_methods])
                      </div>
                      <div class="col-md-2" id="div-quotas">
-                        <div class="form-group">
-                           <label for="quota">Parcelas</label>
-                           <select class="form-control" id="quota" name="quota">
-                              <option value="">Parcelas</option>
-                              <option value="1">1x</option>
-                              <option value="2">2x</option>
-                              <option value="3">3x</option>
-                              <option value="4">4x</option>
-                              <option value="5">5x</option>
-                              <option value="6">6x</option>
-                              <option value="7">7x</option>
-                              <option value="8">8x</option>
-                              <option value="9">9x</option>
-                              <option value="10">10x</option>
-                              <option value="11">11x</option>
-                              <option value="12">12x</option>
-                           </select>
-                        </div>
+                        @include('admin.includes.quotas')
                      </div>
                      <div class="col-md-3" id="div-due">
                         <div class="form-group">
                            <label for="due_date">Data do vencimento</label>
-                           <input type="date" class="form-control" id="due_date" name="due_date" value="{{date('Y-m-d')}}">
+                           <input type="date" class="form-control" id="due_date" name="due_date" value="{{
+                           old('due_date', date('Y-m-d')) }}">
                         </div>
                      </div>
                      <div class="col-md-3" hidden id="div_payout_interval">
@@ -91,19 +79,31 @@
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="purchase_date">Data da Compra</label>
-                           <input type="date" class="form-control" id="purchase_date" name="purchase_date" value="{{date('Y-m-d')}}">
+                           <input type="date" class="form-control @error('purchase_date') is-invalid @enderror" id="purchase_date" name="purchase_date" value="{{ old('purchase_date', date('Y-m-d')) }}">
+
+                           @error('purchase_date')
+                              <div id="" class="invalid-feedback">
+                                 {{ $message }}
+                              </div>
+                           @enderror
                         </div>
                      </div>
                      <div class="col-md-6" id="div-provider_id">
                         <div class="form-group">
                            <label for="providers">Fornecedores</label>
-                           <select class="form-control select2" id="providers" name="provider_id">
-                              <option>Selecione um fornecedor</option>
+                           <select class="form-control select2 @error('provider_id') is-invalid @enderror" id="providers" name="provider_id">
+                              <option value="">Selecione um fornecedor</option>
                               @foreach ($providers as $provider)
-                                 <option value="{{ $provider->id }}">{{ $provider->name }} - {{ $provider->cnpj }}
+                                 <option value="{{ $provider->id }}" @if($provider->id == old('provider_id')) selected @endif>{{ $provider->name }} - {{ $provider->cnpj }}
                                  </option>
                               @endforeach
                            </select>
+
+                           @error('provider_id')
+                              <div class="invalid-feedback">
+                                 {{ $message }}
+                              </div>
+                           @enderror
                         </div>
                      </div>
                      <div class="col-md-6" id="div-status">
@@ -112,7 +112,7 @@
                      <div class="col-md-12">
                         <div class="form-group">
                            <label for="note">Observações</label>
-                           <input type="text" class="form-control" id="note" name="note">
+                           <input type="text" class="form-control" id="note" name="note" value="{{ old('note') }}">
                         </div>
                      </div>
                   </div>
@@ -127,6 +127,10 @@
                                     {{ $product->name }} {{ $product->size }}</option>
                               @endforeach
                            </select>
+
+                           @error('amount')
+                              <div class="text-error">{{ $message }}</div>
+                           @enderror
                         </div>
                      </div>
                   </div>

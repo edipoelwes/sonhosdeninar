@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PurchaseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, DB};
 use App\Models\{Lot, LotItem, PaymentMethod, Product, Provider, Purchase, PurchaseProduct, Quota};
@@ -52,7 +53,7 @@ class PurchaseController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-   public function store(Request $request)
+   public function store(PurchaseRequest $request)
    {
       // $valor = $request->only('price');
       // // $num = floatval($valor['price']["21"]);
