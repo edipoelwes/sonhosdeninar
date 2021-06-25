@@ -55,10 +55,6 @@ class PurchaseController extends Controller
 
    public function store(PurchaseRequest $request)
    {
-      // $valor = $request->only('price');
-      // // $num = floatval($valor['price']["21"]);
-      // var_dump($this->convertNumber($valor['price']["21"])); die();
-      // return number_format($num, 2, '.', ',');
       DB::beginTransaction();
 
       $purchase = $request->only(['status', 'payment_method', 'note', 'purchase_date', 'quota', 'payout_interval']);

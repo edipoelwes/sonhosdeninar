@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
    Route::post('purchases/quota', 'App\Http\Controllers\PurchaseController@updateQuota')->name('purchases.quota');
    Route::resource('purchases', PurchaseController::class)->except(['edit', 'update', 'destroy']);
 
+   Route::post('sales/quota', 'App\Http\Controllers\SaleController@updateQuota')->name('sales.quota');
    Route::resource('sales', SaleController::class)->except(['edit', 'destroy']);
 
    // Route::resources([

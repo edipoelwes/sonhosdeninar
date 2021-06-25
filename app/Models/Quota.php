@@ -15,6 +15,7 @@ class Quota extends Model
    protected $fillable = [
       'company_id',
       'purchase_id',
+      'sale_id',
       'quota',
       'price',
       'due_date'
@@ -23,5 +24,10 @@ class Quota extends Model
    public function purchase()
    {
       return $this->belongsTo(Purchase::class);
+   }
+
+   public function sale()
+   {
+      return $this->belongsTo(Sale::class);
    }
 }

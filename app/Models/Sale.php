@@ -40,4 +40,9 @@ class Sale extends Model
    {
       return $this->hasMany(Recipe::class);
    }
+
+   public function quotas()
+   {
+      return $this->hasMany(Quota::class);
+   }
 }

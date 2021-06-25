@@ -73,6 +73,14 @@
                         @include('admin.includes.quotas')
                      </div>
 
+                     <div class="col-md-3" id="div-due" hidden>
+                        <div class="form-group">
+                           <label for="due_date">Data do vencimento</label>
+                           <input type="date" class="form-control" id="due_date" name="due_date" value="{{
+                           old('due_date', date('Y-m-d')) }}">
+                        </div>
+                     </div>
+
                      <div class="col-md-3" id="div-purchaseDate">
                         <div class="form-group">
                            <label for="sale_date">Data da venda</label>
@@ -278,15 +286,18 @@
             case '2':
                $('#div-status select#status option[value="2"]').attr('selected','selected')
                $('#div-quotas').removeAttr('hidden')
+               $('#div-due').removeAttr('hidden')
                break;
             case '3':
             case '4':
                $('#div-status select#status option[value="1"]').attr('selected','selected')
                $('#div-quotas').attr('hidden', true)
+               $('#div-due').attr('hidden', true)
                break;
             default:
                $('#div-status select#status option[value=""]').attr('selected','selected')
                $('#div-quotas').attr('hidden', true)
+               $('#div-due').attr('hidden', true)
          }
       }
 

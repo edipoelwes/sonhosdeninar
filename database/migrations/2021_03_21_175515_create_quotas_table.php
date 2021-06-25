@@ -16,7 +16,8 @@ class CreateQuotasTable extends Migration
       Schema::create('quotas', function (Blueprint $table) {
          $table->id();
          $table->unsignedBigInteger('company_id');
-         $table->unsignedBigInteger('purchase_id');
+         $table->unsignedBigInteger('purchase_id')->nullable();
+         $table->unsignedBigInteger('sale_id')->nullable();
          $table->integer('quota')->default(1);
          $table->integer('payment_status')->nullable()->comment('1 => Confirmado, 2 => Pendente, 3 => Cancelado');
          $table->date('due_date')->nullable();
@@ -24,6 +25,7 @@ class CreateQuotasTable extends Migration
          $table->softDeletes();
 
          $table->foreign('purchase_id')->references('id')->on('purchases');
+         $table->foreign('sale_id')->references('id')->on('sales');
          $table->foreign('company_id')->references('id')->on('companies');
       });
    }
