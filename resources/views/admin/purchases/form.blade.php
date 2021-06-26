@@ -54,10 +54,10 @@
                      <div class="col-md-4">
                         @include('admin.includes.payment_method', ['payment_methods' => $payment_methods])
                      </div>
-                     <div class="col-md-2" id="div-quotas">
+                     <div class="col-md-2" id="div-quotas" hidden>
                         @include('admin.includes.quotas')
                      </div>
-                     <div class="col-md-3" id="div-due">
+                     <div class="col-md-3" id="div-due" hidden>
                         <div class="form-group">
                            <label for="due_date">Data do vencimento</label>
                            <input type="date" class="form-control" id="due_date" name="due_date" value="{{

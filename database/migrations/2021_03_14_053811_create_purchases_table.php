@@ -22,7 +22,7 @@ class CreatePurchasesTable extends Migration
          $table->integer('status')->nullable()->comment('1 => Confirmado, 2 => Pendente, 3 => Cancelado');
          $table->integer('payment_method')->nullable()->comment('1 => Boleto bancário, 2 => Cartão de credito, 3 => Transferência bancaria, 4 => Dinheiro');
          $table->text('note')->nullable();
-         $table->date('purchase_date')->nullable();
+         $table->date('purchase_date')->nullable()->default(strval(date('Y-m-d', strtotime(now()))));
          $table->integer('quota')->default(1)->nullable();
          $table->integer('payout_interval')->nullable();
          // $table->decimal('total', 10, 2)->default(0);

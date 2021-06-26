@@ -29,6 +29,7 @@
                         @endcan
 
                      </select>
+                     <div id="category-message" class="invalid-feedback"></div>
                   </div>
                   <div class="form-group col-md-6">
                      <label for="brand">Marca *</label>
@@ -55,6 +56,7 @@
                            <option value="emid">Emid</option>
                         @endcan
                      </select>
+                     <div id="brand-message" class="invalid-feedback"></div>
                   </div>
                </div>
                <div class="row">
@@ -62,19 +64,21 @@
                      <div class="form-group col-md-4">
                         <label for="reference">Referência *</label>
                         <input type="text" class="form-control refer" id="reference" name="reference" placeholder="Referência do produto">
+                        <div id="reference-message" class="invalid-feedback"></div>
                      </div>
                   @endcan
 
                   <div class="form-group col-md-8">
                      <label for="name">Nome @can('Sonhos de Ninar') * @endcan</label>
                      <input type="text" class="form-control" id="name" name="name" placeholder="Nome do produto">
+                     <div id="name-message" class="invalid-feedback"></div>
                   </div>
 
                   @can('Sonhos de Ninar')
                      <div class="form-group col-md-4">
-                        <label for="size">Tamanho</label>
+                        <label for="size">Tamanho *</label>
                         <select id="size" class="form-control" name="size">
-                           <option value="selected">Selecione um Tamanho</option>
+                           <option value="">Selecione um Tamanho</option>
                            <option value="rn">RN</option>
                            <option value="p">P</option>
                            <option value="m">M</option>
@@ -83,15 +87,90 @@
                            <option value="xxg">XXG</option>
                            <option value="grandinhos">GRANDINHOS</option>
                         </select>
+                        <div id="size-message" class="invalid-feedback"></div>
                      </div>
                   @endcan
                </div>
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-               <button type="submit" class="btn btn-primary mr-5">Salvar</button>
+               <button type="button" class="btn btn-primary mr-5" id="submit">Salvar</button>
             </div>
          </div>
       </form>
    </div>
 </div>
+
+@push('js')
+   <script>
+      $('#submit').click(function(){
+         let message = "Campo obrigatório"
+         let error = false
+
+         let category = $('#category')
+         let brand = $('#brand')
+         let reference = $('#reference')
+         let name = $('#name')
+         let size = $('#size')
+
+
+         if(category.val() == '') {
+            error = true
+            category.addClass('is-invalid')
+            $('#category-message').text(message)
+         } else {
+            error = false
+            category.removeClass('is-invalid')
+            $('#category-message').text('')
+         }
+
+         if(brand.val() == '') {
+            error = true
+            brand.addClass('is-invalid')
+            $('#brand-message').text(message)
+         } else {
+            let error = false
+            brand.removeClass('is-invalid')
+            $('#brand-message').text('')
+         }
+
+         @can('Fototica Macedo')
+            if(reference.val() == '') {
+               error = true
+               reference.addClass('is-invalid')
+               $('#reference-message').text(message)
+            } else {
+               let error = false
+               reference.removeClass('is-invalid')
+               $('#reference-message').text('')
+            }
+         @endcan
+
+         @can('Sonhos de Ninar')
+            if(name.val() == '') {
+               error = true
+               name.addClass('is-invalid')
+               $('#name-message').text(message)
+            } else {
+               let error = false
+               name.removeClass('is-invalid')
+               $('#name-message').text('')
+            }
+
+            if(size.val() == '') {
+               error = true
+               size.addClass('is-invalid')
+               $('#size-message').text(message)
+            } else {
+               let error = false
+               size.removeClass('is-invalid')
+               $('#size-message').text('')
+            }
+         @endcan
+
+         if (error == false) {
+            $('button#submit').attr('type', 'submit')
+         }
+      })
+   </script>
+@endpush

@@ -68,6 +68,16 @@ class ProductController extends Controller
          return back()->withToastError('Error ao atualizar Item!');
       }
 
+      if(Auth::user()->company_id == 1) {
+         if($this->checkItem($request->category, $request->brand, $request->name, $request->size) > 0) {
+            return back()->withToastError('Item já existe no Invetário!');
+         }
+      } else {
+         if($this->checkItem($request->category, $request->brand, null, null, $request->reference) > 0) {
+            return back()->withToastError('Item já existe no Invetário!');
+         }
+      }
+
       if (!Product::create($product)) {
          return back()->withToastError('Error ao cadastrar Item!');
       }
@@ -138,5 +148,26 @@ class ProductController extends Controller
          ->first();
 
       return response()->json($product);
+   }
+
+   private function checkItem(
+      string $category,
+      string $brand,
+      string $name = null,
+      string $size = null,
+      string $reference = null): int
+   {
+      return Product::where([
+         ['company_id', Auth::user()->company_id],
+         ['category', $category],
+         ['brand', $brand],
+         ['reference', $reference],
+      ])->orWhere([
+         ['company_id', Auth::user()->company_id],
+         ['category', $category],
+         ['brand', $brand],
+         ['size', $size],
+         ['name', $name],
+      ])->count();
    }
 }

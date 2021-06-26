@@ -1,5 +1,5 @@
 <div class="form-group">
-   <label for="payment_method">Forma de Pagamento</label>
+   <label for="payment_method">Forma de Pagamento *</label>
    <select class="form-control @error('payment_method') is-invalid @enderror"
       id="payment_method" name="payment_method" onchange="bank_slip(this.value)">
       <option value="">Metodo de pagamento</option>

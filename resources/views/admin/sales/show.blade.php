@@ -36,6 +36,12 @@
                            <input type="text" class="form-control" placeholder="{{ $sale->payment_method }}" disabled>
                         </div>
 
+                        {{-- <div class="col-md-4">
+                           <label>Parcelas</label>
+                           <input type="text" class="form-control"
+                              placeholder="{{ $sale->quota . ' x de R$ ' . money_br($purchase->purchaseProducts->sum('sub_total') / $purchase->quota) }}">
+                        </div> --}}
+
                         <div class="col-md-4">
                            <label>Status da compra</label>
                            <input type="text" class="form-control" placeholder="{{ $sale->status }}" disabled>

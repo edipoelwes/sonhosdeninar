@@ -71,14 +71,16 @@
                         <span class="sidebar-normal">Perfis</span>
                      </a>
                   </li>
-                  <li class="ml-3 {{ Route::is('permissions.index') ? 'active' : ''  }}">
-                     <a href="{{ route('permissions.index') }}">
-                        <span class="sidebar-mini-icon">
-                           <i class="bi bi-unlock-fill"></i>
-                        </span>
-                        <span class="sidebar-normal">Permissões</span>
-                     </a>
-                  </li>
+                  @can('Super Usuario')
+                     <li class="ml-3 {{ Route::is('permissions.index') ? 'active' : ''  }}">
+                        <a href="{{ route('permissions.index') }}">
+                           <span class="sidebar-mini-icon">
+                              <i class="bi bi-unlock-fill"></i>
+                           </span>
+                           <span class="sidebar-normal">Permissões</span>
+                        </a>
+                     </li>
+                  @endcan
                </ul>
             </div>
          </li>

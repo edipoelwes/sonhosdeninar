@@ -28,6 +28,17 @@ class UserSeeder extends Seeder
         'updated_at'     => now(),
       ],
       [
+         'company_id'     => 2,
+         'name'           => 'Edipo Elwes',
+         'phone'           => '86999097714',
+         'cpf'            => '03570590349',
+         'email'          => 'edipoelwes@gmail.com',
+         'password'       => Hash::make('12345678'),
+         'remember_token' => Str::random(10),
+         'created_at'     => now(),
+         'updated_at'     => now(),
+      ],
+      [
         'company_id'     => 1,
         'name'           => 'Jessianne Saiara',
         'phone'           => '86999097714',
