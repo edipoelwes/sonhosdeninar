@@ -13,13 +13,38 @@
                   <label for="name">Nome *</label>
                   <input type="text" class="form-control" id="name" name="name"
                      placeholder="Nome da perfil">
+                  <div id="name-message" class="invalid-feedback"></div>
                </div>
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-               <button type="submit" class="btn btn-primary mr-5">Salvar</button>
+               <button type="button" class="btn btn-primary mr-5" id="submit">Salvar</button>
             </div>
          </div>
       </form>
    </div>
 </div>
+
+@push('js')
+   <script>
+      $('#submit').click(function(){
+         let message = "Campo obrigatório"
+         let error = false
+         let name = $('#name')
+
+         if(name.val() == '') {
+            error = true
+            name.addClass('is-invalid')
+            $('#name-message').text(message)
+         } else {
+            let error = false
+            name.removeClass('is-invalid')
+            $('#name-message').text('')
+         }
+
+         if (error == false) {
+            $('button#submit').attr('type', 'submit')
+         }
+      })
+   </script>
+@endpush
