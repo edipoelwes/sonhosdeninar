@@ -19,6 +19,7 @@ class CreateProvidersTable extends Migration
          $table->string('name')->nullable();
          $table->string('cnpj')->unique()->nullable();
          $table->string('phone')->nullable();
+         $table->string('phone_secundary')->nullable();
          $table->timestamps();
          $table->softDeletes();
 

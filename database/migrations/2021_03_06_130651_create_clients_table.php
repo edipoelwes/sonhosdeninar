@@ -19,6 +19,7 @@ class CreateClientsTable extends Migration
          $table->string('name');
          $table->string('cpf')->unique()->nullable();
          $table->string('phone');
+         $table->string('phone_secundary');
          /**obs clients */
          $table->integer('stars')->default(3);
          $table->text('internal_obs')->nullable();
