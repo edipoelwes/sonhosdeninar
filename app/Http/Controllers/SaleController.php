@@ -140,10 +140,11 @@ class SaleController extends Controller
     */
    public function show(Sale $sale)
    {
-      $quotas = Quota::where('sale_id', $sale->id)->orderBy('id')->get();
+      
+      // $quotas = Quota::where('sale_id', $sale->id)->orderBy('id')->get();
       return view('admin.sales.show', [
          'sale' => $sale,
-         'quotas' => $quotas
+         'quotas' => $sale->quotas
       ]);
    }
 

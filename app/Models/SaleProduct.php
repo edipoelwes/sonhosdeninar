@@ -16,6 +16,7 @@ class SaleProduct extends Model
       'sale_id',
       'lot_item_id',
       'amount',
+      'subtotal'
    ];
 
    public function lot_item()

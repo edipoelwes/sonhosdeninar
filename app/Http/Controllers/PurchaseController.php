@@ -147,11 +147,11 @@ class PurchaseController extends Controller
     */
    public function show(Purchase $purchase)
    {
-      $quotas = Quota::where('purchase_id', $purchase->id)->orderBy('id')->get();
+      // $quotas = Quota::where('purchase_id', $purchase->id)->orderBy('id')->get();
 
       return view('admin.purchases.show', [
          'purchase' => $purchase,
-         'quotas' => $quotas
+         'quotas' => $purchase->quotas
       ]);
    }
 

@@ -18,7 +18,8 @@ class Sale extends Model
       'sale_date',
       'status',
       'payment_method',
-      'note'
+      'note',
+      'quota'
    ];
 
    public function user()

@@ -36,11 +36,11 @@
                            <input type="text" class="form-control" placeholder="{{ $sale->payment_method }}" disabled>
                         </div>
 
-                        {{-- <div class="col-md-4">
+                        <div class="col-md-4">
                            <label>Parcelas</label>
                            <input type="text" class="form-control"
-                              placeholder="{{ $sale->quota . ' x de R$ ' . money_br($purchase->purchaseProducts->sum('sub_total') / $purchase->quota) }}">
-                        </div> --}}
+                              placeholder="{{ $sale->quota . ' x de R$ ' . money_br(($sale->sale_products->sum('subtotal') - $sale->discount) / $sale->quota) }}" disabled>
+                        </div>
 
                         <div class="col-md-4">
                            <label>Status da compra</label>
@@ -119,17 +119,14 @@
                               <div class="row">
                                  <div class="col-md-4 mb-2">
                                     <input type="text" class="form-control"
-                                       placeholder="{{ $quota->quota . '   ' . date_br($quota->due_date) }}" disabled>
+                                       placeholder="{{ $quota->quota . ' - ' . date_br($quota->due_date) }}" disabled>
                                  </div>
 
                                  <div class="col-md-4">
-                                    <input type="text" class="form-control"
-                                       placeholder="R$ "
-                                       disabled>
 
-                                    {{-- <input type="text" class="form-control"
-                                       placeholder="R$ {{ money_br($sale->saleProducts->sum('sub_total') / $sale->quota) }}"
-                                       disabled> --}}
+                                    <input type="text" class="form-control"
+                                       placeholder="R$ {{ money_br(($sale->sale_products->sum('subtotal') - $sale->discount) / $sale->quota) }}"
+                                       disabled>
                                  </div>
                                  <div class="col-md-4">
                                     <select class="form-control" name="faturamento_{{ $quota->id }}"
@@ -198,13 +195,13 @@
                            <td colspan="2"></td>
                            <td class="text-bold text-right"><strong>Desconto</strong></td>
                            <td class="text-secondary text-center">R$
-                              {{ $sale->discount }}</td>
+                              {{ money_br($sale->discount) }}</td>
                         </tr>
                         <tr style="background: #ccc">
                            <td colspan="2"></td>
                            <td class="text-bold text-right"><strong>Total Geral</strong></td>
                            <td class="text-secondary text-center">R$
-                              {{ money_br($sale->sale_products->sum('subtotal') - money_db($sale->discount)) }}
+                              {{ money_br($sale->sale_products->sum('subtotal') - $sale->discount) }}
                            </td>
                         </tr>
                      </tfoot>

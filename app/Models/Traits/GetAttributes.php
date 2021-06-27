@@ -40,7 +40,7 @@ trait GetAttributes
 
    public function getDiscountAttribute($value)
    {
-      return money_br($value);
+      return $value;
    }
 
    // public function getCategoryAttribute($value)
