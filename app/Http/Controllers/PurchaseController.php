@@ -30,6 +30,7 @@ class PurchaseController extends Controller
     */
    public function create()
    {
+      // dd(Product::where('company_id', Auth::user()->company_id)->get());
       return view('admin.purchases.form', [
          'products' => Product::where('company_id', Auth::user()->company_id)->get(),
          'providers' => Provider::where('company_id', Auth::user()->company_id)->get(),

@@ -124,7 +124,7 @@
                               <option value="">Selecione um Item</option>
                               @foreach ($products as $product)
                                  <option value="{{ $product->id }}">{{ $product->category }} {{ $product->brand }}
-                                    {{ $product->name }} {{ $product->size }}</option>
+                                    {{ $product->name ?? '' }} {{ $product->size ?? '' }} {{ 'REF nº '.$product->reference ?? '' }}</option>
                               @endforeach
                            </select>
 
