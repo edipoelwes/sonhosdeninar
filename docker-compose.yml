@@ -55,7 +55,7 @@ services:
       working_dir: /var/lib/mysql
       restart: always
       ports:
-         - "${DB_PORT}:${MYSQL_DB_PORT}"
+         - "${MYSQL_DB_PORT}:${DB_PORT}"
       environment:
          MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
          MYSQL_DATABASE: ${DB_DATABASE}
